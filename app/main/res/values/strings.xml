@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Capstone</string>
+    <string name="course_id">CSC-XXX</string>
+    <string name="msg_board">Message Board</string>
+    <string name="user_name">User Name: </string>
+    <string name="password">Password: </string>
+    <string name="survey">Survey#: </string>
+    <string name="user_name_hint">Enter User Name</string>
+    <string name="password_hint">Enter Password</string>
+    <string name="login_btn_text">LOGIN</string>
+    <string name="remember_checkbox_text">Remember Me</string>
+    <string name="mark_all_handled_text">Mark All As Handled</string>
+    <string name="concern_percentage">90%</string>
+    <string name="priority_comment">{concern comment plain text data here...}</string>
+    <string name="handled_checkbox_text">Mark as handled</string>
+    <string name="view_replies_btn">View Replies</string>
+    <string name="update">UPDATE</string>
+    <string name="first_name_label">First Name:</string>
+    <string name="last_name_label">Last Name:</string>
+    <string name="email_label">Email:</string>
+    <string name="first_name_hint">Enter First Name</string>
+    <string name="last_name_hint">Enter Last Name</string>
+    <string name="email_hint">Enter Email</string>
+</resources>
