@@ -9,22 +9,22 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import edu.nu.jam.capstone.Data.Comment;
+import edu.nu.jam.capstone.Data.CommentData;
 import java.util.List;
-import edu.nu.jam.capstone.Interfaces.IPriorityCommentOperations;
+import edu.nu.jam.capstone.Interfaces.IMajorityConcernOperations;
 import edu.nu.jam.capstone.R;
 
 
-public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder>
+public class MajorityConcernAdapter extends RecyclerView.Adapter<MajorityConcernAdapter.ViewHolder>
 {
-	private IPriorityCommentOperations commentOperationsContext;
+	private IMajorityConcernOperations commentOperationsContext;
 
-	public CommentAdapter(Context context)
+	public MajorityConcernAdapter(Context context)
 	{
-		if (!(context instanceof IPriorityCommentOperations))
-			throw new ClassCastException("IPriorityCommentOperations cast exception.");
+		if (!(context instanceof IMajorityConcernOperations))
+			throw new ClassCastException("IMajorityConcernOperations cast exception.");
 
-		commentOperationsContext = (IPriorityCommentOperations) context;
+		commentOperationsContext = (IMajorityConcernOperations) context;
 	}
 
 	class ViewHolder extends RecyclerView.ViewHolder
@@ -44,7 +44,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
 		private void bindControls()
 		{
-			commentTextView = itemView.findViewById(R.id.commentTextView);
+			commentTextView = itemView.findViewById(R.id.surveyQuestionTextView);
 			percentageTextView = itemView.findViewById(R.id.percentageTextView);
 			markAsHandledCheckBox = itemView.findViewById(R.id.markAsHandledCheckBox);
 			viewRepliesBtn = itemView.findViewById(R.id.viewRepliesBtn);
@@ -66,26 +66,26 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 			});
 		}
 
-		private void displayRolodexData(Comment comment)
+		private void displayRolodexData(CommentData commentData)
 		{
-			commentTextView.setText(comment.getContent());
-			percentageTextView.setText(Double.toString(comment.getPercentage()));
+			commentTextView.setText(commentData.getContent());
+			percentageTextView.setText(Double.toString(commentData.getPercentage()));
 		}
 	}
 
 	@NonNull
 	@Override
-	public CommentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parentViewGroup, int viewType)
+	public MajorityConcernAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parentViewGroup, int viewType)
 	{
 		View view = LayoutInflater.from(parentViewGroup.getContext()).inflate(R.layout.card_majority_concern, parentViewGroup, false);
-		return new CommentAdapter.ViewHolder(view);
+		return new MajorityConcernAdapter.ViewHolder(view);
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull CommentAdapter.ViewHolder holder, int position)
+	public void onBindViewHolder(@NonNull MajorityConcernAdapter.ViewHolder holder, int position)
 	{
-		List<Comment> commentList = commentOperationsContext.onGetComments();
-		Comment rolodexRecordInformation = commentList.get(position);
+		List<CommentData> commentDataList = commentOperationsContext.onGetConcerns();
+		CommentData rolodexRecordInformation = commentDataList.get(position);
 		holder.displayRolodexData(rolodexRecordInformation);
 		holder.itemView.setTag(position);
 	}
@@ -93,6 +93,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 	@Override
 	public int getItemCount()
 	{
-		return commentOperationsContext.onGetComments().size();
+		return commentOperationsContext.onGetConcerns().size();
 	}
 }

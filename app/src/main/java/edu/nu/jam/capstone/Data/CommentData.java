@@ -1,18 +1,18 @@
 package edu.nu.jam.capstone.Data;
 
-public class Comment
+public class CommentData
 {
 	private String content;
 	private double percentage;
 	// TODO: make int value of # of replies
 	// TODO: make LL of subsequent comments
 
-	public Comment()
+	public CommentData()
 	{
 		this.content = null;
 	}
 
-	public Comment(String content, int percentage)
+	public CommentData(String content, int percentage)
 	{
 		this.content = content;
 		this.percentage = percentage;

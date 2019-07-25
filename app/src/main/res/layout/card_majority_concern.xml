@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
-android:id="@+id/rolodexListLayout"
+android:id="@+id/wrapperLayout"
 android:layout_width="match_parent"
 android:layout_height="wrap_content"
 android:orientation="horizontal">
@@ -15,7 +15,7 @@ android:orientation="horizontal">
     android:layout_marginBottom="5dp"
     app:cardCornerRadius="5dp"
     app:cardElevation="5dp"
-    android:id="@+id/priorityCommentListCardView">
+    android:id="@+id/sessionSelectionCardView">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,16 +25,16 @@ android:orientation="horizontal">
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
-        android:id="@+id/priorityCommentListSubLayout">
+        android:id="@+id/sessionItemSubLayout">
 
         <LinearLayout
-            android:id="@+id/rolodexDataLayout"
+            android:id="@+id/surveyItemLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/commentTextView"
+                android:id="@+id/surveyQuestionTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -54,7 +54,6 @@ android:orientation="horizontal">
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-
                     <TextView
                         android:id="@+id/percentageTextView"
                         android:layout_width="wrap_content"
@@ -68,7 +67,6 @@ android:orientation="horizontal">
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
 
                     <CheckBox
                         android:id="@+id/markAsHandledCheckBox"
@@ -95,18 +93,13 @@ android:orientation="horizontal">
                         android:layout_marginBottom="8dp"
                         android:text="@string/view_replies_btn"
                         android:textAlignment="center"
-
-
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
-
-
 
         </LinearLayout>
 

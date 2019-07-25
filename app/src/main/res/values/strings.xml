@@ -11,7 +11,7 @@
     <string name="remember_checkbox_text">Remember Me</string>
     <string name="mark_all_handled_text">Mark All As Handled</string>
     <string name="concern_percentage">90%</string>
-    <string name="priority_comment">{concern comment plain text data here...}</string>
+    <string name="priority_comment">{ concern commentData plain text data here }</string>
     <string name="handled_checkbox_text">Mark as handled</string>
     <string name="view_replies_btn">View Replies</string>
     <string name="update">UPDATE</string>
@@ -21,4 +21,13 @@
     <string name="first_name_hint">Enter First Name</string>
     <string name="last_name_hint">Enter Last Name</string>
     <string name="email_hint">Enter Email</string>
+    <string name="go_to_session_btn_text">GO TO SESSION</string>
+    <string name="go_to_survey_btn_text">GO TO SURVEY</string>
+    <string name="response_text">{ Response Item }</string>
+    <string name="response_description">{ Response Description }</string>
+    <string name="survey_question_text">N- { Survey Question } :</string>
+    <string name="equals_sign">=</string>
+    <string name="response_percentage_text">{0%}</string>
+    <string name="session_text">{ Course Title }\n{ Session: Month-Year }</string>
+    <string name="survey_name">{ Survey Name }</string>
 </resources>
