@@ -1,0 +1,23 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="new_comment_text_size">14sp</dimen>
+    <dimen name="default_layout_margin_top">5sp</dimen>
+    <dimen name="default_layout_margin_right">5sp</dimen>
+    <dimen name="rolodex_name_text_size">16sp</dimen>
+    <dimen name="default_layout_margin_left">5sp</dimen>
+    <dimen name="default_layout_margin_bottom">5sp</dimen>
+    <dimen name="card_elevation">7sp</dimen>
+    <dimen name="corner_radius">3sp</dimen>
+    <dimen name="dialog_layout_margin_left">5sp</dimen>
+    <dimen name="dialog_layout_margin_top">15sp</dimen>
+    <dimen name="dialog_layout_margin_right">5sp</dimen>
+    <dimen name="dialog_layout_margin_bottom">15sp</dimen>
+    <dimen name="dialog_text_size">12sp</dimen>
+    <dimen name="delete_dialog_text_size">15sp</dimen>
+    <dimen name="counter_text_size">10sp</dimen>
+</resources>

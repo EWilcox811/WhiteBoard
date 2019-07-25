@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".NewCommentActivity">
+    <EditText
+        android:id="@+id/newCommentET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/new_comment_text_size"
+        android:inputType="textMultiLine"
+        android:hint="@string/comment_hint"
+        />
+    <TextView
+        android:id="@+id/characterCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/initial_count"
+        android:layout_gravity="bottom|start"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/confirmCommentFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_gravity="bottom|end"
+        android:backgroundTint="@color/themeMedium"
+        app:srcCompat="@drawable/ic_action_confirm_comment"/>
+
+</LinearLayout>

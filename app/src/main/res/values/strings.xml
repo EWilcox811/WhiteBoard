@@ -30,4 +30,22 @@
     <string name="response_percentage_text">{0%}</string>
     <string name="session_text">{ Course Title }\n{ Session: Month-Year }</string>
     <string name="survey_name">{ Survey Name }</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_progressive_survey">Weekly Survey</string>
+    <string name="menu_logout">Logout</string>
+    <string name="menu_new_comment">Add Comment</string>
+    <string name="comment_hint">Enter Comment Here.</string>
+    <string name="initial_count">0/250</string>
+    <string name="initial_replies">0</string>
+    <string name="initial_up_votes">0</string>
+
+    <string name="initial_seek_bar">0%</string>
+    <string name="progressive_filler">Weekly Survey Question</string>
+    <string name="class_confidence">CLASS CONFIDENCE : </string>
 </resources>
