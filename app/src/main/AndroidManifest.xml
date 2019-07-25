@@ -12,7 +12,9 @@
         <activity android:name=".ViewReplies"/>
         <activity android:name=".ProgressiveSurvey" />
         <activity android:name=".NewCommentActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".NavDrawerActivity"/>
+        <activity android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

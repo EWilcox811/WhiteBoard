@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Capstone</string>
+    <string name="app_name">WhiteBoard</string>
     <string name="course_id">CSC-XXX</string>
     <string name="msg_board">Message Board</string>
     <string name="user_name">User Name: </string>

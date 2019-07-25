@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/themeLight</item>
         <item name="colorPrimaryDark">@color/themeMedium</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
