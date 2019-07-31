@@ -8,6 +8,6 @@ import edu.nu.jam.capstone.Data.CommentData;
 
 public interface ICommentBoardOperations
 {
-	List<CommentData> onGetConcerns();
+	List<CommentData> onGetComments();
 	void onItemSelected(int position, View view);
 }

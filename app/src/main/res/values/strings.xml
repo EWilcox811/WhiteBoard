@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WhiteBoard</string>
+    <string name="app_name">Capstone</string>
     <string name="course_id">CSC-XXX</string>
     <string name="msg_board">Message Board</string>
     <string name="user_name">User Name: </string>
@@ -27,8 +27,10 @@
     <string name="response_description">{ Response Description }</string>
     <string name="survey_question_text">N- { Survey Question } :</string>
     <string name="equals_sign">=</string>
-    <string name="response_percentage_text">{0%}</string>
-    <string name="session_text">{ Course Title }\n{ Session: Month-Year }</string>
+    <string name="response_percentage_text">{ 0% }</string>
+    <string name="course_number_text">{ Course Number }</string>
+    <string name="course_name_text">{ Course Name }</string>
+    <string name="session_text">{ Session: Month-Year }</string>
     <string name="survey_name">{ Survey Name }</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -48,4 +50,17 @@
     <string name="initial_seek_bar">0%</string>
     <string name="progressive_filler">Weekly Survey Question</string>
     <string name="class_confidence">CLASS CONFIDENCE : </string>
+    <string name="forgot_password_label">Forgot My Password</string>
+    <string name="recovery_prompt_label">Enter your UserName or Email:</string>
+    <string name="email_recovery_notification">(A temporary password will be sent to the email you have registered with WhiteBoard)</string>
+    <string name="submit_button_label">SUBMIT</string>
+    <string name="temp_password_label">Enter the temporary password that was sent to your account email and choose a new password:</string>
+    <string name="temporary_password_label">Temporary Password:</string>
+    <string name="temp_password_hint">Enter Temp Password</string>
+    <string name="new_password_label">New Password:</string>
+    <string name="confirm_new_password_label">Confirm New Password:</string>
+    <string name="confirm_new_password_text">Re-enter New Password</string>
+    <string name="new_password_hint">Enter New Password</string>
+    <string name="percent_sign">%</string>
+
 </resources>

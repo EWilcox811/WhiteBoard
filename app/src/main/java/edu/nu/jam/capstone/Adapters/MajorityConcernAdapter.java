@@ -93,6 +93,8 @@ public class MajorityConcernAdapter extends RecyclerView.Adapter<MajorityConcern
 	@Override
 	public int getItemCount()
 	{
-		return commentOperationsContext.onGetConcerns().size();
+		if (commentOperationsContext.onGetConcerns() != null)
+			return commentOperationsContext.onGetConcerns().size();
+		return -1;
 	}
 }

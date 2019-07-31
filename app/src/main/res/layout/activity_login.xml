@@ -25,7 +25,7 @@
         android:layout_marginBottom="40dp"/>
 
     <TextView
-        android:id="@+id/passwordTextView"
+        android:id="@+id/emailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/password"
@@ -33,7 +33,7 @@
         android:layout_margin="10dp"/>
 
     <EditText
-        android:id="@+id/passwordEditView"
+        android:id="@+id/emailEditView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autofillHints=""
@@ -47,7 +47,7 @@
         android:id="@+id/loginBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="35dp"
         android:width="140dp"
         android:text="@string/login_btn_text" />
 
@@ -57,5 +57,13 @@
         android:layout_height="wrap_content"
         android:text="@string/remember_checkbox_text"
         android:layout_margin="10dp"/>
+
+    <TextView
+        android:id="@+id/forgotPasswordTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/forgot_password_label"
+        android:textAlignment="center" />
 
 </LinearLayout>

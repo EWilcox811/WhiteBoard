@@ -1,10 +1,10 @@
 package edu.nu.jam.capstone;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-public class ProgressiveSurvey extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class ProgressiveSurveyActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
