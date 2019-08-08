@@ -16,7 +16,7 @@ out/
 release/
 
 # Gradle files
-.gradle/
+.gradle\
 build/
 .idea/
 
@@ -81,4 +81,5 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+local.properties
 local.properties
