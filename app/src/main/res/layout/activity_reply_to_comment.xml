@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".ReplyToCommentActivity">
+    <TextView
+        android:id="@+id/topLevelCommentTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="@dimen/activity_vertical_margin"
+        android:background="?android:attr/listDivider" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:counterEnabled = "true"
+        app:counterMaxLength = "250"
+        app:counterTextAppearance="@style/TextLimitStyle">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/newCommentET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/ReplyToCommentStyle"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:backgroundTint="@color/themeMedium"
+        app:srcCompat = "@drawable/ic_action_confirm_comment"/>
+
+</LinearLayout>

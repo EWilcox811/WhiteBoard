@@ -36,119 +36,18 @@
                 android:layout_marginBottom="5dp"
                 android:text="@string/survey_question_text"
                 android:textSize="16sp" />
-
-            <LinearLayout
-                android:id="@+id/surveyLayout"
+            <SeekBar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:max="100"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:min="0"
+                android:progress="0"
+                android:progressTint="@color/themeLight"
+                android:thumbTint="@color/themeMedium"
 
-                <LinearLayout
-                    android:id="@+id/responseContainer1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <CheckBox
-                        android:id="@+id/responseCheckBox1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:scrollbarSize="5dp"
-                        android:text="@string/response_text"
-                        android:textSize="14sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/responseItemDescriptionTextView1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="@string/response_description"
-                        android:textSize="15sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/markAsHandledCheckBox" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/responseContainer2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <CheckBox
-                        android:id="@+id/responseCheckBox2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:scrollbarSize="5dp"
-                        android:text="@string/response_text"
-                        android:textSize="14sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/responseItemDescriptionTextView2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="@string/response_description"
-                        android:textSize="15sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/markAsHandledCheckBox" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/responseContainer3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <CheckBox
-                        android:id="@+id/responseCheckBox3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:scrollbarSize="5dp"
-                        android:text="@string/response_text"
-                        android:textSize="14sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/responseItemDescriptionTextView3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="@string/response_description"
-                        android:textSize="15sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/markAsHandledCheckBox" />
-                </LinearLayout>
-
-            </LinearLayout>
+                />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

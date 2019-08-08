@@ -9,6 +9,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -36,9 +37,8 @@ public class CommentBoardAdapter extends RecyclerView.Adapter<CommentBoardAdapte
 
 		// TODO: change theses
 		private TextView commentTextView;
-		private TextView percentageTextView;
-		private CheckBox markAsHandledCheckBox;
-		private Button viewRepliesBtn;
+		private TextView repliesTextView;
+		private TextView upVotesTextView;
 
 		ViewHolder(@NonNull View itemView)
 		{
@@ -50,10 +50,9 @@ public class CommentBoardAdapter extends RecyclerView.Adapter<CommentBoardAdapte
 
 		private void bindControls()
 		{
-			commentTextView = itemView.findViewById(R.id.surveyQuestionTextView);
-			percentageTextView = itemView.findViewById(R.id.percentageTextView);
-			markAsHandledCheckBox = itemView.findViewById(R.id.markAsHandledCheckBox);
-			viewRepliesBtn = itemView.findViewById(R.id.viewRepliesBtn);
+			commentTextView = itemView.findViewById(R.id.commentCardTextView);
+			repliesTextView = itemView.findViewById(R.id.numReplies);
+			upVotesTextView = itemView.findViewById(R.id.numVotes);
 		}
 
 		private void registerHandlers()
@@ -63,11 +62,9 @@ public class CommentBoardAdapter extends RecyclerView.Adapter<CommentBoardAdapte
 				@Override
 				public void onClick(View view)
 				{
-//					int index = (int) view.getTag();
-//					View fetchedViewOrigin = (View) phoneNumberTextView.getParent();
-//					View fetchedViewIntermediate = (View) fetchedViewOrigin.getParent();
-//					View fetchedViewTarget = (View) fetchedViewIntermediate.getParent();
-//					rolodexOperationsContext.onItemSelected(index, fetchedViewTarget);
+					int index = (int) view.getTag();
+					CardView selectedComment = view.findViewById(R.id.commentCard);
+					commentOperationsContext.onItemSelected(index, selectedComment);
 				}
 			});
 		}
@@ -75,7 +72,8 @@ public class CommentBoardAdapter extends RecyclerView.Adapter<CommentBoardAdapte
 		private void displayCommentData(CommentData commentData)
 		{
 			commentTextView.setText(commentData.getContent());
-			percentageTextView.setText(Double.toString(commentData.getPercentage()));
+			repliesTextView.setText(Integer.toString(commentData.getNumberOfReplies()));
+			upVotesTextView.setText(Integer.toString(commentData.getUpvotes()));
 		}
 	}
 
@@ -86,6 +84,7 @@ public class CommentBoardAdapter extends RecyclerView.Adapter<CommentBoardAdapte
 		View view = LayoutInflater.from(parentViewGroup.getContext()).inflate(R.layout.card_comment, parentViewGroup, false);
 		return new CommentBoardAdapter.ViewHolder(view);
 	}
+
 
 	@Override
 	public void onBindViewHolder(@NonNull CommentBoardAdapter.ViewHolder holder, int position)

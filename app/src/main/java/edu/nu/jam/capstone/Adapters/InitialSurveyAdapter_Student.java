@@ -51,13 +51,13 @@ public class InitialSurveyAdapter_Student extends RecyclerView.Adapter<InitialSu
 
 		private void bindControls()
 		{
-			surveyQuestionTextView = itemView.findViewById(R.id.surveyQuestionTextView);
-			responseCheckBox1 = itemView.findViewById(R.id.responseCheckBox1);
-			responseItemDescriptionTextView1 = itemView.findViewById(R.id.responseItemDescriptionTextView1);
-			responseCheckBox2 = itemView.findViewById(R.id.responseCheckBox2);
-			responseItemDescriptionTextView2 = itemView.findViewById(R.id.responseItemDescriptionTextView2);
-			responseCheckBox3 = itemView.findViewById(R.id.responseCheckBox3);
-			responseItemDescriptionTextView3 = itemView.findViewById(R.id.responseItemDescriptionTextView3);
+//			surveyQuestionTextView = itemView.findViewById(R.id.surveyQuestionTextView);
+//			responseCheckBox1 = itemView.findViewById(R.id.responseCheckBox1);
+//			responseItemDescriptionTextView1 = itemView.findViewById(R.id.responseItemDescriptionTextView1);
+//			responseCheckBox2 = itemView.findViewById(R.id.responseCheckBox2);
+//			responseItemDescriptionTextView2 = itemView.findViewById(R.id.responseItemDescriptionTextView2);
+//			responseCheckBox3 = itemView.findViewById(R.id.responseCheckBox3);
+//			responseItemDescriptionTextView3 = itemView.findViewById(R.id.responseItemDescriptionTextView3);
 		}
 
 		private void registerHandlers()

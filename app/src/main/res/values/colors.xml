@@ -9,4 +9,5 @@
     <color name="themeLight">#0540f2</color>
     <color name="themeMedium">#1843b8</color>
     <color name="themeDark">#012075</color>
+    <color name="limitCounter">#e81523</color>
 </resources>
