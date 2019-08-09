@@ -59,22 +59,22 @@
  
 * **Error Response:**
 
-  Only Errors possible if no connection or miss typed url. No error codes returned
+  None
 
 * **Sample Call:**
 
-````
-curl -X GET \
-  http://localhost:8080/users \
-  -H 'Accept: */*' \
-  -H 'Cache-Control: no-cache' \
-  -H 'Connection: keep-alive' \
-  -H 'Host: localhost:8080' \
-  -H 'Postman-Token: 9cc91996-79c9-45f1-8a8a-b0876fbe9a55,2ed1dcad-9640-4daa-9bb9-791cefeb40ef' \
-  -H 'User-Agent: PostmanRuntime/7.15.0' \
-  -H 'accept-encoding: gzip, deflate' \
-  -H 'cache-control: no-cache'
-````
+  ````
+  curl -X GET \
+    http://localhost:8080/users \
+    -H 'Accept: */*' \
+    -H 'Cache-Control: no-cache' \
+    -H 'Connection: keep-alive' \
+    -H 'Host: localhost:8080' \
+    -H 'Postman-Token: 9cc91996-79c9-45f1-8a8a-b0876fbe9a55,2ed1dcad-9640-4daa-9bb9-791cefeb40ef' \
+    -H 'User-Agent: PostmanRuntime/7.15.0' \
+    -H 'accept-encoding: gzip, deflate' \
+    -H 'cache-control: no-cache'
+  ````
 
 
 **Show User**
@@ -121,7 +121,7 @@ curl -X GET \
             "href": "http://localhost:8080/users/901/roles"
         }
     }
-}
+    }
     ```
  
 * **Error Response:**
@@ -132,18 +132,18 @@ curl -X GET \
 
 * **Sample Call:**
 
-```
-curl -X GET \
-  http://localhost:8080/users/901 \
-  -H 'Accept: */*' \
-  -H 'Cache-Control: no-cache' \
-  -H 'Connection: keep-alive' \
-  -H 'Host: localhost:8080' \
-  -H 'Postman-Token: 037078e7-6cbd-4850-a72f-b9f4ae7a860b,c570161b-bd8f-4a9e-a508-d70db298b34f' \
-  -H 'User-Agent: PostmanRuntime/7.15.0' \
-  -H 'accept-encoding: gzip, deflate' \
-  -H 'cache-control: no-cache'
   ```
+  curl -X GET \
+    http://localhost:8080/users/901 \
+    -H 'Accept: */*' \
+    -H 'Cache-Control: no-cache' \
+    -H 'Connection: keep-alive' \
+    -H 'Host: localhost:8080' \
+    -H 'Postman-Token: 037078e7-6cbd-4850-a72f-b9f4ae7a860b,c570161b-bd8f-4a9e-a508-d70db298b34f' \
+    -H 'User-Agent: PostmanRuntime/7.15.0' \
+    -H 'accept-encoding: gzip, deflate' \
+    -H 'cache-control: no-cache'
+    ```
   
 
 **Signin**
@@ -184,57 +184,69 @@ curl -X GET \
 
   * **Code:** 200 <br />
     **Content:** 
-    ```{
-    "username": "MCoopman902",
-    "userId": 902,
-    "jwtToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJNQ29vcG1hbjkwMiIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sImlhdCI6MTU2NDkzOTQzMiwiZXhwIjoxNTY3NTMxNDMyfQ.RN4CKNDS8_2EHtI9kG0YkejOOJ4iTYmt8S-YiaTU77s",
-    "userType": "students",
-    "currentDepartmentId": 5,
-    "currentSessionNumberId": 3,
-    "currentClassNumberId": 3
-}```
- 
-* **Error Response:**
-  Returned if username or password are invalid
-  * **Code:** 400 BAD REQUEST <br />
-    **Content:** 
     ```
     {
-    "timestamp": "2019-08-04T17:53:28.806+0000",
-    "message": "Authentication failed"
+      "username": "MCoopman902",
+      "userId": 902,
+      "jwtToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJNQ29vcG1hbjkwMiIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sImlhdCI6MTU2NDkzOTQzMiwiZXhwIjoxNTY3NTMxNDMyfQ.RN4CKNDS8_2EHtI9kG0YkejOOJ4iTYmt8S-YiaTU77s",
+      "userType": "students",
+      "currentDepartmentId": 5,
+      "currentSessionNumberId": 3,
+      "currentClassNumberId": 3
     }
     ```
-  OR
-  Returned if missing one or more of the fields
-  * **Code:** 403 FORBIDDEN <br />
+ 
+* **Error Response:**
+  Returned if Username is invalid
+  * **Code:** 406 Not Acceptable <br />
     **Content:** 
-    ```
+  ```
     {
-    "timestamp": "2019-08-04T17:54:18.161+0000",
-    "message": "Missing required field. Please Check documentation fro required fields"
-}
+      "timestamp": "2019-08-09T02:43:00.430+0000",
+      "message": "Invalid Username"
+    }
+  ```
+  OR
+    Returned if Password is invalid
+  * **Code:** 406 Not Acceptable <br />
+    **Content:** 
+  ```
+    {
+      "timestamp": "2019-08-09T02:43:35.722+0000",
+      "message": "Invalid Password"
+    }
+  ```
+  OR
+    Returned missing field
+  * **Code:** 406 Not Acceptable <br />
+    **Content:** 
+  ```
+     {
+      "timestamp": "2019-08-09T02:43:35.722+0000",
+       message": "Missing Field"
+     }
     ```
 
 * **Sample Call:**
 
-```
-curl -X POST \
-  http://localhost:8080/users/signin \
-  -H 'Accept: */*' \
-  -H 'Cache-Control: no-cache' \
-  -H 'Connection: keep-alive' \
-  -H 'Content-Type: application/json' \
-  -H 'Host: localhost:8080' \
-  -H 'Postman-Token: a0e512b2-7386-4803-ad0f-e98b9f488192,01a3b16b-9a9d-458c-91ee-867f8982a54a' \
-  -H 'User-Agent: PostmanRuntime/7.15.0' \
-  -H 'accept-encoding: gzip, deflate' \
-  -H 'cache-control: no-cache' \
-  -H 'content-length: 29' \
-  -d '{
-	"username" : "MCoopman902",
-	"password" : "password"
-}'
-```
+  ```
+  curl -X POST \
+    http://localhost:8080/users/signin \
+    -H 'Accept: */*' \
+    -H 'Cache-Control: no-cache' \
+    -H 'Connection: keep-alive' \
+    -H 'Content-Type: application/json' \
+    -H 'Host: localhost:8080' \
+    -H 'Postman-Token: a0e512b2-7386-4803-ad0f-e98b9f488192,01a3b16b-9a9d-458c-91ee-867f8982a54a' \
+    -H 'User-Agent: PostmanRuntime/7.15.0' \
+    -H 'accept-encoding: gzip, deflate' \
+    -H 'cache-control: no-cache' \
+    -H 'content-length: 29' \
+    -d '{
+    "username" : "MCoopman902",
+    "password" : "password"
+  }'
+  ```
 
 
 **Add New Student**
@@ -261,16 +273,16 @@ curl -X POST \
 
 * **Data Params**
 
- ```
- {
-	"firstName" : "Mike",
-	"lastName"  : "Coopman",
-	"password"  : "password",
-	"email"     : "macoopman@gmail.com",
-	"gpa"       : "3.95",
-	"major"     : "Computer Science"
-}
- ```
+   ```
+   {
+    "firstName" : "Mike",
+    "lastName"  : "Coopman",
+    "password"  : "password",
+    "email"     : "macoopman@gmail.com",
+    "gpa"       : "3.95",
+    "major"     : "Computer Science"
+  }
+   ```
 
 * **Success Response:**
   
@@ -340,43 +352,41 @@ curl -X POST \
  
 * **Error Response:**
 
-  * **Code:** 500 INTERNAL SERVER ERROR <br />
+  * **Code:** 406 Not Acceptable 
     **Content:** 
     ```
     {
-    "timestamp": "2019-08-04T18:00:57.671+0000",
-    "status": 500,
-    "message": "Record already exists",
-    "path": "/users/addStudent",
-    "locale": "en_US"
-}
+    "timestamp": "2019-08-09T02:45:01.615+0000",
+    "message": "Email Address Already Exists
+    }
     ```
+   
 
 
 * **Sample Call:**
 
-```
-curl -X POST \
-  http://localhost:8080/users/addStudent \
-  -H 'Accept: */*' \
-  -H 'Cache-Control: no-cache' \
-  -H 'Connection: keep-alive' \
-  -H 'Content-Type: application/json' \
-  -H 'Host: localhost:8080' \
-  -H 'Postman-Token: 584b0245-5afa-4d69-889c-48060afc35ec,ff387f9d-1a39-44a1-bae2-eba3eddd1eed' \
-  -H 'User-Agent: PostmanRuntime/7.15.0' \
-  -H 'accept-encoding: gzip, deflate' \
-  -H 'cache-control: no-cache' \
-  -H 'content-length: 91' \
-  -d '{
-	"firstName" : "Evan",
-	"lastName"  : "Wilcox",
-	"password"  : "password",
-	"email"     : "ewilcox@gmail.com",
-	"gpa"       : "3.95",
-	"major"     : "Computer Science"
-}
-```
+  ```
+  curl -X POST \
+    http://localhost:8080/users/addStudent \
+    -H 'Accept: */*' \
+    -H 'Cache-Control: no-cache' \
+    -H 'Connection: keep-alive' \
+    -H 'Content-Type: application/json' \
+    -H 'Host: localhost:8080' \
+    -H 'Postman-Token: 584b0245-5afa-4d69-889c-48060afc35ec,ff387f9d-1a39-44a1-bae2-eba3eddd1eed' \
+    -H 'User-Agent: PostmanRuntime/7.15.0' \
+    -H 'accept-encoding: gzip, deflate' \
+    -H 'cache-control: no-cache' \
+    -H 'content-length: 91' \
+    -d '{
+    "firstName" : "Evan",
+    "lastName"  : "Wilcox",
+    "password"  : "password",
+    "email"     : "ewilcox@gmail.com",
+    "gpa"       : "3.95",
+    "major"     : "Computer Science"
+  }
+  ```
 
 * **Notes:**
 
@@ -411,10 +421,10 @@ curl -X POST \
 
   ```
   {
-	"firstName" : "Admin",
-	"lastName"  : "Admin",
-	"password"  : "admin",
-	"email"     : "admin@admin.com"
+    "firstName" : "Admin",
+    "lastName"  : "Admin",
+    "password"  : "admin",
+    "email"     : "admin@admin.com"
   }
   ```
 
@@ -449,40 +459,37 @@ curl -X POST \
  
 * **Error Response:**
 
-   * **Code:** 500 INTERNAL SERVER ERROR <br />
+   * **Code:** 406 Not Acceptable 
     **Content:** 
     ```
     {
-    "timestamp": "2019-08-04T18:00:57.671+0000",
-    "status": 500,
-    "message": "Record already exists",
-    "path": "/users/addAdmin",
-    "locale": "en_US"
-}
+    "timestamp": "2019-08-09T02:45:01.615+0000",
+    "message": "Email Address Already Exists
+    }
     ```
 
 * **Sample Call:**
 
-```
-curl -X POST \
-  http://localhost:8080/users/addAdmin \
-  -H 'Accept: */*' \
-  -H 'Cache-Control: no-cache' \
-  -H 'Connection: keep-alive' \
-  -H 'Content-Type: application/json' \
-  -H 'Host: localhost:8080' \
-  -H 'Postman-Token: eb8d522d-a564-4e23-bbcd-a992d5d20b62,abe27b93-9229-4e3f-943d-fbe6c110fa4d' \
-  -H 'User-Agent: PostmanRuntime/7.15.0' \
-  -H 'accept-encoding: gzip, deflate' \
-  -H 'cache-control: no-cache' \
-  -H 'content-length: 108' \
-  -d '{
-	"firstName" : "Admin",
-	"lastName"  : "Admin",
-	"password"  : "admin",
-	"email"     : "admin@admin.com"
-}'
-```
+  ```
+  curl -X POST \
+    http://localhost:8080/users/addAdmin \
+    -H 'Accept: */*' \
+    -H 'Cache-Control: no-cache' \
+    -H 'Connection: keep-alive' \
+    -H 'Content-Type: application/json' \
+    -H 'Host: localhost:8080' \
+    -H 'Postman-Token: eb8d522d-a564-4e23-bbcd-a992d5d20b62,abe27b93-9229-4e3f-943d-fbe6c110fa4d' \
+    -H 'User-Agent: PostmanRuntime/7.15.0' \
+    -H 'accept-encoding: gzip, deflate' \
+    -H 'cache-control: no-cache' \
+    -H 'content-length: 108' \
+    -d '{
+    "firstName" : "Admin",
+    "lastName"  : "Admin",
+    "password"  : "admin",
+    "email"     : "admin@admin.com"
+  }'
+  ```
 * **Notes:**
 
   If any information is not available for the user being created keep the field in the request and provide a blank string as the value.
@@ -555,17 +562,14 @@ curl -X POST \
 * **Error Response:**
 
 
-   * **Code:** 500 INTERNAL SERVER ERROR <br />
+  * **Code:** 406 Not Acceptable 
     **Content:** 
-  ```
-  {
-      "timestamp": "2019-08-04T18:00:57.671+0000",
-      "status": 500,
-      "message": "Record already exists",
-      "path": "/users/addAdmin",
-      "locale": "en_US"
-  }
-   ```
+    ```
+    {
+    "timestamp": "2019-08-09T02:45:01.615+0000",
+    "message": "Email Address Already Exists
+    }
+    ```
 
 * **Sample Call:**
 
@@ -804,12 +808,22 @@ curl -X POST \
  
 * **Error Response:**
 
-  * **Code:** 404 BAD REQUEST <br />
+  * **Code:** 406 Not Acceptable
     **Content:** 
     ```
     {
-    "timestamp": "2019-08-04T18:24:22.847+0000",
-    "message": "Username or email are invalid"
+      "timestamp": "2019-08-09T03:20:48.011+0000",
+      "message": "Invalid Email Address"
+    }
+    ```
+  OR
+  
+  * **Code:** 406 Not Acceptable
+    **Content:** 
+    ```
+    {
+      "timestamp": "2019-08-09T03:20:48.011+0000",
+      "message": "Invalid Username"
     }
     ```
 
@@ -881,14 +895,24 @@ curl -X POST \
  
 * **Error Response:**
 
-  * **Code:** 404 BAD REQUEST <br />
+ * **Code:** 406 Not Acceptable
     **Content:** 
-  ```
-  {
-    "timestamp": "2019-08-04T18:31:33.369+0000",
-    "message": "Invalid temp password"
-  }
-  ```
+    ```
+    {
+      "timestamp": "2019-08-09T03:20:48.011+0000",
+      "message": "Invalid User Id"
+    }
+    ```
+   OR
+   
+   * **Code:** 406 Not Acceptable
+    **Content:** 
+    ```
+    {
+      "timestamp": "2019-08-09T03:20:48.011+0000",
+      "message": "Invalid Temporary Password"
+    }
+    ```
   
 
 * **Sample Call:**
@@ -952,18 +976,23 @@ curl -X POST \
  
 * **Error Response:**
 
-
-  * **Code:** 500 INTERNAL SERVER ERROR <br />
-    **Content:** 
-    ```
-    {
-    "timestamp": "2019-08-04T18:41:50.081+0000",
-    "status": 500,
-    "message": "Record not found",
-    "path": "/users/902/updateLearningStyle/10",
-    "locale": "en_US"
-    }
-    ```
+   * **Code:** 406 Not Acceptable
+      **Content:** 
+      ```
+      {
+        "timestamp": "2019-08-09T03:20:48.011+0000",
+        "message": "Invalid Learning Style Id"
+      }
+      ```
+      OR
+   * **Code:** 406 Not Acceptable
+      **Content:** 
+      ```
+      {
+        "timestamp": "2019-08-09T03:20:48.011+0000",
+        "message": "User Id Not Found"
+      }
+      ```   
 
 
 * **Sample Call:**
