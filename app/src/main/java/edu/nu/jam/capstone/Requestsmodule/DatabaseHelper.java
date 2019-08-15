@@ -2,7 +2,9 @@ package edu.nu.jam.capstone.Requestsmodule;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -23,6 +25,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.zip.InflaterOutputStream;
 
@@ -109,5 +112,50 @@ public class DatabaseHelper {
     public String getLoginToken()
     {
         return loginToken;
+    }
+
+    public void SaveLoginTokenToSharedPreferences(Context context) {
+        System.out.println("Saving Login Token to Shared Preferences");
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("com.whiteboard.key", getLoginToken());
+        editor.commit();
+    }
+
+    public String GetLoginTokenFromSharedPreferences(Context context) {
+        System.out.println("Loading Login Token From Shared Preferences");
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        String token = sharedPref.getString("com.whiteboard.key", "");
+        System.out.println("Shared Preferences Token: " + token);
+        return token;
+    }
+
+    public void SaveUserInfoToSharedPreferences(Context context, String username, String hashword, boolean rememberMe) {
+        System.out.println("Saving User Info to Shared Preferences");
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("com.whiteboard.username", username);
+        editor.putString("com.whiteboard.hashword", hashword);
+        editor.putBoolean("com.whiteboard.rememberMe", rememberMe);
+        editor.commit();
+    }
+
+    public List<String> GetUserInfoFromSharedPreferences(Context context) {
+        System.out.println("Loading User Info From Shared Preferences");
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        String username = sharedPref.getString("com.whiteboard.username", "");
+        String hashword = sharedPref.getString("com.whiteboard.hashword", "");
+        List<String> userInfo = new ArrayList<>();
+        userInfo.add(username);
+        userInfo.add(hashword);
+        System.out.println("Shared Preferences Username: " + username);
+        return userInfo;
+    }
+
+    public boolean GetRememberMeFromSharedPreferences(Context context) {
+        System.out.println("Loading Remember Me Boolean From Shared Preferences");
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean rememberme = sharedPref.getBoolean("com.whiteboard.rememberMe", false);
+        return rememberme;
     }
 }
