@@ -61,8 +61,7 @@ public class NavDrawerActivity extends AppCompatActivity
         else {
             sessionid = dbHelper.getSessionId();
         }
-
-        getCommmentList();
+        //BgetCommentList();
 
 
         setContentView(R.layout.nav_drawer);
@@ -216,18 +215,20 @@ public class NavDrawerActivity extends AppCompatActivity
                 String freshSessionId = dbHelper.getSessionId();
                 dbHelper.SaveSessionIdToSharedPreferences(NavDrawerActivity.this, freshSessionId);
                 sessionid = freshSessionId;
-
+                getCommentList();
             }
         },NavDrawerActivity.this, userid).execute();
     }
 
-    public void getCommmentList() {
+    public void getCommentList() {
         final DatabaseHelper dbHelper = new DatabaseHelper();
         new CommentListHelper(new AsyncResponder() {
             @Override
             public void processFinish(String output) {
+
                 dbHelper.onGetCommentListCompleted(output);
                 commentListFromBackend = dbHelper.getCommentList();
+                System.out.println(commentListFromBackend);
             }
         }, NavDrawerActivity.this, sessionid).execute();
     }

@@ -121,9 +121,9 @@ public class DatabaseHelper {
             JSONObject jsonObj = new JSONObject(result);
             // Grab the '_embedded' value.
             JSONObject _embedded = jsonObj.getJSONObject("_embedded");
-            // Grab the array of classees from '_embedded' using the classes key.
+            // Grab the array of comments from '_embedded' using the comments key.
             JSONArray comments = _embedded.getJSONArray("comments");
-            // Iterate through the JSON classes array
+            // Iterate through the JSON comments array
             for (int i = 0; i<comments.length();i++) {
                 // Set up objects for the HashMap
                 JSONObject c = comments.getJSONObject(i);
@@ -258,14 +258,14 @@ public class DatabaseHelper {
         System.out.println("Saving Session Id to Shared Preferences: " + sessionid);
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("com.whiteboard.userid", sessionid);
+        editor.putString("com.whiteboard.sessionid", sessionid);
         editor.commit();
     }
 
     public String GetSessionIdFromSharedPreferences(Context context) {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-        sessionid = sharedPref.getString("com.whiteboard.userid", "");
-        System.out.println("Loading User Id From Shared Preferences: " + sessionid);
+        sessionid = sharedPref.getString("com.whiteboard.sessionid", "");
+        System.out.println("Loading Session Id From Shared Preferences: " + sessionid);
         return sessionid;
     }
 }
