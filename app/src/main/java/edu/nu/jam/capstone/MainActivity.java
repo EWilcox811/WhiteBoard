@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity
                         String token = dbHelper.getLoginToken();
                         dbHelper.SaveLoginTokenToSharedPreferences(MainActivity.this);
                         System.out.println(token);
+						String userid = dbHelper.getUserId();
+						dbHelper.SaveUserIdToSharedPreferences(MainActivity.this, userid);
                         startNewActivity();
                     }
                 }, MainActivity.this, usernameText, passwordText).execute();

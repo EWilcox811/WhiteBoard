@@ -35,6 +35,9 @@ public class DatabaseHelper {
 
     ArrayList<HashMap<String,String>> classList  = new ArrayList<HashMap<String,String>>();
     String loginToken;
+    String userid;
+
+
 
     /**
      * Builds the ArrayList of classes with the HashMap of strings
@@ -100,6 +103,7 @@ public class DatabaseHelper {
             JSONObject jsonObj = new JSONObject(result);
             // Grab the 'jwtToken' value.
             loginToken = jsonObj.getString("jwtToken");
+            userid = jsonObj.getString("userId");
 
 
 
@@ -113,6 +117,8 @@ public class DatabaseHelper {
     {
         return loginToken;
     }
+
+    public String getUserId() { return userid; }
 
     public void SaveLoginTokenToSharedPreferences(Context context) {
         System.out.println("Saving Login Token to Shared Preferences");
@@ -157,5 +163,20 @@ public class DatabaseHelper {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         boolean rememberme = sharedPref.getBoolean("com.whiteboard.rememberMe", false);
         return rememberme;
+    }
+
+    public void SaveUserIdToSharedPreferences(Context context, String userId) {
+        System.out.println("Saving User Id to Shared Preferences: " + userid);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("com.whiteboard.userid", userId);
+        editor.commit();
+    }
+
+    public String GetUserIdFromSharedPreferences(Context context) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        userid = sharedPref.getString("com.whiteboard.userid", "");
+        System.out.println("Loading User Id From Shared Preferences: " + userid);
+        return userid;
     }
 }
