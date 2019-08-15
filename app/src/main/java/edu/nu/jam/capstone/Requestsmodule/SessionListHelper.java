@@ -14,17 +14,19 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class SessionListHelper extends AsyncTask<Void, Void, String> {
-    //http://104.248.0.248/professors/901/currentSession
+    //http://104.248.0.248/persons/901/currentSession
 
     String response = "";
     Context context;
+    String userid = "";
     Long totalBytes;
     ProgressDialog pd;
     public AsyncResponder delegate;
 
-    public SessionListHelper(AsyncResponder delegate, Context context){
+    public SessionListHelper(AsyncResponder delegate, Context context, String userid){
         this.delegate = delegate;
         this.context = context;
+        this.userid = userid;
     }
 
     protected void onPreExecute() {
@@ -36,13 +38,13 @@ public class SessionListHelper extends AsyncTask<Void, Void, String> {
         pd.show();
     }
 
-    void getSessions() throws IOException{
+    void getCurrentSession() throws IOException{
         HttpURLConnection connection = null;
         BufferedReader reader = null;
 
         try {
             // URL of the backend.
-            URL url = new URL("http://104.248.0.248/classes");
+            URL url = new URL("http://104.248.0.248/persons/" + userid + "/currentSession");
             // Establish the connection with the backend.
             connection = (HttpURLConnection) url.openConnection();
             // Connect to the backend.
@@ -91,7 +93,7 @@ public class SessionListHelper extends AsyncTask<Void, Void, String> {
     @Override
     protected String doInBackground(Void...params) {
         try {
-            getSessions();
+            getCurrentSession();
 
         } catch (IOException e) {
             e.printStackTrace();

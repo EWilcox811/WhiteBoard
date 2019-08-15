@@ -30,6 +30,9 @@ import java.util.List;
 import edu.nu.jam.capstone.Adapters.CommentBoardAdapter;
 import edu.nu.jam.capstone.Data.CommentData;
 import edu.nu.jam.capstone.Interfaces.ICommentBoardOperations;
+import edu.nu.jam.capstone.Requestsmodule.AsyncResponder;
+import edu.nu.jam.capstone.Requestsmodule.DatabaseHelper;
+import edu.nu.jam.capstone.Requestsmodule.SessionListHelper;
 
 public class NavDrawerActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener, ICommentBoardOperations
@@ -43,10 +46,22 @@ public class NavDrawerActivity extends AppCompatActivity
     private List<CommentData> subComments = new ArrayList<>();
     List<CommentData> topLevelList = new ArrayList<>();
     private RecyclerView commentStream;
+    private String sessionid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
         super.onCreate(savedInstanceState);
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        if (dbHelper.GetSessionIdFromSharedPreferences(this).isEmpty()) {
+            getSessionId();
+        }
+        else {
+            sessionid = dbHelper.getSessionId();
+        }
+
+
+
+
         setContentView(R.layout.nav_drawer);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -186,5 +201,20 @@ public class NavDrawerActivity extends AppCompatActivity
     {
 
 
+    }
+
+    public void getSessionId() {
+        final DatabaseHelper dbHelper = new DatabaseHelper();
+        String userid = dbHelper.GetUserIdFromSharedPreferences(NavDrawerActivity.this);
+        new SessionListHelper(new AsyncResponder(){
+            @Override
+            public void processFinish(String output){
+                dbHelper.onGetSessionListCompleted(output);
+                String freshSessionId = dbHelper.getSessionId();
+                dbHelper.SaveSessionIdToSharedPreferences(NavDrawerActivity.this, freshSessionId);
+                sessionid = freshSessionId;
+
+            }
+        },NavDrawerActivity.this, userid).execute();
     }
 }

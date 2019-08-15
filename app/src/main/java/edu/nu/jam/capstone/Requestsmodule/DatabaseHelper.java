@@ -36,6 +36,7 @@ public class DatabaseHelper {
     ArrayList<HashMap<String,String>> classList  = new ArrayList<HashMap<String,String>>();
     String loginToken;
     String userid;
+    String sessionid;
 
 
 
@@ -94,6 +95,23 @@ public class DatabaseHelper {
     {
         // Returns the classList. Don't use if you haven't ran the onClassListHelperCompleted first.
         return classList;
+    }
+
+    public void onGetSessionListCompleted(String result) {
+        try {
+            // Convert the JSON string into a parsable JSON object.
+            JSONObject jsonObj = new JSONObject(result);
+            // Set the Session ID variable
+            sessionid = jsonObj.getString("id");
+        } catch (JSONException e) {
+            // This is in case Mike fucked up.
+            e.printStackTrace();
+        }
+    }
+
+    public String getSessionId()
+    {
+        return sessionid;
     }
 
     public void onLoginFinished(String result)
@@ -178,5 +196,20 @@ public class DatabaseHelper {
         userid = sharedPref.getString("com.whiteboard.userid", "");
         System.out.println("Loading User Id From Shared Preferences: " + userid);
         return userid;
+    }
+
+    public void SaveSessionIdToSharedPreferences(Context context, String sessionid) {
+        System.out.println("Saving Session Id to Shared Preferences: " + sessionid);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("com.whiteboard.userid", sessionid);
+        editor.commit();
+    }
+
+    public String GetSessionIdFromSharedPreferences(Context context) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        sessionid = sharedPref.getString("com.whiteboard.userid", "");
+        System.out.println("Loading User Id From Shared Preferences: " + sessionid);
+        return sessionid;
     }
 }
