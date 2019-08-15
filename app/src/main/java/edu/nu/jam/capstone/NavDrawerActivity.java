@@ -25,12 +25,14 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import edu.nu.jam.capstone.Adapters.CommentBoardAdapter;
 import edu.nu.jam.capstone.Data.CommentData;
 import edu.nu.jam.capstone.Interfaces.ICommentBoardOperations;
 import edu.nu.jam.capstone.Requestsmodule.AsyncResponder;
+import edu.nu.jam.capstone.Requestsmodule.CommentListHelper;
 import edu.nu.jam.capstone.Requestsmodule.DatabaseHelper;
 import edu.nu.jam.capstone.Requestsmodule.SessionListHelper;
 
@@ -47,6 +49,7 @@ public class NavDrawerActivity extends AppCompatActivity
     List<CommentData> topLevelList = new ArrayList<>();
     private RecyclerView commentStream;
     private String sessionid;
+    private ArrayList<HashMap<String,String>> commentListFromBackend;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
@@ -59,7 +62,7 @@ public class NavDrawerActivity extends AppCompatActivity
             sessionid = dbHelper.getSessionId();
         }
 
-
+        getCommmentList();
 
 
         setContentView(R.layout.nav_drawer);
@@ -216,5 +219,16 @@ public class NavDrawerActivity extends AppCompatActivity
 
             }
         },NavDrawerActivity.this, userid).execute();
+    }
+
+    public void getCommmentList() {
+        final DatabaseHelper dbHelper = new DatabaseHelper();
+        new CommentListHelper(new AsyncResponder() {
+            @Override
+            public void processFinish(String output) {
+                dbHelper.onGetCommentListCompleted(output);
+                commentListFromBackend = dbHelper.getCommentList();
+            }
+        }, NavDrawerActivity.this, sessionid).execute();
     }
 }

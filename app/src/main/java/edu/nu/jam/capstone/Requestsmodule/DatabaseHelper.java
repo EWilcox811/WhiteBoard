@@ -34,6 +34,7 @@ import javax.net.ssl.HttpsURLConnection;
 public class DatabaseHelper {
 
     ArrayList<HashMap<String,String>> classList  = new ArrayList<HashMap<String,String>>();
+    ArrayList<HashMap<String, String>> commentList = new ArrayList<>();
     String loginToken;
     String userid;
     String sessionid;
@@ -112,6 +113,61 @@ public class DatabaseHelper {
     public String getSessionId()
     {
         return sessionid;
+    }
+
+    public void onGetCommentListCompleted(String result) {
+        try {
+            // Convert the JSON string into a parsable JSON object.
+            JSONObject jsonObj = new JSONObject(result);
+            // Grab the '_embedded' value.
+            JSONObject _embedded = jsonObj.getJSONObject("_embedded");
+            // Grab the array of classees from '_embedded' using the classes key.
+            JSONArray comments = _embedded.getJSONArray("comments");
+            // Iterate through the JSON classes array
+            for (int i = 0; i<comments.length();i++) {
+                // Set up objects for the HashMap
+                JSONObject c = comments.getJSONObject(i);
+                // Grab the value of the subject key.
+                String message = c.getString("message");
+                // Grab the value of the parentid key.
+                String parentid = c.getString("parentId");
+                // Grab the value of the number of replies key.
+                String numofreplies = c.getString("numOfRelies");
+                // Grab the value of the username key.
+                String username = c.getString("userName");
+                // Grab the value of the isAnonymous key.
+                String isAnonymous = c.getString("isAnonymous");
+                // Grab the value of the date created key.
+                String datecreated = c.getString("dateCreated");
+
+                // Make the HashMap for the values.
+                HashMap<String, String> comment = new HashMap<>();
+                comment.put("message", message);
+                comment.put("parentid", parentid);
+                comment.put("numofreplies", numofreplies);
+                comment.put("username", username);
+                comment.put("isanonymous", isAnonymous);
+                comment.put("datecreated", datecreated);
+
+                // Add the HashMap to the ArrayList.
+                commentList.add(comment);
+            }
+
+
+        } catch (JSONException e) {
+            // This is in case Mike fucked up.
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * HashMap:
+     * message, parentid, numofreplies, username, isanonymous, datecreated
+     *
+     * @return returns the ArrayList<HashMap<String, String> for the list of classes.
+     */
+    public ArrayList<HashMap<String, String>> getCommentList() {
+        return commentList;
     }
 
     public void onLoginFinished(String result)
