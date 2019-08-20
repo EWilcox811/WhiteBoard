@@ -8,7 +8,7 @@
 
 * **URL**
 
-  /learningstyle
+  `/learningstyle`
 
 * **Method:**
 
@@ -16,63 +16,61 @@
   
 *  **URL Params**
 
-   None 
+   `None` 
    
    **Required:**
  
-   None
+   `None`
 
    **Optional:**
  
-   None
+   `None`
 
 * **Data Params**
-
-
-
+  `None`
 * **Success Response:**
   
-  * **Code:** 200 <br />
+  * **Code:** `200` 
     **Content:** 
-```
-      {
-      "_embedded": {
-          "learningstyle": [
-              {
-                  "question": "When I learn I read books, articles, and handouts",
-                  "_links": {
-                      "self": {
-                          "href": "http://localhost:8080/learningstyle/1"
-                      },
-                      "learningStyleQuestion": {
-                          "href": "http://localhost:8080/learningstyle/1"
+    ```
+          {
+          "_embedded": {
+              "learningstyle": [
+                  {
+                      "question": "When I learn I read books, articles, and handouts",
+                      "_links": {
+                          "self": {
+                              "href": "http://localhost:8080/learningstyle/1"
+                          },
+                          "learningStyleQuestion": {
+                              "href": "http://localhost:8080/learningstyle/1"
+                          }
                       }
-                  }
-              },
-              {
-                  "question": "When I learn I use examples and applications",
-                  "_links": {
-                      "self": {
-                          "href": "http://localhost:8080/learningstyle/2"
-                      },
-                      "learningStyleQuestion": {
-                          "href": "http://localhost:8080/learningstyle/2"
+                  },
+                  {
+                      "question": "When I learn I use examples and applications",
+                      "_links": {
+                          "self": {
+                              "href": "http://localhost:8080/learningstyle/2"
+                          },
+                          "learningStyleQuestion": {
+                              "href": "http://localhost:8080/learningstyle/2"
+                          }
                       }
-                  }
-              },
-             ...
-      "page": {
-          "size": 20,
-          "totalElements": 4,
-          "totalPages": 1,
-          "number": 0
-      }
-     }
-```
+                  },
+                 ...
+          "page": {
+              "size": 20,
+              "totalElements": 4,
+              "totalPages": 1,
+              "number": 0
+          }
+         }
+    ```
  
 * **Error Response:**
 
-  No Error messages
+  `None`
 
 * **Sample Call:**
 
@@ -97,7 +95,7 @@
 
 * **URL**
 
-  /learningstyle/{id}
+  `/learningstyle/{learningStyle_id}`
 
 * **Method:**
   
@@ -107,19 +105,19 @@
 
    **Required:**
  
-   `id=[integer]`
+   `None`
 
    **Optional:**
  
-   `None
+   `None`
 
 * **Data Params**
 
-  None
+  `None`
 
 * **Success Response:**
   
-  * **Code:** 200 <br />
+  * **Code:** `200` 
     **Content:** 
     ```
     {
@@ -138,8 +136,8 @@
 * **Error Response:**
 
 
-  * **Code:** 404 NOT FOUND <br />
-    **Content:** None
+  * **Code:** `404 NOT FOUND`
+    **Content:** `None`
     
 * **Sample Call:**
 ```
@@ -163,7 +161,7 @@ curl -X GET \
 
 * **URL**
 
-  /learningstyle/add
+  `/learningstyle/add`
 
 * **Method:**
 
@@ -173,27 +171,27 @@ curl -X GET \
 
    **Required:**
  
-   None
+   `None`
 
    **Optional:**
  
-   None
+   `None`
 
 * **Data Params**
 
   ```
   {
-	"question" : "this is a new learning style question"
+	  "question" : "this is a new learning style question"
   }
   ```
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
-    **Content:** None
+  * **Code:** `200` 
+    **Content:** `None`
  
 * **Error Response:**
-  None
+    `None`
 
 * **Sample Call:**
 
