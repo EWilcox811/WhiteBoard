@@ -8,32 +8,31 @@
 
 * **URL**
 
-  /users/
+  `/users`
 
 * **Method:**
   
-
   `GET` 
   
 *  **URL Params**
 
-   None
+   `None`
 
    **Required:**
  
-   None
+   `None`
 
    **Optional:**
  
-   {?page,size,sort}
+   `{?page,size,sort}`
 
 * **Data Params**
 
-  None
+  `None`
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** `200` 
     **Content:** 
     ```
     _embedded": {
@@ -59,7 +58,7 @@
  
 * **Error Response:**
 
-  None
+  `None`
 
 * **Sample Call:**
 
@@ -83,11 +82,10 @@
 
 * **URL**
 
-  /users/{user_id}
+  `/users/{user_id}`
 
 * **Method:**
   
-
   `GET` 
   
 *  **URL Params**
@@ -102,7 +100,7 @@
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** `200` 
     **Content:** 
     ```
     {
@@ -126,7 +124,7 @@
  
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** `404 NOT FOUND` 
     **Content:** None
 
 
@@ -152,7 +150,7 @@
 
 * **URL**
 
-  /user/signin
+  `/user/signin`
 
 * **Method:**
   
@@ -164,25 +162,25 @@
 
    **Required:**
  
-   None
+   `None`
 
    **Optional:**
  
-   None
+   `None`
 
 * **Data Params**
 
   ```
   {
-	"username" : "MCoopman902",
-	"password" : "password"
+    "username" : "MCoopman902",
+    "password" : "password"
   }
   ```
 
 * **Success Response:**
 
 
-  * **Code:** 200 <br />
+  * **Code:** `200`
     **Content:** 
     ```
     {
@@ -197,35 +195,35 @@
     ```
  
 * **Error Response:**
-  Returned if Username is invalid
-  * **Code:** 406 Not Acceptable <br />
+
+  * **Code:** `406 Not Acceptable` 
     **Content:** 
-  ```
-    {
-      "timestamp": "2019-08-09T02:43:00.430+0000",
-      "message": "Invalid Username"
-    }
-  ```
-  OR
-    Returned if Password is invalid
-  * **Code:** 406 Not Acceptable <br />
-    **Content:** 
-  ```
-    {
-      "timestamp": "2019-08-09T02:43:35.722+0000",
-      "message": "Invalid Password"
-    }
-  ```
-  OR
-    Returned missing field
-  * **Code:** 406 Not Acceptable <br />
-    **Content:** 
-  ```
-     {
-      "timestamp": "2019-08-09T02:43:35.722+0000",
-       message": "Missing Field"
-     }
     ```
+      {
+        "timestamp": "2019-08-09T02:43:00.430+0000",
+        "message": "Invalid Username"
+      }
+    ```
+  OR
+    
+  * **Code:** `406 Not Acceptable` 
+    **Content:** 
+    ```
+      {
+        "timestamp": "2019-08-09T02:43:35.722+0000",
+        "message": "Invalid Password"
+      }
+    ```
+  OR
+    
+  * **Code:** `406 Not Acceptable` <br />
+    **Content:** 
+    ```
+       {
+        "timestamp": "2019-08-09T02:43:35.722+0000",
+         message": "Missing Field"
+       }
+      ```
 
 * **Sample Call:**
 
@@ -255,7 +253,7 @@
 
 * **URL**
 
-  /user/addStudent
+  `/user/addStudent`
 
 * **Method:**
   
@@ -265,29 +263,29 @@
 
    **Required:**
  
-   None
+   `None`
 
    **Optional:**
  
-   None
+   `None`
 
 * **Data Params**
 
    ```
    {
-    "firstName" : "Mike",
-    "lastName"  : "Coopman",
-    "password"  : "password",
-    "email"     : "macoopman@gmail.com",
-    "gpa"       : "3.95",
-    "major"     : "Computer Science"
+      "firstName" : "Mike",
+      "lastName"  : "Coopman",
+      "password"  : "password",
+      "email"     : "macoopman@gmail.com",
+      "gpa"       : "3.95",
+      "major"     : "Computer Science"
   }
    ```
 
 * **Success Response:**
   
 
-  * **Code:** 200 <br />
+  * **Code:** `200` 
     **Content:** 
     ```
     {
@@ -346,18 +344,18 @@
                 "id": 12
             }
         ]
+      }
     }
-}
     ```
  
 * **Error Response:**
 
-  * **Code:** 406 Not Acceptable 
+  * **Code:** `406 Not Acceptable `
     **Content:** 
     ```
     {
-    "timestamp": "2019-08-09T02:45:01.615+0000",
-    "message": "Email Address Already Exists
+      "timestamp": "2019-08-09T02:45:01.615+0000",
+      "message": "Email Address Already Exists
     }
     ```
    
@@ -400,22 +398,21 @@
 
 * **URL**
 
-  /users/addAdmin
+  `/users/addAdmin`
 
 * **Method:**
   
-
  `POST` 
   
 *  **URL Params**
 
    **Required:**
  
-   None
+   `None`
 
    **Optional:**
  
-   None
+   `None`
 
 * **Data Params**
 
@@ -429,7 +426,7 @@
   ```
 
 * **Success Response:**
-  * **Code:** 200 <br />
+  * **Code:** `200` 
     **Content:** 
     ```
     {
@@ -459,12 +456,12 @@
  
 * **Error Response:**
 
-   * **Code:** 406 Not Acceptable 
+   * **Code:** `406 Not Acceptable `
     **Content:** 
     ```
     {
-    "timestamp": "2019-08-09T02:45:01.615+0000",
-    "message": "Email Address Already Exists
+      "timestamp": "2019-08-09T02:45:01.615+0000",
+      "message": "Email Address Already Exists
     }
     ```
 
@@ -496,42 +493,42 @@
 
 
 **Add New Professor**
-----
+---
   Adds a professor to the system. Attaches the user privileges.
 
 * **URL**
 
-  /users/addProfessor
+  `/users/addProfessor`
 
 * **Method:**
-* 
+
   `POST` 
   
 *  **URL Params**
 
    **Required:**
  
-    None
+    `None`
 
    **Optional:**
  
-   None
+   `None`
 
 * **Data Params**
 
   ```
   {
-	"firstName" : "Jean",
-	"lastName"  : "Desire",
-	"password"  : "password",
-	"email"     : "jean.desire@natuniv.edu",
-	"rating"       : "3.95"
+    "firstName" : "Jean",
+    "lastName"  : "Desire",
+    "password"  : "password",
+    "email"     : "jean.desire@natuniv.edu",
+    "rating"       : "3.95"
   }
   ```
 
 * **Success Response:**
   
-  * **Code:** 200 <br />
+  * **Code:** `200` 
     **Content:** 
     ```
     {
@@ -562,7 +559,7 @@
 * **Error Response:**
 
 
-  * **Code:** 406 Not Acceptable 
+  * **Code:** `406 Not Acceptable `
     **Content:** 
     ```
     {
@@ -573,27 +570,27 @@
 
 * **Sample Call:**
 
-```
-curl -X POST \
-  http://localhost:8080/users/addProfessor \
-  -H 'Accept: */*' \
-  -H 'Cache-Control: no-cache' \
-  -H 'Connection: keep-alive' \
-  -H 'Content-Type: application/json' \
-  -H 'Host: localhost:8080' \
-  -H 'Postman-Token: d5790436-4c39-427c-a864-fedf98827c38,188647b0-8a8b-4c02-95eb-45de24238607' \
-  -H 'User-Agent: PostmanRuntime/7.15.0' \
-  -H 'accept-encoding: gzip, deflate' \
-  -H 'cache-control: no-cache' \
-  -H 'content-length: 147' \
-  -d '{
-	"firstName" : "Jean",
-	"lastName"  : "Desire",
-	"password"  : "password",
-	"email"     : "jean.desire@natuniv.edu",
-	"rating"       : "3.95"
-}
-```
+  ```
+  curl -X POST \
+    http://localhost:8080/users/addProfessor \
+    -H 'Accept: */*' \
+    -H 'Cache-Control: no-cache' \
+    -H 'Connection: keep-alive' \
+    -H 'Content-Type: application/json' \
+    -H 'Host: localhost:8080' \
+    -H 'Postman-Token: d5790436-4c39-427c-a864-fedf98827c38,188647b0-8a8b-4c02-95eb-45de24238607' \
+    -H 'User-Agent: PostmanRuntime/7.15.0' \
+    -H 'accept-encoding: gzip, deflate' \
+    -H 'cache-control: no-cache' \
+    -H 'content-length: 147' \
+    -d '{
+    "firstName" : "Jean",
+    "lastName"  : "Desire",
+    "password"  : "password",
+    "email"     : "jean.desire@natuniv.edu",
+    "rating"       : "3.95"
+  }
+  ```
 
 * **Notes:**
 
@@ -607,7 +604,7 @@ curl -X POST \
 
 * **URL**
 
-  /user/{user_id}/userData
+  `/user/{user_id}/userData`
 
 * **Method:**
   
@@ -622,16 +619,16 @@ curl -X POST \
 
    **Optional:**
  
-   None
+   `None`
 
 * **Data Params**
 
-  None
+  `None`
 
 * **Success Response:**
 
 
-  * **Code:** 200 <br />
+  * **Code:** `200`
     **Content:** 
     ```
     {
@@ -662,8 +659,8 @@ curl -X POST \
  
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
-    **Content:** None
+  * **Code:** `404 NOT FOUND`
+    **Content:** `None`
  `
 
 * **Sample Call:**
@@ -692,7 +689,7 @@ curl -X POST \
 
 * **URL**
 
-  /users/{user_id}/roles
+  `/users/{user_id}/roles`
 
 * **Method:**
 
@@ -706,15 +703,15 @@ curl -X POST \
 
    **Optional:**
  
-   None
+   `None`
 
 * **Data Params**
 
-  None
+  `None`
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** `200` 
     **Content:** 
     ```
     {
@@ -745,7 +742,7 @@ curl -X POST \
  
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
+  * **Code:** `404 NOT FOUND` 
     **Content:** None
 
 
@@ -773,7 +770,7 @@ curl -X POST \
 
 * **URL**
 
-  /user/recover
+  `/user/recover`
 
 * **Method:**
   
@@ -783,22 +780,22 @@ curl -X POST \
 
    **Required:**
  
-  None
+  `None`
 
 
 * **Data Params**
 
-```
-{
-	"username" : "MCoopman902",
-	"email"    : "macoopman@gmail.com"
-}
-```
+  ```
+  {
+    "username" : "MCoopman902",
+    "email"    : "macoopman@gmail.com"
+  }
+  ```
 
 * **Success Response:**
   
 
-  * **Code:** 200 <br />
+  * **Code:** `200` 
     **Content:** 
     ```
     {
@@ -808,7 +805,7 @@ curl -X POST \
  
 * **Error Response:**
 
-  * **Code:** 406 Not Acceptable
+  * **Code:** `406 Not Acceptable`
     **Content:** 
     ```
     {
@@ -818,7 +815,7 @@ curl -X POST \
     ```
   OR
   
-  * **Code:** 406 Not Acceptable
+  * **Code:** `406 Not Acceptable`
     **Content:** 
     ```
     {
@@ -860,22 +857,22 @@ curl -X POST \
 
 * **URL**
 
-  /user/recover/passwordChange
+  `/user/recover/passwordChange`
   
 * **Method:**
    `POST` 
   
 *  **URL Params**
 
-    None
+    `None`
 
    **Required:**
  
-   None
+   `None`
 
    **Optional:**
  
-   None
+   `None`
 
 * **Data Params**
 
@@ -890,12 +887,12 @@ curl -X POST \
 * **Success Response:**
   
 
-  * **Code:** 200 <br />
+  * **Code:** `200` 
     **Content:**  None
  
 * **Error Response:**
 
- * **Code:** 406 Not Acceptable
+ * **Code:** `406 Not Acceptable`
     **Content:** 
     ```
     {
@@ -905,7 +902,7 @@ curl -X POST \
     ```
    OR
    
-   * **Code:** 406 Not Acceptable
+   * **Code:** `406 Not Acceptable`
     **Content:** 
     ```
     {
@@ -943,7 +940,7 @@ curl -X POST \
 
 * **URL**
 
- /user/{userId}/updateLearningStyle/{learningStyleId}
+ `/user/{userId}/updateLearningStyle/{learningStyleId}`
 
 * **Method:**
 
@@ -959,7 +956,7 @@ curl -X POST \
 
    **Optional:**
  
-   None
+   `None`
 
 * **Data Params**
 
@@ -971,12 +968,12 @@ curl -X POST \
 
 * **Success Response:**
   
-  * **Code:** 200 <br />
+  * **Code:** `200` 
     **Content:** None
  
 * **Error Response:**
 
-   * **Code:** 406 Not Acceptable
+   * **Code:** `406 Not Acceptable`
       **Content:** 
       ```
       {
@@ -985,7 +982,7 @@ curl -X POST \
       }
       ```
       OR
-   * **Code:** 406 Not Acceptable
+   * **Code:** `406 Not Acceptable`
       **Content:** 
       ```
       {
