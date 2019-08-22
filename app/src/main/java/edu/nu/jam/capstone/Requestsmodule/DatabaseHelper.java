@@ -196,6 +196,8 @@ public class DatabaseHelper {
 
     public String getUserId() { return userid; }
 
+    public String getUserType() {return usertype;}
+
     public void SaveLoginTokenToSharedPreferences(Context context) {
         System.out.println("Saving Login Token to Shared Preferences");
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
