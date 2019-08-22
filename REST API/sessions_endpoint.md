@@ -579,3 +579,88 @@
   ``` 
 
 
+**Show Learning Style Question Results**
+----
+  Return a JSON list of the learning style questions and the calculated session average per question.
+
+* **URL**
+
+  `/sessions/{session_id}/learningstyleresults`
+
+* **Method:**
+  
+  `GET`
+  
+*  **URL Params**
+
+
+   **Required:**
+ 
+   `session_id=[integer]`
+
+* **Data Params**
+
+  `None`
+
+* **Success Response:**
+  
+
+  * **Code:** `200` 
+    **Content:** 
+    ```
+        [
+        {
+            "questionId": 1,
+            "question": "When I learn I read books, articles, and handouts",
+            "average": 63.0
+        },
+        {
+            "questionId": 2,
+            "question": "When I learn I use examples and applications",
+            "average": 64.0
+        },
+        {
+            "questionId": 3,
+            "question": "When I learn I see patterns in things",
+            "average": 61.0
+        },
+        {
+            "questionId": 4,
+            "question": "When I learn I like to talk things through",
+            "average": 63.0
+        }
+    ]
+    ```
+ 
+* **Error Response:**
+
+  * **Code:** `406 NOT ACCEPTABLE` 
+    **Content:** 
+    ```
+    {
+        "timestamp": "2019-08-22T02:37:37.255+0000",
+        "message": "Session Id Not Found"
+    }
+    ```
+
+
+* **Sample Call:**
+
+ ```
+   curl -X GET \
+    http://localhost:8080/sessions/111/learningstyleresults \
+    -H 'Accept: */*' \
+    -H 'Accept-Encoding: gzip, deflate' \
+    -H 'Cache-Control: no-cache' \
+    -H 'Connection: keep-alive' \
+    -H 'Content-Length: 28' \
+    -H 'Content-Type: application/json' \
+    -H 'Host: localhost:8080' \
+    -H 'Postman-Token: c1a8c216-1ffc-4f68-b691-0f202a54fb3d,f5ee2e23-ec71-42f2-89f9-c462a55e91a4' \
+    -H 'User-Agent: PostmanRuntime/7.15.2' \
+    -H 'cache-control: no-cache' \
+    -d '{
+    "updatedValue" : "62"
+  }
+ ```
+
