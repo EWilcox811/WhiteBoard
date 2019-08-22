@@ -37,6 +37,7 @@ public class DatabaseHelper {
     ArrayList<HashMap<String, String>> commentList = new ArrayList<>();
     String loginToken;
     String userid;
+    String usertype;
     String sessionid;
 
 
@@ -178,6 +179,7 @@ public class DatabaseHelper {
             // Grab the 'jwtToken' value.
             loginToken = jsonObj.getString("jwtToken");
             userid = jsonObj.getString("userId");
+            usertype = jsonObj.getString("userType");
 
 
 
