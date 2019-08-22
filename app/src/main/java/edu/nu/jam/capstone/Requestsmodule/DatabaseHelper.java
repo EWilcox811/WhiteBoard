@@ -181,8 +181,6 @@ public class DatabaseHelper {
             userid = jsonObj.getString("userId");
             usertype = jsonObj.getString("userType");
 
-
-
         } catch (JSONException e) {
             // This is in case Mike fucked up.
             e.printStackTrace();
@@ -256,6 +254,21 @@ public class DatabaseHelper {
         userid = sharedPref.getString("com.whiteboard.userid", "");
         System.out.println("Loading User Id From Shared Preferences: " + userid);
         return userid;
+    }
+
+    public void SaveUserTypeToSharedPreferences(Context context, String usertype) {
+        System.out.println("Saving User Type to Shared Preferences: " + userid);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("com.whiteboard.usertype", usertype);
+        editor.commit();
+    }
+
+        public String GetUserTypeFromSharedPreferences(Context context) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        usertype = sharedPref.getString("com.whiteboard.usertype", "");
+        System.out.println("Loading User Type From Shared Preferences: " + usertype);
+        return usertype;
     }
 
     public void SaveSessionIdToSharedPreferences(Context context, String sessionid) {
