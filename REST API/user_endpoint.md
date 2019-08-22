@@ -940,7 +940,7 @@
 
 * **URL**
 
- `/user/{userId}/updateLearningStyle/{learningStyleId}`
+ `/user/{userId}/updateLearningStyle/{questionId}`
 
 * **Method:**
 
@@ -952,7 +952,7 @@
    **Required:**
  
    `userId=[integer]`
-   `learningStyleId=[integer]`
+   `questionId=[integer]`
 
    **Optional:**
  
@@ -978,7 +978,7 @@
       ```
       {
         "timestamp": "2019-08-09T03:20:48.011+0000",
-        "message": "Invalid Learning Style Id"
+        "message": "Invalid Question Id"
       }
       ```
       OR
