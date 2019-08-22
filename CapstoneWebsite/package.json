@@ -1,0 +1,15 @@
+{
+  "name": "whiteboard",
+  "version": "1.0.0",
+  "description": "Capstone project for National University 2019",
+  "main": "myfirstmodule.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Patrick Fischer, Mike Coopman, Evan Wilcox, Jeremy Mccabe",
+  "license": "MIT",
+  "dependencies": {
+    "traverson": "^6.1.1",
+    "traverson-hal": "^6.1.0"
+  }
+}
