@@ -30,7 +30,106 @@
 			<TBODY id="tablebody">
 			</TBODY>
 		</table>
+		<br>
+		<div id="btndiv">
+			<input type="button" id="EditBtn" value="Edit" onclick="EditBtnOnClick()" />
+			<input type="button" id="DeleteBtn" value="Delete" onclick="DeleteBtnOnClick()" />
+		</div>
 
+	</div>
+	<br>
+	<div id ="textfields">
+		<div id="professorTextFields" class="textfieldsclass">
+			<a>Username: </a>
+			<Input type="text" id="profusernameInput" value=""/>
+			<br>
+			<br>
+			<a>First Name: </a>
+			<Input type="text" id="proffnameInput" value=""/>
+			<br>
+			<br>
+			<a>Last Name: </a>
+			<Input type="text" id="proflnameInput" value=""/>
+			<br>
+			<br>
+			<a>Email: </a>
+			<Input type="email" id="profemailInput" value=""/>
+			<br>
+			<br>
+			<Input type="button" id="professorSubmitBtn" value="Submit" onClick="editProfessor()"/>
+		</div>
+		<div id="studentTextFields" class="textfieldsclass">
+			<a>Username: </a>
+			<Input type="text" id="stuusernameInput" value=""/>
+			<br>
+			<br>
+			<a>First Name: </a>
+			<Input type="text" id="stufnameInput" value=""/>
+			<br>
+			<br>
+			<a>Last Name: </a>
+			<Input type="text" id="stulnameInput" value=""/>
+			<br>
+			<br>
+			<a>Email: </a>
+			<Input type="email" id="stuemailInput" value=""/>
+			<br>
+			<br>
+			<a>GPA: </a>
+			<Input number="text" id="stugpaInput" value=""/>
+			<br>
+			<br>
+			<Input type="button" id="studentSubmitBtn" value="Submit" onClick="editStudent()"/>
+		</div>
+		<div id="classTextFields" class="textfieldsclass">
+			<a>Class Subject: </a>
+			<Input type="text" id="classsubjectInput" value=""/>
+			<br>
+			<br>
+			<a>Class Number: </a>
+			<Input type="text" id="classnumberInput" value=""/>
+			<br>
+			<br>
+			<a>Class Description: </a>
+			<Input type="text" id="classdescInput" value=""/>
+			<br>
+			<br>
+			<Input type="button" id="studentSubmitBtn" value="Submit" onClick="editClass()"/>
+		</div>
+		<div id="sessionTextFields" class="textfieldsclass">
+			<a>Session Name: </a>
+			<Input type="text" id="sessionnameInput" value=""/>
+			<br>
+			<br>
+			<a>Start Date: </a>
+			<Input type="datetime-local" id="sessionstartdateInput" value=""/>
+			<br>
+			<br>
+			<a>End Date: </a>
+			<Input type="datetime-local" id="sessionenddateInput" value=""/>
+			<br>
+			<br>
+			<a>Class Subject: </a>
+			<Input type="text" id="sessclasssubInput" value=""/>
+			<br>
+			<br>
+			<a>Class Number: </a>
+			<Input type="text" id="sessclassnumInput" value=""/>
+			<br>
+			<br>
+			<a>Class Description: </a>
+			<Input type="text" id="sessclassdescInput" value=""/>
+			<br>
+			<br>
+			<Input type="button" id="studentSubmitBtn" value="Submit" onClick="editSession()"/>
+		</div>
+		<div id="commentTextFields" class="textfieldsclass">
+			<a>Comment: </a>
+			<Input type="text" id="commentInput" value=""/>
+			<br>
+			<br>
+			<Input type="button" id="commentSubmitBtn" value="Submit"  onClick="editComment()"/>
+		</div>
 	</div>
 </div>
 
