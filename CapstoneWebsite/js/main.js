@@ -12,39 +12,38 @@ var commentsdiv;
 function getProfessorData() {
     professordiv = document.getElementById("professorTextFields");
     currentDataSelected = "Professor";
-    headers = ["Username", "User ID", "First Name", "Last Name", "Email", "Date Joined", "Rating"]
+    headers = ["Username", "User ID", "First Name", "Last Name", "Email", "Date Joined"]
     var userarray = new Array();
     
-	jQuery.getJSON("http://104.248.0.248/persons", function(data) {
-	}.bind(this)).fail(function(xhr, status) {
+    jQuery.getJSON("http://104.248.0.248/persons", function(data) {
+    }.bind(this)).fail(function(xhr, status) {
     console.log("The JSON chart failed to load.");
     console.log(status);
-	}).done(function(data) {
-		users = data["_embedded"]["professors"];
+    }).done(function(data) {
+        users = data["_embedded"]["professors"];
         var userinfo = new Array();
-		for(i in users) {
-			var uname = users[i]["username"];
-			var uid = users[i]["_links"]["self"]["href"];
-			uid = uid.split("http://104.248.0.248/professors/")[1];
+        for(i in users) {
+            var uname = users[i]["username"];
+            var uid = users[i]["_links"]["self"]["href"];
+            uid = uid.split("http://104.248.0.248/professors/")[1];
             var fname = users[i]["firstName"];
             var lname = users[i]["lastName"];
             var email = users[i]["email"];
             var date = new Date(users[i]["dateJoined"]);
-            var rating = users[i]["rating"];
-			userinfo = [uname, uid, fname, lname, email, date, rating];
-			
-		}
-        for(i in userinfo) {
-            if(userinfo[i] == "" || userinfo[i] == undefined){
-                userinfo[i] = "No Data Available";
-            } 
+            userinfo = [uname, uid, fname, lname, email, date];
+            for(i in userinfo) {
+                if(userinfo[i] == "" || userinfo[i] == undefined){
+                    userinfo[i] = "No Data Available";
+                } 
+            }
+            userarray.push(userinfo);
+            
         }
 
-        userarray.push(userinfo);
         // User Headers
         
-		drawTable(headers, userarray);
-	});
+        drawTable(headers, userarray);
+    });
     
 };
 
@@ -399,12 +398,10 @@ function hideTextInputs(selected) {
 
 function fillProfessorEditTables() {
 
-    var usernameInput = document.getElementById("profusernameInput");
     var fnameInput = document.getElementById("proffnameInput");
     var lnameInput = document.getElementById("proflnameInput");
     var emailInput = document.getElementById("profemailInput");
 
-    usernameInput.value = currentRowSelected[0];
     fnameInput.value = currentRowSelected[2];
     lnameInput.value = currentRowSelected[3];
     emailInput.value = currentRowSelected[4];
@@ -412,13 +409,11 @@ function fillProfessorEditTables() {
 
 function fillStudentEditTables() {
 
-    var usernameInput = document.getElementById("stuusernameInput");
     var fnameInput = document.getElementById("stufnameInput");
     var lnameInput = document.getElementById("stulnameInput");
     var emailInput = document.getElementById("stuemailInput");
     var gpaInput = document.getElementById("stugpaInput");
 
-    usernameInput.value = currentRowSelected[0];
     fnameInput.value = currentRowSelected[2];
     lnameInput.value = currentRowSelected[3];
     emailInput.value = currentRowSelected[4];
@@ -633,20 +628,14 @@ function promptForDelete() {
 function deleteProfessor() {
     console.log("Deleting professor");
 
-    apiUrl = "http://104.248.0.248/professors"
+    apiUrl = "http://104.248.0.248/users"
 
 
-  fetch(apiUrl + "/" + currentRowSelected[0], {
-    method: 'DELETE',
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8' // Indicates the content 
-     },
-    body: ""   
+  fetch(apiUrl + "/" + currentRowSelected[1], {
+    method: 'DELETE'
       }).then((response) => {
-        response.json().then((response) => {
           getProfessorData();
           //console.log(response);
-        })
       }).catch(err => {
         console.error(err)
   })
