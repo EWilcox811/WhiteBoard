@@ -363,20 +363,17 @@ function DeleteBtnOnClick() {
                 break;
             case "Student":
                 console.log("Student Selected");
-                hideTextInputs(studentdiv);
-                fillStudentEditTables();
+                deleteStudent();
                 studentdiv.style.display = "block";
                 break;
             case "Class":
                 console.log("Class Selected");
-                hideTextInputs(classesdiv);
-                fillClassEditTables();
+                deleteClass();
                 classesdiv.style.display = "block";
                 break;
             case "Session":
                 console.log("Session Selected");
-                hideTextInputs(sessionsdiv);
-                fillSessionEditTables();
+                deleteSession();
                 sessionsdiv.style.display = "block";
                 break;
             case "Comments":
@@ -642,23 +639,65 @@ function deleteProfessor() {
     
 }
 
+function deleteStudent() {
+    console.log("Deleting student");
+
+    apiUrl = "http://104.248.0.248/users"
+
+
+  fetch(apiUrl + "/" + currentRowSelected[1], {
+    method: 'DELETE'
+      }).then((response) => {
+          getProfessorData();
+          //console.log(response);
+      }).catch(err => {
+        console.error(err)
+  })
+}
+
+function deleteClass() {
+    console.log("Deleting class");
+
+    apiUrl = "http://104.248.0.248/classes"
+
+
+  fetch(apiUrl + "/" + currentRowSelected[0], {
+    method: 'DELETE'
+      }).then((response) => {
+          getClassData();
+          //console.log(response);
+      }).catch(err => {
+        console.error(err)
+  })
+}
+
+function deleteSession() {
+    console.log("Deleting session");
+
+    apiUrl = "http://104.248.0.248/sessions"
+
+
+  fetch(apiUrl + "/" + currentRowSelected[0], {
+    method: 'DELETE'
+      }).then((response) => {
+          getSessionData();
+          //console.log(response);
+      }).catch(err => {
+        console.error(err)
+  })
+}
+
 function deleteComment() {
     console.log("Deleting comment");
     console.log(currentRowSelected);
     apiUrl = "http://104.248.0.248/comments"
 
 
-  fetch(apiUrl + "/" + currentRowSelected[0], {
-    method: 'DELETE',
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8' // Indicates the content 
-     },
-    body: ""   
+  fetch(apiUrl + "/" + currentRowSelected[1], {
+    method: 'DELETE'
       }).then((response) => {
-        response.json().then((response) => {
           getCommentData();
           //console.log(response);
-        })
       }).catch(err => {
         console.error(err)
   })
