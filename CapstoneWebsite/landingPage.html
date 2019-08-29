@@ -32,13 +32,69 @@
 		</table>
 		<br>
 		<div id="btndiv">
+			<input type="button" id="NewBtn" value="New" onclick="NewBtnOnClick()" />
 			<input type="button" id="EditBtn" value="Edit" onclick="EditBtnOnClick()" />
 			<input type="button" id="DeleteBtn" value="Delete" onclick="DeleteBtnOnClick()" />
 		</div>
 
 	</div>
 	<br>
-	<div id ="textfields">
+	<div id="textfieldnew">
+		<div id="professorTextFieldsNew" class="textfieldsclass">
+			<a>First Name: </a>
+			<Input type="text" id="proffnameInputNew" value=""/>
+			<br>
+			<br>
+			<a>Last Name: </a>
+			<Input type="text" id="proflnameInputNew" value=""/>
+			<br>
+			<br>
+			<a>Email: </a>
+			<Input type="email" id="profemailInputnew" value=""/>
+			<br>
+			<br>
+			<Input type="button" id="professorSubmitBtn" value="Submit" onClick="newProfessor()"/>
+		</div>
+		<div id="studentTextFieldsNew" class="textfieldsclass">
+			<a>First Name: </a>
+			<Input type="text" id="stufnameInputNew" value=""/>
+			<br>
+			<br>
+			<a>Last Name: </a>
+			<Input type="text" id="stulnameInputNew" value=""/>
+			<br>
+			<br>
+			<a>Email: </a>
+			<Input type="email" id="stuemailInputNew" value=""/>
+			<br>
+			<br>
+			<a>GPA: </a>
+			<Input number="text" id="stugpaInputNew" value=""/>
+			<br>
+			<br>
+			<a>Major: </a>
+			<Input number="text" id="stumajorInputNew" value=""/>
+			<br>
+			<br>
+			<Input type="button" id="studentSubmitBtn" value="Submit" onClick="newStudent()"/>
+		</div>
+		<div id="classTextFieldsNew" class="textfieldsclass">
+			<a>Class Subject: </a>
+			<Input type="text" id="classsubjectInputNew" value=""/>
+			<br>
+			<br>
+			<a>Class Number: </a>
+			<Input type="text" id="classnumberInputNew" value=""/>
+			<br>
+			<br>
+			<a>Class Description: </a>
+			<Input type="text" id="classdescInputNew" value=""/>
+			<br>
+			<br>
+			<Input type="button" id="classSubmitBtn" value="Submit" onClick="newClass()"/>
+		</div>
+	</div>
+	<div id ="textfieldsedit">
 		<div id="professorTextFields" class="textfieldsclass">
 			<a>First Name: </a>
 			<Input type="text" id="proffnameInput" value=""/>
@@ -86,7 +142,7 @@
 			<Input type="text" id="classdescInput" value=""/>
 			<br>
 			<br>
-			<Input type="button" id="studentSubmitBtn" value="Submit" onClick="editClass()"/>
+			<Input type="button" id="classSubmitBtn" value="Submit" onClick="editClass()"/>
 		</div>
 		<div id="sessionTextFields" class="textfieldsclass">
 			<a>Session Name: </a>
@@ -113,7 +169,7 @@
 			<Input type="text" id="sessclassdescInput" value=""/>
 			<br>
 			<br>
-			<Input type="button" id="studentSubmitBtn" value="Submit" onClick="editSession()"/>
+			<Input type="button" id="sessionSubmitBtn" value="Submit" onClick="editSession()"/>
 		</div>
 		<div id="commentTextFields" class="textfieldsclass">
 			<a>Comment: </a>

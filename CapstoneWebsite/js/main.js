@@ -8,9 +8,16 @@ var studentdiv;
 var classesdiv;
 var sessionsdiv;
 var commentsdiv;
+var professordivNew;
+var studentdivNew;
+var classesdivNew;
+var newBtn;
 
 function getProfessorData() {
+    newBtn = document.getElementById("NewBtn");
+    newBtn.style.display = "inline";
     professordiv = document.getElementById("professorTextFields");
+    professordivNew = document.getElementById("professorTextFieldsNew");
     currentDataSelected = "Professor";
     headers = ["Username", "User ID", "First Name", "Last Name", "Email", "Date Joined"]
     var userarray = new Array();
@@ -48,7 +55,9 @@ function getProfessorData() {
 };
 
 function getStudentData() {
+    newBtn.style.display = "inline";
     studentdiv = document.getElementById("studentTextFields")
+    studentdivNew = document.getElementById("studentTextFieldsNew")
     currentDataSelected = "Student";
     headers = ["Username", "User ID", "First Name", "Last Name", "Email", "Date Joined", "GPA"]
     var userarray = new Array();
@@ -87,7 +96,9 @@ function getStudentData() {
 };
 
 function getClassData() {
+    newBtn.style.display = "inline";
     classesdiv = document.getElementById("classTextFields");
+    classesdivNew = document.getElementById("classTextFieldsNew");
     currentDataSelected = "Class";
     headers = ["Class ID", "Class Subject", "Class Number", "Class Description"]
     var classarray = new Array();
@@ -123,6 +134,7 @@ function getClassData() {
 };
 
 function getSessionData() {
+    newBtn.style.display = "none";
     sessionsdiv = document.getElementById("sessionTextFields");
     currentDataSelected = "Session";
     headers = ["Session ID", "Session Name", "Start Date", "End Date", "Class Subject", "Class Number", "Class Description"]
@@ -162,6 +174,7 @@ function getSessionData() {
 };
 
 function getCommentData() {
+    newBtn.style.display = "none";
     commentsdiv = document.getElementById("commentTextFields");
     currentDataSelected = "Comments";
     headers = ["Comment ID", "Comment Date", "Parent Comment", "Commenter User Name", "Comment", "Number of Replies", "Anonymous", "Session Name"]
@@ -296,6 +309,34 @@ function highlight(e) {
 var table = document.getElementById('tablebody'),
     selected = table.getElementsByClassName('selected');
 table.onclick = highlight;
+
+function NewBtnOnClick() {
+    switch(currentDataSelected) {
+        case "Professor":
+            console.log("Professor Selected");
+            hideTextInputs(professordivNew);
+            professordivNew.style.display = "block";
+            break;
+        case "Student":
+            console.log("Student Selected");
+            hideTextInputs(studentdivNew);
+            studentdivNew.style.display = "block";
+            break;
+        case "Class":
+            console.log("Class Selected");
+            hideTextInputs(classesdivNew);
+            classesdivNew.style.display = "block";
+            break;
+        case "Session":
+            console.log("Session Selected");
+            // To Be Added Later
+            break;
+        case "Comments":
+            console.log("Comments Selected");
+            // To Be Added Later
+            // Maybe a way to have a "Class Announcement"?
+    }
+}
 
 function EditBtnOnClick(){
     value = $(".selected").html();
@@ -455,21 +496,103 @@ function fillCommentEditTables() {
     commentInput.value = currentRowSelected[4]; 
 }
 
-/* PUT Functions */
+/* POST Functions */
+
+function newProfessor() {
+    console.log("Adding professor");
+
+    apiUrl = "http://104.248.0.248/users/addProfessor"
 
 
-/*
 
-{
-  "firstName" : "Jean",
-  "lastName"  : "Desire",
-  "password"  : "password",
-  "email"     : "jean.desire@natuniv.edu",
-  "rating"       : "3.95"
+    var data = new Object();
+    data.firstName = document.getElementById("proffnameInputNew").value;
+    data.lastName = document.getElementById("proflnameInputNew").value;
+    data.email = document.getElementById("profemailInputnew").value;
+    data.password = "password";
+    data.rating = "0.00";
+
+
+  fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8' // Indicates the content 
+     },
+    body: JSON.stringify(data)   
+      }).then((response) => {
+        response.json().then((response) => {
+          getProfessorData();
+          //console.log(response);
+        })
+      }).catch(err => {
+        console.error(err)
+  })
+}
+
+function newStudent() {
+    console.log("Adding student");
+
+    apiUrl = "http://104.248.0.248/users/addStudent"
+
+
+
+    var data = new Object();
+    data.firstName = document.getElementById("stufnameInputNew").value;
+    data.lastName = document.getElementById("stulnameInputNew").value;
+    data.email = document.getElementById("stuemailInputNew").value;
+    data.password = "password";
+    data.gpa = document.getElementById("stugpaInputNew").value;
+    data.major = document.getElementById("stumajorInputNew").value;
+
+
+  fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8' // Indicates the content 
+     },
+    body: JSON.stringify(data)   
+      }).then((response) => {
+        response.json().then((response) => {
+          getStudentData();
+          //console.log(response);
+        })
+      }).catch(err => {
+        console.error(err)
+  })
+}
+
+function newClass() {
+    console.log("Adding student");
+
+    apiUrl = "http://104.248.0.248/classes"
+
+
+
+    var data = new Object();
+    data.subject = document.getElementById("classsubjectInputNew").value;
+    data.classNumber = document.getElementById("classnumberInputNew").value;
+    data.description = document.getElementById("classdescInputNew").value;
+
+
+  fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8' // Indicates the content 
+     },
+    body: JSON.stringify(data)   
+      }).then((response) => {
+        response.json().then((response) => {
+          getClassData();
+          //console.log(response);
+        })
+      }).catch(err => {
+        console.error(err)
+  })
 }
 
 
-*/
+/* PUT Functions */
+
 function editProfessor() {
     console.log("Editing professor");
 
@@ -648,7 +771,7 @@ function deleteStudent() {
   fetch(apiUrl + "/" + currentRowSelected[1], {
     method: 'DELETE'
       }).then((response) => {
-          getProfessorData();
+          getStudentData();
           //console.log(response);
       }).catch(err => {
         console.error(err)
