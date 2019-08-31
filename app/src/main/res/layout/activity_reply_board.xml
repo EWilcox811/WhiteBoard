@@ -20,6 +20,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/ic_dialog_new_comment"
-        android:backgroundTint="@color/themeMedium"/>
+        android:backgroundTint="@color/themeMedium"
+        app:borderWidth="0sp"/>
 
 </LinearLayout>

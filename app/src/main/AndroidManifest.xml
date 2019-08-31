@@ -10,9 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ReplyToCommentActivity"></activity>
-        <activity android:name=".ViewReplies" />
-        <activity android:name=".ProgressiveSurvey" />
+        <activity android:name=".ReplyToCommentActivity"/>
+        <activity android:name=".InitialSurveyActivity"/>
+        <activity android:name=".MajorityConcernActivity"/>
+        <activity android:name=".PasswordRecoveryActivity"/>
+        <activity android:name=".PasswordResetActivity"/>
+        <activity android:name=".SessionSelectionActivity"/>
+        <activity android:name=".SurveySelectionActivity"/>
+        <activity android:name=".ViewRepliesActivity" />
+        <activity android:name=".ProgressiveSurveyActivity" />
         <activity android:name=".NewCommentActivity" />
         <activity android:name=".NavDrawerActivity" />
         <activity

@@ -10,4 +10,7 @@ public interface ICommentBoardOperations
 {
 	List<CommentData> onGetComments();
 	void onItemSelected(int position, CardView view);
+	void onTextViewClicked(int position);
+	void onReplyClicked(int position);
+	void onUpVoteClicked(int position);
 }

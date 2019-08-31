@@ -21,6 +21,7 @@
         android:layout_margin="@dimen/fab_margin"
         android:layout_gravity="bottom|end"
         android:backgroundTint="@color/themeMedium"
+        app:borderWidth="0sp"
         app:srcCompat="@drawable/ic_action_confirm_comment"
         />
 

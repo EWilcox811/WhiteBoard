@@ -8,7 +8,7 @@ public class CommentData
 	private double percentage;
 	private int upVotes;
 	private int numberOfReplies;
-	private List<CommentData> subCommentList;
+	private List<CommentData> repliesList;
 
 	public CommentData()
 	{
@@ -16,7 +16,7 @@ public class CommentData
 		this.percentage = 0.0;
 		this.upVotes = 0;
 		this.numberOfReplies = 0;
-		this.subCommentList = null;
+		this.repliesList = null;
 	}
 
 	public CommentData(String content, int percentage, int upVotes, int numberOfReplies, List<CommentData> subCommentList)
@@ -25,7 +25,7 @@ public class CommentData
 		this.percentage = percentage;
 		this.upVotes = upVotes;
 		this.numberOfReplies = numberOfReplies;
-		this.subCommentList = subCommentList;
+		this.repliesList = subCommentList;
 	}
 
 	public String getContent()
@@ -73,13 +73,13 @@ public class CommentData
 		this.numberOfReplies = numberOfReplies;
 	}
 
-	public List<CommentData> getSubCommentList()
+	public List<CommentData> getRepliesList()
 	{
-		return subCommentList;
+		return repliesList;
 	}
 
-	public void setSubCommentList(List<CommentData> subCommentList)
+	public void setRepliesList(List<CommentData> repliesList)
 	{
-		this.subCommentList = subCommentList;
+		this.repliesList = repliesList;
 	}
 }

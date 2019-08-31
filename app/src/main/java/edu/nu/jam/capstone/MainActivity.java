@@ -83,6 +83,8 @@ public class MainActivity extends AppCompatActivity
                         System.out.println(token);
 						String userid = dbHelper.getUserId();
 						dbHelper.SaveUserIdToSharedPreferences(MainActivity.this, userid);
+						String userType = dbHelper.getUserType();
+						dbHelper.SaveUserTypeToSharedPreferences(MainActivity.this, userType);
                         startNewActivity();
                     }
                 }, MainActivity.this, usernameText, passwordText).execute();
@@ -92,7 +94,9 @@ public class MainActivity extends AppCompatActivity
 
 	private void startNewActivity()
 	{
+		String userType = dbHelper.GetUserTypeFromSharedPreferences(MainActivity.this);
 		Intent intent = new Intent(this, NavDrawerActivity.class);
+		intent.putExtra("userType", userType);
 		startActivity(intent);
 	}
 }

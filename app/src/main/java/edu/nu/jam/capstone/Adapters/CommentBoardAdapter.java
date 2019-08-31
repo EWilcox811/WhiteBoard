@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,6 +40,8 @@ public class CommentBoardAdapter extends RecyclerView.Adapter<CommentBoardAdapte
 		private TextView commentTextView;
 		private TextView repliesTextView;
 		private TextView upVotesTextView;
+		private ImageView replyImageView;
+		private ImageView upVoteImageView;
 
 		ViewHolder(@NonNull View itemView)
 		{

@@ -5,13 +5,19 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_howILearn"
+            android:icon="@drawable/ic_how_i_learn"
+            android:title="@string/nav_initial_survey"/>
+        <item
             android:id="@+id/nav_progressiveSurvey"
             android:icon="@drawable/ic_menu_progressive_survey"
             android:title="@string/menu_progressive_survey" />
+
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_menu_logout"
             android:title="@string/menu_logout" />
+
     </group>
 
     <item android:title="Communicate">
@@ -21,6 +27,25 @@
                 android:icon="@drawable/ic_dialog_comment"
                 android:iconTint="@android:color/black"
                 android:title="@string/menu_new_comment" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/nav_professorButtonGroup"
+        android:title="Results"
+        android:visible="false">
+        <menu>
+            <item
+                android:id="@+id/nav_surveyResults"
+                android:icon="@drawable/ic_metrics_icon"
+                android:title="@string/nav_survey_results" />
+            <item
+                android:id="@+id/nav_sessionSelection"
+                android:icon="@drawable/ic_session_icon"
+                android:title="@string/nav_session_selector"/>
+            <item
+                android:id="@+id/nav_majorityConcern"
+                android:icon="@drawable/ic_majority_concern_icon"
+                android:title="@string/nav_majority_concern"/>
         </menu>
     </item>
 

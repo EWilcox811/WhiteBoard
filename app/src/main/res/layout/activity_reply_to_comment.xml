@@ -34,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:backgroundTint="@color/themeMedium"
+        app:borderWidth="0sp"
         app:srcCompat = "@drawable/ic_action_confirm_comment"/>
 
 </LinearLayout>

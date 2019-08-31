@@ -2,7 +2,9 @@ package edu.nu.jam.capstone;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,12 +49,18 @@ public class NavDrawerActivity extends AppCompatActivity
     private CommentData commentCard;
     private List<CommentData> subComments = new ArrayList<>();
     List<CommentData> topLevelList = new ArrayList<>();
+    NavigationView navigationView;
+    private Menu professorNavView;
     private RecyclerView commentStream;
     private String sessionid;
+    private String userType;
+
     private ArrayList<HashMap<String,String>> commentListFromBackend;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
+        userType = intent.getStringExtra("userType");
+        System.out.println(userType);
         super.onCreate(savedInstanceState);
         DatabaseHelper dbHelper = new DatabaseHelper();
         if (dbHelper.GetSessionIdFromSharedPreferences(this).isEmpty()) {
@@ -76,11 +84,18 @@ public class NavDrawerActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         bindControls();
+        setNavDrawer();
 
         commentStream.setHasFixedSize(false);
         commentStream.setLayoutManager(new LinearLayoutManager(this));
         commentStream.setAdapter(new CommentBoardAdapter(this));
         commentStream.getAdapter().notifyDataSetChanged();
+
+    }
+
+    private void setNavDrawer() {
+        if(userType.startsWith("p")||userType.startsWith("P"))
+            professorNavView.findItem(R.id.nav_professorButtonGroup).setVisible(true);
 
     }
 
@@ -97,6 +112,8 @@ public class NavDrawerActivity extends AppCompatActivity
         });
         commentStream = findViewById(R.id.commentStreamRecycler);
         repliesImageView = findViewById(R.id.replyToComment);
+        navigationView = findViewById(R.id.nav_view);
+        professorNavView = navigationView.getMenu();
     }
 
     @Override
@@ -144,17 +161,42 @@ public class NavDrawerActivity extends AppCompatActivity
         int id = item.getItemId();
 
         switch(id){
+            case(R.id.nav_howILearn):
+                //TODO send to initial survey activity
+                Intent initialSurveyIntent = new Intent(this, InitialSurveyActivity.class);
+                startActivity(initialSurveyIntent);
+                break;
             case(R.id.nav_progressiveSurvey):
                 //TODO send to progressive survey activity
                 break;
             case(R.id.nav_logout):
                 //TODO logout and send back to login screen
+                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
+                editor.clear();
+                editor.commit();
+                Intent logoutIntent = new Intent(this, MainActivity.class);
+                startActivity(logoutIntent);
                 break;
             case(R.id.nav_newComment):
-                Intent intent = new Intent(this, NewCommentActivity.class);
-                startActivityForResult(intent, 1);
+                Intent newCommentIntent = new Intent(this, NewCommentActivity.class);
+                startActivityForResult(newCommentIntent, 1);
                 break;
-            // Handle the camera action
+            case(R.id.nav_surveyResults):
+                //TODO send to survey selection activity
+                Intent surveySelectionIntent = new Intent(this, SurveySelectionActivity.class);
+                startActivity(surveySelectionIntent);
+                break;
+            case(R.id.nav_sessionSelection):
+                //TODO send to session selection activity
+                Intent sessionSelectionIntent = new Intent(this, SessionSelectionActivity.class);
+                startActivity(sessionSelectionIntent);
+                break;
+            case(R.id.nav_majorityConcern):
+                //Bonus Item
+                //TODO send to majority concern activity
+                Intent majorityConcernIntent = new Intent(this, MajorityConcernActivity.class);
+                startActivity(majorityConcernIntent);
+                break;
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -172,17 +214,6 @@ public class NavDrawerActivity extends AppCompatActivity
                     CommentData commentCard = new CommentData(comment, 0,0,0, subComments);
                     topLevelList.add(commentCard);
                     commentStream.getAdapter().notifyDataSetChanged();
-                    repliesImageView.setOnClickListener(new View.OnClickListener()
-                    {
-                        @Override
-                        public void onClick(View view)
-                        {
-                            Intent intent = new Intent(getApplicationContext(), ReplyToCommentActivity.class);
-
-                            intent.putExtra("topLevelComment", commentTextView.getText().toString());
-                            startActivityForResult(intent, 2);
-                        }
-                    });
                 }
                 break;
             case 2:
