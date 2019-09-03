@@ -55,6 +55,7 @@ public class NavDrawerActivity extends AppCompatActivity
     private String sessionid;
     private String userType;
     private int cardPosition;
+    private CommentBoardAdapter adapter;
 
     private ArrayList<HashMap<String,String>> commentListFromBackend;
     @Override
@@ -89,7 +90,7 @@ public class NavDrawerActivity extends AppCompatActivity
 
         commentStream.setHasFixedSize(false);
         commentStream.setLayoutManager(new LinearLayoutManager(this));
-        commentStream.setAdapter(new CommentBoardAdapter(this));
+        commentStream.setAdapter(adapter);
         commentStream.getAdapter().notifyDataSetChanged();
 
     }
@@ -101,6 +102,7 @@ public class NavDrawerActivity extends AppCompatActivity
     }
 
     private void bindControls() {
+        adapter = new CommentBoardAdapter(this);
         commentTextView = findViewById(R.id.commentCardTextView);
         newCommentFAB = findViewById(R.id.newCommentFAB);
         newCommentFAB.setOnClickListener(new View.OnClickListener() {
@@ -117,6 +119,33 @@ public class NavDrawerActivity extends AppCompatActivity
         professorNavView = navigationView.getMenu();
         repliesImageView = findViewById(R.id.replyToComment);
         upVotesImageView = findViewById(R.id.upVoteComment);
+        adapter.setOnICommentBoardListener(new ICommentBoardOperations() {
+            @Override
+            public List<CommentData> onGetComments() {
+                return null;
+            }
+
+            @Override
+            public void onItemSelected(int position) {
+
+            }
+
+            @Override
+            public void onTextViewClicked(int position) {
+
+            }
+
+            @Override
+            public void onReplyClicked(int position) {
+
+            }
+
+            @Override
+            public void onUpVoteClicked(int position) {
+
+            }
+        });
+
     }
 
     @Override
