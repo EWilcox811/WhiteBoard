@@ -54,22 +54,23 @@ public class NavDrawerActivity extends AppCompatActivity
     private RecyclerView commentStream;
     private String sessionid;
     private String userType;
+    private int cardPosition;
 
     private ArrayList<HashMap<String,String>> commentListFromBackend;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
         userType = intent.getStringExtra("userType");
-        System.out.println(userType);
         super.onCreate(savedInstanceState);
         DatabaseHelper dbHelper = new DatabaseHelper();
-        if (dbHelper.GetSessionIdFromSharedPreferences(this).isEmpty()) {
+        if (dbHelper.GetSessionIdFromSharedPreferences(this).isEmpty())
+        {
             getSessionId();
         }
-        else {
+        else
+        {
             sessionid = dbHelper.getSessionId();
         }
-        //BgetCommentList();
 
 
         setContentView(R.layout.nav_drawer);
@@ -114,6 +115,8 @@ public class NavDrawerActivity extends AppCompatActivity
         repliesImageView = findViewById(R.id.replyToComment);
         navigationView = findViewById(R.id.nav_view);
         professorNavView = navigationView.getMenu();
+        repliesImageView = findViewById(R.id.replyToComment);
+        upVotesImageView = findViewById(R.id.upVoteComment);
     }
 
     @Override
@@ -164,10 +167,15 @@ public class NavDrawerActivity extends AppCompatActivity
             case(R.id.nav_howILearn):
                 //TODO send to initial survey activity
                 Intent initialSurveyIntent = new Intent(this, InitialSurveyActivity.class);
+                initialSurveyIntent.putExtra("userType", userType);
                 startActivity(initialSurveyIntent);
                 break;
             case(R.id.nav_progressiveSurvey):
                 //TODO send to progressive survey activity
+                Intent progressiveSurveyIntent = new Intent(this, ProgressiveSurveyActivity.class);
+                progressiveSurveyIntent.putExtra("weekNumber", 2);
+                progressiveSurveyIntent.putExtra("userType", userType);
+                startActivity(progressiveSurveyIntent);
                 break;
             case(R.id.nav_logout):
                 //TODO logout and send back to login screen
@@ -230,9 +238,33 @@ public class NavDrawerActivity extends AppCompatActivity
     }
 
     @Override
-    public void onItemSelected(int position, CardView cardView)
+    public void onItemSelected(int position) {
+        cardPosition = position;
+
+    }
+
+    @Override
+    public void onTextViewClicked(int position)
     {
 
+    }
+
+    @Override
+    public void onReplyClicked(int position)
+    {
+            repliesImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getApplicationContext(), ReplyToCommentActivity.class);
+                    intent.putExtra("parentComment", topLevelList.get(cardPosition).getContent());
+                    startActivity(intent);
+                }
+            });
+
+    }
+
+    @Override
+    public void onUpVoteClicked(int position) {
 
     }
 

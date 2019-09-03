@@ -4,8 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,7 +22,11 @@ import edu.nu.jam.capstone.R;
 
 public class CommentBoardAdapter extends RecyclerView.Adapter<CommentBoardAdapter.ViewHolder>
 {
-	private ICommentBoardOperations commentOperationsContext;
+	private ICommentBoardOperations commentOperationsContext, mListener;
+	public void setOnICommentBoardListener(ICommentBoardOperations listener)
+	{
+		mListener = listener;
+	}
 
 	public CommentBoardAdapter(Context context)
 	{
@@ -43,12 +46,12 @@ public class CommentBoardAdapter extends RecyclerView.Adapter<CommentBoardAdapte
 		private ImageView replyImageView;
 		private ImageView upVoteImageView;
 
-		ViewHolder(@NonNull View itemView)
+		ViewHolder(@NonNull View itemView, final ICommentBoardOperations listener)
 		{
 			super(itemView);
 
 			bindControls();
-			registerHandlers();
+			registerHandlers(listener);
 		}
 
 		private void bindControls()
@@ -56,9 +59,11 @@ public class CommentBoardAdapter extends RecyclerView.Adapter<CommentBoardAdapte
 			commentTextView = itemView.findViewById(R.id.commentCardTextView);
 			repliesTextView = itemView.findViewById(R.id.numReplies);
 			upVotesTextView = itemView.findViewById(R.id.numVotes);
+			replyImageView = itemView.findViewById(R.id.replyToComment);
+			upVoteImageView = itemView.findViewById(R.id.upVoteComment);
 		}
 
-		private void registerHandlers()
+		private void registerHandlers(final ICommentBoardOperations listener)
 		{
 			itemView.setOnClickListener(new View.OnClickListener()
 			{
@@ -66,10 +71,24 @@ public class CommentBoardAdapter extends RecyclerView.Adapter<CommentBoardAdapte
 				public void onClick(View view)
 				{
 					int index = (int) view.getTag();
-					CardView selectedComment = view.findViewById(R.id.commentCard);
-					commentOperationsContext.onItemSelected(index, selectedComment);
+					commentOperationsContext.onItemSelected(index);
 				}
 			});
+			replyImageView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					if(listener != null)
+					{
+						int position = getAdapterPosition();
+						if(position != RecyclerView.NO_POSITION)
+						{
+							listener.onReplyClicked(position);
+						}
+					}
+
+				}
+			});
+
 		}
 
 		private void displayCommentData(CommentData commentData)
@@ -85,7 +104,7 @@ public class CommentBoardAdapter extends RecyclerView.Adapter<CommentBoardAdapte
 	public CommentBoardAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parentViewGroup, int viewType)
 	{
 		View view = LayoutInflater.from(parentViewGroup.getContext()).inflate(R.layout.card_comment, parentViewGroup, false);
-		return new CommentBoardAdapter.ViewHolder(view);
+		return new CommentBoardAdapter.ViewHolder(view,  mListener);
 	}
 
 

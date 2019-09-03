@@ -34,7 +34,7 @@ public class SurveySelectionActivity extends AppCompatActivity implements ISurve
 	private void populateRecyclerViewWeeklyLabels()
 	{
 		// TODO:  figure out which week its in via the API or token, attach it to the week value here.
-		int weekNumber = 3;
+		int weekNumber = 2;
 		if (weekNumber == 1)
 		{
 			surveyLabelList.add("Initial Survey");

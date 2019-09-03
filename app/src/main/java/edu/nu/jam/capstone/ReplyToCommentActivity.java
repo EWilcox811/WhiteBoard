@@ -45,13 +45,29 @@ public class ReplyToCommentActivity extends AppCompatActivity implements ICommen
         return null;
     }
 
+    @Override
+    public void onItemSelected(int position) {
+
+    }
+
+    @Override
+    public void onTextViewClicked(int position) {
+
+    }
+
+    @Override
+    public void onReplyClicked(int position) {
+
+    }
+
+    @Override
+    public void onUpVoteClicked(int position) {
+
+    }
+
     /*
     This should work similarly to the onItemSelected from the NavDrawerActivity because each reply
     to a comment can itself have replies to it.  Therefore, the clickListeners implemented in the
     NavDrawerActivity will also be implemented here.
      */
-    @Override
-    public void onItemSelected(int position, CardView view) {
-
-    }
 }
