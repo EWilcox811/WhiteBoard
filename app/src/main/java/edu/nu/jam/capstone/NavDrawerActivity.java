@@ -16,7 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,7 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,9 +36,15 @@ import edu.nu.jam.capstone.Requestsmodule.CommentListHelper;
 import edu.nu.jam.capstone.Requestsmodule.DatabaseHelper;
 import edu.nu.jam.capstone.Requestsmodule.SessionListHelper;
 
+import static edu.nu.jam.capstone.MainActivity.EXTRA_USER_TYPE;
+
 public class NavDrawerActivity extends AppCompatActivity
-    implements NavigationView.OnNavigationItemSelectedListener, ICommentBoardOperations
+        implements NavigationView.OnNavigationItemSelectedListener, ICommentBoardOperations
 {
+    //Intent extras
+    public static final String EXTRA_PARENT_COMMENT = "parentComment";
+    public static final String EXTRA_WEEK_NUMBER = "weekNumber";
+
 
     //TODO make sure that there is only the necessary objects
     private FloatingActionButton newCommentFAB, confirmCommentFAB, replyToCommentFAB;
@@ -57,18 +61,19 @@ public class NavDrawerActivity extends AppCompatActivity
     private int cardPosition;
     private CommentBoardAdapter adapter;
 
-    private ArrayList<HashMap<String,String>> commentListFromBackend;
+    private ArrayList<HashMap<String, String>> commentListFromBackend;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         Intent intent = getIntent();
-        userType = intent.getStringExtra("userType");
+        userType = intent.getStringExtra(EXTRA_USER_TYPE);
         super.onCreate(savedInstanceState);
         DatabaseHelper dbHelper = new DatabaseHelper();
         if (dbHelper.GetSessionIdFromSharedPreferences(this).isEmpty())
         {
             getSessionId();
-        }
-        else
+        } else
         {
             sessionid = dbHelper.getSessionId();
         }
@@ -79,7 +84,7 @@ public class NavDrawerActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_drawer);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -95,17 +100,19 @@ public class NavDrawerActivity extends AppCompatActivity
 
     }
 
-    private void setNavDrawer() {
-        if(userType.startsWith("p")||userType.startsWith("P"))
+    private void setNavDrawer()
+    {
+        if (userType.startsWith("p") || userType.startsWith("P"))
             professorNavView.findItem(R.id.nav_professorButtonGroup).setVisible(true);
 
     }
 
-    private void bindControls() {
+    private void bindControls()
+    {
         adapter = new CommentBoardAdapter(this);
-        commentTextView = findViewById(R.id.commentCardTextView);
         newCommentFAB = findViewById(R.id.newCommentFAB);
-        newCommentFAB.setOnClickListener(new View.OnClickListener() {
+        newCommentFAB.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view)
             {
@@ -114,71 +121,46 @@ public class NavDrawerActivity extends AppCompatActivity
             }
         });
         commentStream = findViewById(R.id.commentStreamRecycler);
-        repliesImageView = findViewById(R.id.replyToComment);
-        navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_drawer);
         professorNavView = navigationView.getMenu();
-        repliesImageView = findViewById(R.id.replyToComment);
-        upVotesImageView = findViewById(R.id.upVoteComment);
-        adapter.setOnICommentBoardListener(new ICommentBoardOperations() {
-            @Override
-            public List<CommentData> onGetComments() {
-                return null;
-            }
-
-            @Override
-            public void onItemSelected(int position) {
-
-            }
-
-            @Override
-            public void onTextViewClicked(int position) {
-
-            }
-
-            @Override
-            public void onReplyClicked(int position) {
-
-            }
-
-            @Override
-            public void onUpVoteClicked(int position) {
-
-            }
-        });
-
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+        if (drawer.isDrawerOpen(GravityCompat.START))
+        {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        } else
+        {
             super.onBackPressed();
         }
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        switch(id)
+        switch (id)
         {
-            case(R.id.action_settings):
+            case (R.id.action_settings):
                 //TODO takes them to their profile setting
                 break;
-            case(R.id.action_logout):
+            case (R.id.action_logout):
                 //TODO logs them out and sends them back to login screen
                 break;
         }
@@ -188,25 +170,27 @@ public class NavDrawerActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(MenuItem item)
+    {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        switch(id){
-            case(R.id.nav_howILearn):
+        switch (id)
+        {
+            case (R.id.nav_howILearn):
                 //TODO send to initial survey activity
                 Intent initialSurveyIntent = new Intent(this, InitialSurveyActivity.class);
-                initialSurveyIntent.putExtra("userType", userType);
+                initialSurveyIntent.putExtra(EXTRA_USER_TYPE, userType);
                 startActivity(initialSurveyIntent);
                 break;
-            case(R.id.nav_progressiveSurvey):
+            case (R.id.nav_progressiveSurvey):
                 //TODO send to progressive survey activity
                 Intent progressiveSurveyIntent = new Intent(this, ProgressiveSurveyActivity.class);
-                progressiveSurveyIntent.putExtra("weekNumber", 2);
-                progressiveSurveyIntent.putExtra("userType", userType);
+                progressiveSurveyIntent.putExtra(EXTRA_WEEK_NUMBER, 2);
+                progressiveSurveyIntent.putExtra(EXTRA_USER_TYPE, userType);
                 startActivity(progressiveSurveyIntent);
                 break;
-            case(R.id.nav_logout):
+            case (R.id.nav_logout):
                 //TODO logout and send back to login screen
                 SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
                 editor.clear();
@@ -214,21 +198,21 @@ public class NavDrawerActivity extends AppCompatActivity
                 Intent logoutIntent = new Intent(this, MainActivity.class);
                 startActivity(logoutIntent);
                 break;
-            case(R.id.nav_newComment):
+            case (R.id.nav_newComment):
                 Intent newCommentIntent = new Intent(this, NewCommentActivity.class);
                 startActivityForResult(newCommentIntent, 1);
                 break;
-            case(R.id.nav_surveyResults):
+            case (R.id.nav_surveyResults):
                 //TODO send to survey selection activity
                 Intent surveySelectionIntent = new Intent(this, SurveySelectionActivity.class);
                 startActivity(surveySelectionIntent);
                 break;
-            case(R.id.nav_sessionSelection):
+            case (R.id.nav_sessionSelection):
                 //TODO send to session selection activity
                 Intent sessionSelectionIntent = new Intent(this, SessionSelectionActivity.class);
                 startActivity(sessionSelectionIntent);
                 break;
-            case(R.id.nav_majorityConcern):
+            case (R.id.nav_majorityConcern):
                 //Bonus Item
                 //TODO send to majority concern activity
                 Intent majorityConcernIntent = new Intent(this, MajorityConcernActivity.class);
@@ -240,21 +224,23 @@ public class NavDrawerActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
+    {
         switch (requestCode)
         {
             case 1:
-                if(resultCode == Activity.RESULT_OK)
+                if (resultCode == Activity.RESULT_OK)
                 {
                     String comment = data.getStringExtra("comment");
-                    CommentData commentCard = new CommentData(comment, 0,0,0, subComments);
+                    CommentData commentCard = new CommentData(comment, 0, 0, 0, subComments);
                     topLevelList.add(commentCard);
                     commentStream.getAdapter().notifyDataSetChanged();
                 }
                 break;
             case 2:
-                if(resultCode == Activity.RESULT_OK)
+                if (resultCode == Activity.RESULT_OK)
                 {
 
                 }
@@ -262,13 +248,16 @@ public class NavDrawerActivity extends AppCompatActivity
     }
 
     @Override
-    public List<CommentData> onGetComments() {
+    public List<CommentData> onGetComments()
+    {
         return topLevelList;
     }
 
     @Override
-    public void onItemSelected(int position) {
+    public void onItemSelected(int position)
+    {
         cardPosition = position;
+        Toast.makeText(this, "You clicked card " + position, Toast.LENGTH_LONG).show();
 
     }
 
@@ -281,42 +270,44 @@ public class NavDrawerActivity extends AppCompatActivity
     @Override
     public void onReplyClicked(int position)
     {
-            repliesImageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(getApplicationContext(), ReplyToCommentActivity.class);
-                    intent.putExtra("parentComment", topLevelList.get(cardPosition).getContent());
-                    startActivity(intent);
-                }
-            });
-
+        Toast.makeText(getApplicationContext(), "Reply image clicked", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(getApplicationContext(), ReplyToCommentActivity.class);
+        intent.putExtra(EXTRA_PARENT_COMMENT, topLevelList.get(cardPosition).getContent());
+        startActivity(intent);
     }
 
     @Override
-    public void onUpVoteClicked(int position) {
+    public void onUpVoteClicked(int position)
+    {
 
     }
 
-    public void getSessionId() {
+    public void getSessionId()
+    {
         final DatabaseHelper dbHelper = new DatabaseHelper();
         String userid = dbHelper.GetUserIdFromSharedPreferences(NavDrawerActivity.this);
-        new SessionListHelper(new AsyncResponder(){
+        new SessionListHelper(new AsyncResponder()
+        {
             @Override
-            public void processFinish(String output){
+            public void processFinish(String output)
+            {
                 dbHelper.onGetSessionListCompleted(output);
                 String freshSessionId = dbHelper.getSessionId();
                 dbHelper.SaveSessionIdToSharedPreferences(NavDrawerActivity.this, freshSessionId);
                 sessionid = freshSessionId;
                 getCommentList();
             }
-        },NavDrawerActivity.this, userid).execute();
+        }, NavDrawerActivity.this, userid).execute();
     }
 
-    public void getCommentList() {
+    public void getCommentList()
+    {
         final DatabaseHelper dbHelper = new DatabaseHelper();
-        new CommentListHelper(new AsyncResponder() {
+        new CommentListHelper(new AsyncResponder()
+        {
             @Override
-            public void processFinish(String output) {
+            public void processFinish(String output)
+            {
 
                 dbHelper.onGetCommentListCompleted(output);
                 commentListFromBackend = dbHelper.getCommentList();

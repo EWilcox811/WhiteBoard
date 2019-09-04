@@ -8,31 +8,39 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import java.util.List;
+
 import edu.nu.jam.capstone.Data.CommentData;
 import edu.nu.jam.capstone.Interfaces.ICommentBoardOperations;
 
+import static edu.nu.jam.capstone.NavDrawerActivity.EXTRA_PARENT_COMMENT;
+
 //TODO create functionality for the replies activity
 
-public class ReplyToCommentActivity extends AppCompatActivity implements ICommentBoardOperations {
+public class ReplyToCommentActivity extends AppCompatActivity implements ICommentBoardOperations
+{
     private TextView topLevelCommentTextView;
     private Intent intent;
+    private String message;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_reply_to_comment);
 
         bindControls();
         populateTopLevelComment();
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reply_to_comment);
     }
 
-    private void populateTopLevelComment() {
-        topLevelCommentTextView.setText(intent.getStringExtra("topLevelComment"));
+    private void populateTopLevelComment()
+    {
+        topLevelCommentTextView.setText(message);
     }
 
     private void bindControls()
     {
         intent = getIntent();
+        message = intent.getStringExtra(EXTRA_PARENT_COMMENT);
         topLevelCommentTextView = findViewById(R.id.topLevelCommentTextView);
     }
 
@@ -41,27 +49,32 @@ public class ReplyToCommentActivity extends AppCompatActivity implements ICommen
     retrieved from the database using the top level comment or parent comment's ID
      */
     @Override
-    public List<CommentData> onGetComments() {
+    public List<CommentData> onGetComments()
+    {
         return null;
     }
 
     @Override
-    public void onItemSelected(int position) {
+    public void onItemSelected(int position)
+    {
 
     }
 
     @Override
-    public void onTextViewClicked(int position) {
+    public void onTextViewClicked(int position)
+    {
 
     }
 
     @Override
-    public void onReplyClicked(int position) {
+    public void onReplyClicked(int position)
+    {
 
     }
 
     @Override
-    public void onUpVoteClicked(int position) {
+    public void onUpVoteClicked(int position)
+    {
 
     }
 

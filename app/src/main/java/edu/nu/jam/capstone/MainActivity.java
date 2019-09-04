@@ -19,7 +19,9 @@ import edu.nu.jam.capstone.Requestsmodule.*;
 
 public class MainActivity extends AppCompatActivity
 {
-    private DatabaseHelper dbHelper;
+
+	public static final String EXTRA_USER_TYPE = "userType";
+	private DatabaseHelper dbHelper;
     private EditText username;
     private EditText password;
 	private Button loginButton;
@@ -96,7 +98,7 @@ public class MainActivity extends AppCompatActivity
 	{
 		String userType = dbHelper.GetUserTypeFromSharedPreferences(MainActivity.this);
 		Intent intent = new Intent(this, NavDrawerActivity.class);
-		intent.putExtra("userType", userType);
+		intent.putExtra(EXTRA_USER_TYPE, userType);
 		startActivity(intent);
 	}
 }
