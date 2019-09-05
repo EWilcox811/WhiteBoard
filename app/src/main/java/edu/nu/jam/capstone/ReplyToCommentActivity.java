@@ -42,6 +42,7 @@ public class ReplyToCommentActivity extends AppCompatActivity
         setContentView(R.layout.activity_reply_to_comment);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         System.out.println("Reply to comment activity");
         bindControls();
         returnIntent();

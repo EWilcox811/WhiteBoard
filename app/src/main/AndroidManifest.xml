@@ -10,7 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ReplyToCommentActivity"/>
+        <activity android:name=".ReplyToCommentActivity"
+            android:label="Reply To Comment Activity"
+            android:parentActivityName=".NavDrawerActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".NavDrawerActivity"/>
+        </activity>
         <activity android:name=".InitialSurveyActivity"
             android:label="Initial Survey Activity"
             android:parentActivityName=".NavDrawerActivity">
