@@ -47,7 +47,7 @@ public class NavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ICommentBoardOperations
 {
     //Intent extras
-    public static final String EXTRA_REPLIES_LIST = "repliesList";
+    public static final String EXTRA_PARENT_COMMENT_ID = "repliesList";
     public static final String EXTRA_PARENT_COMMENT = "parentComment";
     public static final String EXTRA_WEEK_NUMBER = "weekNumber";
 
@@ -190,14 +190,12 @@ public class NavDrawerActivity extends AppCompatActivity
             case (R.id.nav_howILearn):
                 //TODO send to initial survey activity
                 Intent initialSurveyIntent = new Intent(this, InitialSurveyActivity.class);
-                initialSurveyIntent.putExtra(EXTRA_USER_TYPE, userType);
                 startActivity(initialSurveyIntent);
                 break;
             case (R.id.nav_progressiveSurvey):
                 //TODO send to progressive survey activity
                 Intent progressiveSurveyIntent = new Intent(this, ProgressiveSurveyActivity.class);
                 progressiveSurveyIntent.putExtra(EXTRA_WEEK_NUMBER, 2);
-                progressiveSurveyIntent.putExtra(EXTRA_USER_TYPE, userType);
                 startActivity(progressiveSurveyIntent);
                 break;
             case (R.id.nav_logout):

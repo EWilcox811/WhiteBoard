@@ -19,12 +19,17 @@ import edu.nu.jam.capstone.Adapters.ProgressiveSurveyAdapter_Professor;
 import edu.nu.jam.capstone.Adapters.ProgressiveSurveyAdapter_Student;
 import edu.nu.jam.capstone.Data.ProgressiveSurveyData;
 import edu.nu.jam.capstone.Interfaces.IProgressiveSurveyAdapterOperations;
+import edu.nu.jam.capstone.Requestsmodule.DatabaseHelper;
+
+import static edu.nu.jam.capstone.MainActivity.EXTRA_USER_TYPE;
 
 public class ProgressiveSurveyActivity extends AppCompatActivity implements IProgressiveSurveyAdapterOperations
 {
     private List<ProgressiveSurveyData> progressiveSurveyDataList = new LinkedList<>();
     private RecyclerView recyclerView;
     private int currentIndex;
+
+    private DatabaseHelper databaseHelper = new DatabaseHelper();
 
     private final String responseDescriptionTag = "Class Response";
     private enum UserType {PROFESSOR, STUDENT};
@@ -61,7 +66,7 @@ public class ProgressiveSurveyActivity extends AppCompatActivity implements IPro
         bindControls();
         Intent intent = getIntent();
         // check to see if the Intent's passed extra is professor or student:
-        if (intent.getStringExtra("userType").toLowerCase().startsWith("p"))
+        if (databaseHelper.GetUserTypeFromSharedPreferences(this).toLowerCase().startsWith("p"))
         {
             // professor-type logic:
             userType = UserType.PROFESSOR;
