@@ -78,6 +78,7 @@ public class NavDrawerActivity extends AppCompatActivity
         } else
         {
             sessionid = dbHelper.getSessionId();
+            getCommentList();
         }
 
 
@@ -337,11 +338,29 @@ public class NavDrawerActivity extends AppCompatActivity
             @Override
             public void processFinish(String output)
             {
-
+                topLevelList.clear();
                 dbHelper.onGetCommentListCompleted(output);
                 commentListFromBackend = dbHelper.getCommentList();
                 System.out.println(commentListFromBackend);
+                for (int i = 0; i < commentListFromBackend.size(); i++) {
+                    String comment = commentListFromBackend.get(i).get("message");
+                    //int upVotes = Integer.parseInt(commentListFromBackend.get(i).get("upvotes"));
+                    int upVotes = 0;
+                    int numberOfReplies = Integer.parseInt(commentListFromBackend.get(i).get("numofreplies"));
+
+                    CommentData commentCard = new CommentData(comment, 0, upVotes, numberOfReplies, subComments);
+                    topLevelList.add(commentCard);
+                }
+
+                commentStream.getAdapter().notifyDataSetChanged();
             }
         }, NavDrawerActivity.this, sessionid).execute();
+
+
+
+    }
+
+    public ArrayList<HashMap<String, String>> getCommentListFromBackend() {
+        return commentListFromBackend;
     }
 }

@@ -140,6 +140,8 @@ public class DatabaseHelper {
                 String isAnonymous = c.getString("isAnonymous");
                 // Grab the value of the date created key.
                 String datecreated = c.getString("dateCreated");
+                // Grab the value of the upvotes key
+                String upvotes = "1";
 
                 // Make the HashMap for the values.
                 HashMap<String, String> comment = new HashMap<>();
@@ -149,6 +151,7 @@ public class DatabaseHelper {
                 comment.put("username", username);
                 comment.put("isanonymous", isAnonymous);
                 comment.put("datecreated", datecreated);
+                comment.put("upvotes", upvotes);
 
                 // Add the HashMap to the ArrayList.
                 commentList.add(comment);
