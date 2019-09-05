@@ -3,10 +3,10 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/themeMedium</item>
-        <item name="colorPrimaryDark">@color/darkerBlue</item>
+        <item name="colorPrimaryDark">@color/themeDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
+        <item name="windowActionBar">true</item>
     </style>
 
     <!-- ??? theme. -->
@@ -38,6 +38,10 @@
         <item name="android:maxLength">250</item>
         <item name="android:inputType">textMultiLine</item>
         <item name="android:hint">Enter Reply Here</item>
+    </style>
+
+    <style name="CustomToolbarStyle" parent = "Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">@color/themeMedium</item>
     </style>
 
 </resources>

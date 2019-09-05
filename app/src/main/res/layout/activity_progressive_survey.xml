@@ -8,6 +8,8 @@
     android:orientation="vertical"
     tools:context=".ProgressiveSurveyActivity">
 
+    <include layout="@layout/toolbar"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/progressiveSurveyRecyclerView"
         android:layout_width="match_parent"

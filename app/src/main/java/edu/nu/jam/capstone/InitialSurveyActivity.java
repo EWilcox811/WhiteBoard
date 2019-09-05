@@ -2,6 +2,7 @@ package edu.nu.jam.capstone;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toolbar;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;

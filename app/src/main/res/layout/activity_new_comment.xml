@@ -6,6 +6,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".NewCommentActivity">
+
+    <include layout="@layout/toolbar"/>
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
