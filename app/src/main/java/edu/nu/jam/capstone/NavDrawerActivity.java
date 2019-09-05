@@ -47,6 +47,7 @@ public class NavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ICommentBoardOperations
 {
     //Intent extras
+    public static final String EXTRA_REPLIES_LIST = "repliesList";
     public static final String EXTRA_PARENT_COMMENT = "parentComment";
     public static final String EXTRA_WEEK_NUMBER = "weekNumber";
 
@@ -300,7 +301,10 @@ public class NavDrawerActivity extends AppCompatActivity
     @Override
     public void onTextViewClicked(int position)
     {
-
+        Toast.makeText(getApplicationContext(), "Comment Text View Clicked", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(getApplicationContext(), ViewRepliesActivity.class);
+        intent.putExtra(EXTRA_PARENT_COMMENT, topLevelList.get(cardPosition).getContent());
+//        intent.putExtra()
     }
 
     @Override

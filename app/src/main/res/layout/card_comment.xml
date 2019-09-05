@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_layout_margin_left"
                     android:maxLength="250"
-
+                    android:clickable="true"
                     android:textSize="@dimen/new_comment_text_size" />
             </LinearLayout>
 
