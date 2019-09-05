@@ -137,6 +137,7 @@ public class SurveySelectionActivity extends AppCompatActivity implements ISurve
 	{
 		return surveyLabelList;
 	}
+
 	private void startSurveyActivity(int selection)
 	{
 		Intent intent = null;

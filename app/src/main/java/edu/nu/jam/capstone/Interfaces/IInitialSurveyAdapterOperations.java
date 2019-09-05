@@ -6,6 +6,9 @@ import java.util.List;
 
 import edu.nu.jam.capstone.Data.InitialSurveyData;
 
+
+// todo: change name (remove adapter)
+
 public interface IInitialSurveyAdapterOperations
 {
 	List<InitialSurveyData> onGetInitialSurveyQuestions();

@@ -30,15 +30,8 @@ public class InitialSurveyAdapter_Professor extends RecyclerView.Adapter<Initial
 	class ViewHolder extends RecyclerView.ViewHolder
 	{
 		private TextView surveyQuestionTextView;
-
-		private TextView responseItemLabelTextView1;
-		private TextView responsePercentageTextView1;
-
-		private TextView responseItemLabelTextView2;
-		private TextView responsePercentageTextView2;
-
-		private TextView responseItemLabelTextView3;
-		private TextView responsePercentageTextView3;
+		private TextView responseItemLabelTextView;
+		private TextView responsePercentageTextView;
 
 		ViewHolder(@NonNull View itemView)
 		{
@@ -51,12 +44,9 @@ public class InitialSurveyAdapter_Professor extends RecyclerView.Adapter<Initial
 		private void bindControls()
 		{
 			surveyQuestionTextView = itemView.findViewById(R.id.surveyQuestionTextView);
-			responseItemLabelTextView1 = itemView.findViewById(R.id.responseItemLabelTextView1);
-			responsePercentageTextView1 = itemView.findViewById(R.id.responsePercentageTextView1);
-			responseItemLabelTextView2 = itemView.findViewById(R.id.responseItemLabelTextView2);
-			responsePercentageTextView2 = itemView.findViewById(R.id.responsePercentageTextView2);
-			responseItemLabelTextView3 = itemView.findViewById(R.id.responseItemLabelTextView3);
-			responsePercentageTextView3 = itemView.findViewById(R.id.responsePercentageTextView3);
+			responseItemLabelTextView = itemView.findViewById(R.id.responseItemLabelTextView);
+			responsePercentageTextView = itemView.findViewById(R.id.responsePercentageTextView);
+
 		}
 
 		private void registerHandlers()
@@ -78,12 +68,8 @@ public class InitialSurveyAdapter_Professor extends RecyclerView.Adapter<Initial
 		private void displayInitialSurveyData(InitialSurveyData initialSurveyData)
 		{
 			surveyQuestionTextView.setText(initialSurveyData.getQuestion());
-//			responseItemLabelTextView1.setText(initialSurveyData.getResponseItem1());
-//			responseItemLabelTextView2.setText(initialSurveyData.getResponseItem2());
-//			responseItemLabelTextView3.setText(initialSurveyData.getResponseItem3());
-//			responsePercentageTextView1.setText(Double.toString(initialSurveyData.getResponsePercentage()));
-//			responsePercentageTextView2.setText(Double.toString(initialSurveyData.getResponsePercentage2()));
-//			responsePercentageTextView3.setText(Double.toString(initialSurveyData.getResponsePercentage3()));
+			responseItemLabelTextView.setText(initialSurveyData.getResponseDescription());
+			responsePercentageTextView.setText(Double.toString(initialSurveyData.getResponsePercentage()));
 		}
 	}
 

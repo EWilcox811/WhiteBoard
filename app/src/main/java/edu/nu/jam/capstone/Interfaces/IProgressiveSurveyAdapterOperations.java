@@ -7,6 +7,8 @@ import java.util.List;
 import edu.nu.jam.capstone.Data.CommentData;
 import edu.nu.jam.capstone.Data.ProgressiveSurveyData;
 
+// todo: change name (remove adapter)
+
 public interface IProgressiveSurveyAdapterOperations
 {
 	List<ProgressiveSurveyData> onGetLearningObjectives();

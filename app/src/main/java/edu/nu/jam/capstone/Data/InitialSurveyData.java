@@ -13,7 +13,7 @@ public class InitialSurveyData
 		responsePercentage = 0.0;
 	}
 
-	public InitialSurveyData(String question,String responseDescription,
+	public InitialSurveyData(String question, String responseDescription,
 							 double responsePercentage)
 	{
 		this.question = question;
