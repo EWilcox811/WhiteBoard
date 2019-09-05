@@ -155,7 +155,8 @@ public class DatabaseHelper {
                 comment.put("upvotes", upvotes);
 
                 // Add the HashMap to the ArrayList.
-                commentList.add(comment);
+                if(parentid == c.getString("id"))
+                    commentList.add(comment);
             }
 
 
