@@ -20,7 +20,7 @@ public class NewCommentActivity extends AppCompatActivity {
 
     private FloatingActionButton confirmCommentFAB;
     private EditText commentEditText;
-    private AppCompatCheckBox isAnonymousCB;B
+    private AppCompatCheckBox isAnonymousCB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

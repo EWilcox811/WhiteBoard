@@ -84,12 +84,15 @@ public class AddCommentHelper extends AsyncTask<Void, Void, String> {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            //connection.setRequestProperty("application/json", jsonObject.toString());
+            System.out.println(jsonObject.toString());
+            connection.setDoOutput(true);
+            connection.setRequestProperty("Content-Type", "application/json");
 
             // Connect to the backend.
             connection.connect();
 
-            connection.setDoOutput(true);
+
+
 
             DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
             wr.writeBytes(jsonObject.toString());

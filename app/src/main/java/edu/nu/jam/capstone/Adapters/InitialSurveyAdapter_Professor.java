@@ -78,12 +78,12 @@ public class InitialSurveyAdapter_Professor extends RecyclerView.Adapter<Initial
 		private void displayInitialSurveyData(InitialSurveyData initialSurveyData)
 		{
 			surveyQuestionTextView.setText(initialSurveyData.getQuestion());
-			responseItemLabelTextView1.setText(initialSurveyData.getResponseItem1());
-			responseItemLabelTextView2.setText(initialSurveyData.getResponseItem2());
-			responseItemLabelTextView3.setText(initialSurveyData.getResponseItem3());
-			responsePercentageTextView1.setText(Double.toString(initialSurveyData.getResponsePercentage()));
-			responsePercentageTextView2.setText(Double.toString(initialSurveyData.getResponsePercentage2()));
-			responsePercentageTextView3.setText(Double.toString(initialSurveyData.getResponsePercentage3()));
+//			responseItemLabelTextView1.setText(initialSurveyData.getResponseItem1());
+//			responseItemLabelTextView2.setText(initialSurveyData.getResponseItem2());
+//			responseItemLabelTextView3.setText(initialSurveyData.getResponseItem3());
+//			responsePercentageTextView1.setText(Double.toString(initialSurveyData.getResponsePercentage()));
+//			responsePercentageTextView2.setText(Double.toString(initialSurveyData.getResponsePercentage2()));
+//			responsePercentageTextView3.setText(Double.toString(initialSurveyData.getResponsePercentage3()));
 		}
 	}
 

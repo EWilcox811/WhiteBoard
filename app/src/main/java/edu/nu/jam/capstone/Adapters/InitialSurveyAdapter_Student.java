@@ -79,12 +79,12 @@ public class InitialSurveyAdapter_Student extends RecyclerView.Adapter<InitialSu
 		private void displayInitialSurveyData(InitialSurveyData initialSurveyData)
 		{
 			surveyQuestionTextView.setText(initialSurveyData.getQuestion());
-			responseCheckBox1.setText(initialSurveyData.getResponseItem1());
-			responseCheckBox2.setText(initialSurveyData.getResponseItem2());
-			responseCheckBox3.setText(initialSurveyData.getResponseItem3());
-			responseItemDescriptionTextView1.setText(initialSurveyData.getResponseDescription());
-			responseItemDescriptionTextView2.setText(initialSurveyData.getResponseDescription2());
-			responseItemDescriptionTextView3.setText(initialSurveyData.getResponseDescription3());
+//			responseCheckBox1.setText(initialSurveyData.getResponseItem1());
+//			responseCheckBox2.setText(initialSurveyData.getResponseItem2());
+//			responseCheckBox3.setText(initialSurveyData.getResponseItem3());
+//			responseItemDescriptionTextView1.setText(initialSurveyData.getResponseDescription());
+//			responseItemDescriptionTextView2.setText(initialSurveyData.getResponseDescription2());
+//			responseItemDescriptionTextView3.setText(initialSurveyData.getResponseDescription3());
 		}
 	}
 
