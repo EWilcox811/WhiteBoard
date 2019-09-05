@@ -7,12 +7,13 @@ android:layout_width="match_parent"
 android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/initialSurveyRecycler"
+        android:id="@+id/initialSurveyRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
     </androidx.recyclerview.widget.RecyclerView>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/submitInitialFAB"
         android:layout_width="wrap_content"

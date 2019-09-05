@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Capstone</string>
-    <string name="course_id">CSC-XXX</string>
+    <string name="app_name">WhiteBoard</string>
+    <string name="course_id">CSC-430</string>
     <string name="msg_board">Message Board</string>
     <string name="user_name">User Name: </string>
     <string name="password">Password: </string>
@@ -66,7 +66,10 @@
     <string name="confirm_new_password_text">Re-enter New Password</string>
     <string name="new_password_hint">Enter New Password</string>
     <string name="percent_sign">%</string>
-
+    <string name="student_confidence_label">Confidence:</string>
+    <string name="elo_number_label">ELO #</string>
+    <string name="elo_number">N</string>
+    <string name="class_confidence_2">{ Class Confidence }</string>
 
 
 </resources>

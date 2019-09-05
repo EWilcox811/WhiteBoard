@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,17 +30,9 @@ public class InitialSurveyAdapter_Student extends RecyclerView.Adapter<InitialSu
 
 	class ViewHolder extends RecyclerView.ViewHolder
 	{
-		private TextView surveyQuestionTextView;
-
-		private TextView responseCheckBox1;
-		private TextView responseItemDescriptionTextView1;
-
-		private TextView responseCheckBox2;
-		private TextView responseItemDescriptionTextView2;
-
-		private TextView responseCheckBox3;
-		private TextView responseItemDescriptionTextView3;
-
+		private TextView initialSurveyQuestionTextView;
+		private SeekBar initialSurveyResponseSeekBar;
+		private TextView initialSurveyResponsePercentageTextView;
 
 		ViewHolder(@NonNull View itemView)
 		{
@@ -51,13 +44,9 @@ public class InitialSurveyAdapter_Student extends RecyclerView.Adapter<InitialSu
 
 		private void bindControls()
 		{
-//			surveyQuestionTextView = itemView.findViewById(R.id.surveyQuestionTextView);
-//			responseCheckBox1 = itemView.findViewById(R.id.responseCheckBox1);
-//			responseItemDescriptionTextView1 = itemView.findViewById(R.id.responseItemDescriptionTextView1);
-//			responseCheckBox2 = itemView.findViewById(R.id.responseCheckBox2);
-//			responseItemDescriptionTextView2 = itemView.findViewById(R.id.responseItemDescriptionTextView2);
-//			responseCheckBox3 = itemView.findViewById(R.id.responseCheckBox3);
-//			responseItemDescriptionTextView3 = itemView.findViewById(R.id.responseItemDescriptionTextView3);
+			initialSurveyQuestionTextView = itemView.findViewById(R.id.surveyQuestionTextView);
+			initialSurveyResponseSeekBar = itemView.findViewById(R.id.initialSurveyResponseSeekBar);
+			initialSurveyResponsePercentageTextView = itemView.findViewById(R.id.initialSurveyResponsePercentageTextView);
 		}
 
 		private void registerHandlers()
@@ -74,17 +63,34 @@ public class InitialSurveyAdapter_Student extends RecyclerView.Adapter<InitialSu
 //					rolodexOperationsContext.onItemSelected(index, fetchedViewTarget);
 				}
 			});
+
+			initialSurveyResponseSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
+			{
+				@Override
+				public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
+				{
+					initialSurveyResponsePercentageTextView.setText(Integer.toString(progress) + ".0 %");
+				}
+
+				@Override
+				public void onStartTrackingTouch(SeekBar seekBar)
+				{
+					// Stub...
+				}
+
+				@Override
+				public void onStopTrackingTouch(SeekBar seekBar)
+				{
+					// Stub...
+				}
+			});
+
 		}
 
 		private void displayInitialSurveyData(InitialSurveyData initialSurveyData)
 		{
-			surveyQuestionTextView.setText(initialSurveyData.getQuestion());
-			responseCheckBox1.setText(initialSurveyData.getResponseItem1());
-			responseCheckBox2.setText(initialSurveyData.getResponseItem2());
-			responseCheckBox3.setText(initialSurveyData.getResponseItem3());
-			responseItemDescriptionTextView1.setText(initialSurveyData.getResponseDescription());
-			responseItemDescriptionTextView2.setText(initialSurveyData.getResponseDescription2());
-			responseItemDescriptionTextView3.setText(initialSurveyData.getResponseDescription3());
+			initialSurveyQuestionTextView.setText(initialSurveyData.getQuestion());
+			initialSurveyResponsePercentageTextView.setText(Double.toString(initialSurveyData.getResponsePercentage()) + " %");
 		}
 	}
 

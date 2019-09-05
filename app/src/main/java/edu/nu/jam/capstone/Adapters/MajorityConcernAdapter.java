@@ -17,6 +17,7 @@ import edu.nu.jam.capstone.R;
 
 public class MajorityConcernAdapter extends RecyclerView.Adapter<MajorityConcernAdapter.ViewHolder>
 {
+	//TODO: fix id
 	private IMajorityConcernOperations commentOperationsContext;
 
 	public MajorityConcernAdapter(Context context)
@@ -66,6 +67,7 @@ public class MajorityConcernAdapter extends RecyclerView.Adapter<MajorityConcern
 			});
 		}
 
+		// TODO:  Change this from Rolodex to Concern/Comment:
 		private void displayRolodexData(CommentData commentData)
 		{
 			commentTextView.setText(commentData.getContent());

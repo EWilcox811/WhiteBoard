@@ -1,41 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-    <LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/wrapperLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/progressiveStudentCardView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/progressiveSurveyQuestionTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:paddingHorizontal="5sp"
-            android:text="@string/progressive_filler"
-            />
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
 
         <LinearLayout
+            android:id="@+id/surveyItemLayout2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <SeekBar
-                android:id="@+id/progressiveSurveySeekBar"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:thumbTint="@color/commentBlue"
-                android:max="100"
-                android:min="0"
-                android:progressTint="@color/darkerBlue"
-                android:progress="0"/>
-            <TextView
-                android:id="@+id/seekBarValueTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingHorizontal="5sp"
-                android:textSize="@dimen/counter_text_size"
-                android:text="@string/initial_seek_bar"/>
-        </LinearLayout>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="15dp"
+            android:paddingBottom="30dp">
 
-</androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="0dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/ELOLabelTextView"
+                    android:textStyle="bold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="1"
+                    android:padding="0dp"
+                    android:text="@string/elo_number_label"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/eloNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="7"
+                    android:text="@string/elo_number"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/progressiveSurveyQuestionTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="5dp"
+                android:paddingBottom="10dp"
+                android:text="@string/progressive_filler"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/confidenceLabelTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="0dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="0dp"
+                android:text="@string/student_confidence_label"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <SeekBar
+                    android:id="@+id/progressiveSurveyResponseSeekBar"
+                    android:layout_width="298dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:min="0"
+                    android:paddingTop="10dp"
+                    android:progress="0"
+                    android:progressTint="@color/themeLight"
+                    android:thumbTint="@color/themeMedium" />
+
+                <TextView
+                    android:id="@+id/progressiveSurveyResponsePercentageTextView"
+                    android:layout_width="80sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:layout_weight="1"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="0dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/response_percentage_text"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

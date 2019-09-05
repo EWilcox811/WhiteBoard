@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,7 +28,7 @@ public class SurveySelectionAdapter extends RecyclerView.Adapter<SurveySelection
 
 	class ViewHolder extends RecyclerView.ViewHolder
 	{
-		private TextView surveyTextView;
+		private TextView surveyItemTextView;
 
 		ViewHolder(@NonNull View itemView)
 		{
@@ -41,7 +40,7 @@ public class SurveySelectionAdapter extends RecyclerView.Adapter<SurveySelection
 
 		private void bindControls()
 		{
-			surveyTextView = itemView.findViewById(R.id.surveyItemTextView);
+			surveyItemTextView = itemView.findViewById(R.id.surveyItemTextView);
 		}
 
 		private void registerHandlers()
@@ -51,18 +50,17 @@ public class SurveySelectionAdapter extends RecyclerView.Adapter<SurveySelection
 				@Override
 				public void onClick(View view)
 				{
-//					int index = (int) view.getTag();
-//					View fetchedViewOrigin = (View) phoneNumberTextView.getParent();
-//					View fetchedViewIntermediate = (View) fetchedViewOrigin.getParent();
-//					View fetchedViewTarget = (View) fetchedViewIntermediate.getParent();
-//					rolodexOperationsContext.onItemSelected(index, fetchedViewTarget);
+					int index = (int) view.getTag();
+					View fetchedViewOrigin = (View) surveyItemTextView.getParent();
+					View fetchedViewTarget = (View) fetchedViewOrigin.getParent();
+					surveySelectionOperationsContext.onItemSelected(index, fetchedViewTarget);
 				}
 			});
 		}
 
 		private void displaySurveyData(String surveyData)
 		{
-			surveyTextView.setText(surveyData);
+			surveyItemTextView.setText(surveyData);
 		}
 	}
 

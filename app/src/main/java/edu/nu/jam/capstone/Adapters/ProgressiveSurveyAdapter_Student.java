@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import edu.nu.jam.capstone.R;
 public class ProgressiveSurveyAdapter_Student extends RecyclerView.Adapter<ProgressiveSurveyAdapter_Student.ViewHolder>
 {
 	private IProgressiveSurveyAdapterOperations progressiveSurveyOperationsContext;
+	static int eloNumber = 1;
 
 	public ProgressiveSurveyAdapter_Student(Context context)
 	{
@@ -29,9 +31,10 @@ public class ProgressiveSurveyAdapter_Student extends RecyclerView.Adapter<Progr
 
 	class ViewHolder extends RecyclerView.ViewHolder
 	{
-		private TextView progressiveQuestionTextView;
-		private TextView classConfidenceLabelTextView;
-		private TextView classConfidencePercentageTextView;
+		private TextView learningObjectiveNumber;
+		private TextView progressiveSurveyQuestionTextView;
+		private SeekBar progressiveSurveyResponseSeekBar;
+		private TextView progressiveSurveyResponsePercentageTextView;
 
 		ViewHolder(@NonNull View itemView)
 		{
@@ -43,9 +46,11 @@ public class ProgressiveSurveyAdapter_Student extends RecyclerView.Adapter<Progr
 
 		private void bindControls()
 		{
-			progressiveQuestionTextView = itemView.findViewById(R.id.progressiveSurveyQuestionTextView);
-			classConfidenceLabelTextView = itemView.findViewById(R.id.classConfidenceLabelTextView);
-			classConfidencePercentageTextView = itemView.findViewById(R.id.classConfidencePercentageTextView);
+			learningObjectiveNumber = itemView.findViewById(R.id.eloNumber);
+			progressiveSurveyQuestionTextView = itemView.findViewById(R.id.progressiveSurveyQuestionTextView);
+			progressiveSurveyResponseSeekBar = itemView.findViewById(R.id.progressiveSurveyResponseSeekBar);
+			progressiveSurveyResponsePercentageTextView = itemView.findViewById(R.id.progressiveSurveyResponsePercentageTextView);
+
 		}
 
 		private void registerHandlers()
@@ -62,13 +67,35 @@ public class ProgressiveSurveyAdapter_Student extends RecyclerView.Adapter<Progr
 //					rolodexOperationsContext.onItemSelected(index, fetchedViewTarget);
 				}
 			});
+
+			progressiveSurveyResponseSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
+			{
+				@Override
+				public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
+				{
+					progressiveSurveyResponsePercentageTextView.setText(Integer.toString(progress) + ".0 %");
+				}
+
+				@Override
+				public void onStartTrackingTouch(SeekBar seekBar)
+				{
+					// Stub...
+				}
+
+				@Override
+				public void onStopTrackingTouch(SeekBar seekBar)
+				{
+					// Stub...
+				}
+			});
 		}
 
 		private void displayProgressiveSurveyData(ProgressiveSurveyData progressiveSurveyData)
 		{
-			progressiveQuestionTextView.setText(progressiveSurveyData.getLearningObjective());
-			classConfidenceLabelTextView.setText(Double.toString(progressiveSurveyData.getClassConfidencePercentage()));
-			classConfidencePercentageTextView.setText(Double.toString(progressiveSurveyData.getStudentConfidencePercentage()));
+			learningObjectiveNumber.setText(Integer.toString(eloNumber) + ":");
+			progressiveSurveyQuestionTextView.setText(progressiveSurveyData.getLearningObjective());
+			progressiveSurveyResponsePercentageTextView.setText(Double.toString(progressiveSurveyData.getStudentConfidencePercentage()));
+			eloNumber++;
 		}
 	}
 

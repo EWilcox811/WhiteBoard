@@ -18,6 +18,7 @@ import edu.nu.jam.capstone.R;
 public class ProgressiveSurveyAdapter_Professor extends RecyclerView.Adapter<ProgressiveSurveyAdapter_Professor.ViewHolder>
 {
 	private IProgressiveSurveyAdapterOperations progressiveSurveyOperationsContext;
+	static int eloNumber = 1;
 
 	public ProgressiveSurveyAdapter_Professor(Context context)
 	{
@@ -43,7 +44,7 @@ public class ProgressiveSurveyAdapter_Professor extends RecyclerView.Adapter<Pro
 
 		private void bindControls()
 		{
-			progressiveQuestionTextView = itemView.findViewById(R.id.progressiveSurveyQuestionTextView);
+			progressiveQuestionTextView = itemView.findViewById(R.id.eloLabelTextView);
 			classConfidenceLabelTextView = itemView.findViewById(R.id.classConfidenceLabelTextView);
 			classConfidencePercentageTextView = itemView.findViewById(R.id.classConfidencePercentageTextView);
 		}
@@ -66,9 +67,11 @@ public class ProgressiveSurveyAdapter_Professor extends RecyclerView.Adapter<Pro
 
 		private void displayProgressiveSurveyData(ProgressiveSurveyData progressiveSurveyData)
 		{
-			progressiveQuestionTextView.setText(progressiveSurveyData.getLearningObjective());
-			classConfidenceLabelTextView.setText(Double.toString(progressiveSurveyData.getClassConfidencePercentage()));
+
+			progressiveQuestionTextView.setText("ELO #" + Integer.toString(eloNumber) + ":   " + progressiveSurveyData.getLearningObjective());
+			classConfidenceLabelTextView.setText("Class Confidence:");
 			classConfidencePercentageTextView.setText(Double.toString(progressiveSurveyData.getStudentConfidencePercentage()));
+			eloNumber++;
 		}
 	}
 

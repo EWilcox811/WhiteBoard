@@ -51,7 +51,7 @@
                     android:paddingBottom="5dp">
 
                     <TextView
-                        android:id="@+id/responseItemLabelTextView1"
+                        android:id="@+id/responseItemLabelTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -64,30 +64,31 @@
                         app:layout_constraintStart_toEndOf="@+id/markAsHandledCheckBox" />
 
                     <TextView
-                        android:id="@+id/equalsSeparatorTextView1"
+                        android:id="@+id/equalsSeparatorTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/equals_sign" />
 
                     <TextView
-                        android:id="@+id/responsePercentageTextView1"
+                        android:id="@+id/responsePercentageTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="4dp"
                         android:layout_marginBottom="8dp"
                         android:text="@string/response_percentage_text"
-                        android:textSize="15sp"
+                        android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/markAsHandledCheckBox" />
 
                     <TextView
-                        android:id="@+id/percentageSignTextView1"
+                        android:id="@+id/percentageSignTextView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/percent_sign" />
+                        android:text="@string/percent_sign"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -95,93 +96,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:paddingBottom="5dp">
-
-                    <TextView
-                        android:id="@+id/responseItemLabelTextView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="@string/response_text"
-                        android:textSize="15sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/markAsHandledCheckBox" />
-
-                    <TextView
-                        android:id="@+id/equalsSeparatorTextView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/equals_sign" />
-
-                    <TextView
-                        android:id="@+id/responsePercentageTextView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="@string/response_percentage_text"
-                        android:textSize="15sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/markAsHandledCheckBox" />
-
-                    <TextView
-                        android:id="@+id/percentageSignTextView2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/percent_sign" />
-                </LinearLayout>
+                    android:paddingBottom="5dp"/>
 
                 <LinearLayout
                     android:id="@+id/summaryLinearLayout3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/responseItemLabelTextView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="@string/response_text"
-                        android:textSize="15sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/markAsHandledCheckBox" />
-
-                    <TextView
-                        android:id="@+id/equalsSeparatorTextView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/equals_sign" />
-
-                    <TextView
-                        android:id="@+id/responsePercentageTextView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="@string/response_percentage_text"
-                        android:textSize="15sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/markAsHandledCheckBox" />
-
-                    <TextView
-                        android:id="@+id/percentageSignTextView3"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/percent_sign" />
-                </LinearLayout>
+                    android:orientation="horizontal"/>
 
             </LinearLayout>
 
