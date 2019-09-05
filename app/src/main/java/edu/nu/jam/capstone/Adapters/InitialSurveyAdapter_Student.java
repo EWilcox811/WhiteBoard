@@ -82,7 +82,7 @@ public class InitialSurveyAdapter_Student extends RecyclerView.Adapter<InitialSu
 			responseCheckBox1.setText(initialSurveyData.getResponseItem1());
 			responseCheckBox2.setText(initialSurveyData.getResponseItem2());
 			responseCheckBox3.setText(initialSurveyData.getResponseItem3());
-			responseItemDescriptionTextView1.setText(initialSurveyData.getResponseDescription1());
+			responseItemDescriptionTextView1.setText(initialSurveyData.getResponseDescription());
 			responseItemDescriptionTextView2.setText(initialSurveyData.getResponseDescription2());
 			responseItemDescriptionTextView3.setText(initialSurveyData.getResponseDescription3());
 		}

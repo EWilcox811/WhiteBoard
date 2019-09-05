@@ -37,6 +37,7 @@ import edu.nu.jam.capstone.Requestsmodule.DatabaseHelper;
 import edu.nu.jam.capstone.Requestsmodule.SessionListHelper;
 
 import static edu.nu.jam.capstone.MainActivity.EXTRA_USER_TYPE;
+import static edu.nu.jam.capstone.NewCommentActivity.EXTRA_NEW_COMMENT;
 
 public class NavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ICommentBoardOperations
@@ -47,8 +48,7 @@ public class NavDrawerActivity extends AppCompatActivity
 
 
     //TODO make sure that there is only the necessary objects
-    private FloatingActionButton newCommentFAB, confirmCommentFAB, replyToCommentFAB;
-    private ImageView repliesImageView, upVotesImageView;
+    private FloatingActionButton newCommentFAB;
     private TextView repliesCount, upVotesCount, commentTextView;
     private CommentData commentCard;
     private List<CommentData> subComments = new ArrayList<>();
@@ -233,7 +233,7 @@ public class NavDrawerActivity extends AppCompatActivity
             case 1:
                 if (resultCode == Activity.RESULT_OK)
                 {
-                    String comment = data.getStringExtra("comment");
+                    String comment = data.getStringExtra(EXTRA_NEW_COMMENT);
                     CommentData commentCard = new CommentData(comment, 0, 0, 0, subComments);
                     topLevelList.add(commentCard);
                     commentStream.getAdapter().notifyDataSetChanged();
@@ -279,7 +279,7 @@ public class NavDrawerActivity extends AppCompatActivity
     @Override
     public void onUpVoteClicked(int position)
     {
-
+        topLevelList.get(position).setUpvotes(topLevelList.get(position).getUpvotes() + 1);
     }
 
     public void getSessionId()

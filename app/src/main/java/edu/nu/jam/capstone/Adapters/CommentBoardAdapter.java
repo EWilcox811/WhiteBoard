@@ -110,6 +110,14 @@ public class CommentBoardAdapter extends RecyclerView.Adapter<CommentBoardAdapte
                 commentOperationsContext.onReplyClicked(position);
             }
         });
+        holder.upVoteImageView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                commentOperationsContext.onUpVoteClicked(position);
+            }
+        });
 
     }
 

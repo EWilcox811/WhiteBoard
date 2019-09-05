@@ -10,9 +10,9 @@ import android.widget.EditText;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 public class NewCommentActivity extends AppCompatActivity {
+    //Intent extra
+    public static final String EXTRA_NEW_COMMENT = "comment";
 
     private FloatingActionButton confirmCommentFAB;
     private EditText commentEditText;
@@ -29,7 +29,7 @@ public class NewCommentActivity extends AppCompatActivity {
         confirmCommentFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intentReturn.putExtra("comment", commentEditText.getText().toString());
+                intentReturn.putExtra(EXTRA_NEW_COMMENT, commentEditText.getText().toString());
                 setResult(Activity.RESULT_OK, intentReturn);
                 finish();
             }

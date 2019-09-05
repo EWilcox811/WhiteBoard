@@ -18,6 +18,13 @@
             android:layout_height="wrap_content"
             style="@style/NewCommentStyle"/>
     </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/anonymityCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Anonymous" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/confirmCommentFAB"
         android:layout_width="wrap_content"
