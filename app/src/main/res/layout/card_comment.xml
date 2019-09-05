@@ -43,7 +43,7 @@
                         android:background="@color/commentCardBackground"
                         app:srcCompat="@drawable/ic_contact_silhouette" />
                     <TextView
-                        android:id="@+id/userIDTextView"
+                        android:id="@+id/userNameTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="userID"/>
