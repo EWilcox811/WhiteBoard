@@ -19,12 +19,14 @@ import edu.nu.jam.capstone.Adapters.InitialSurveyAdapter_Professor;
 import edu.nu.jam.capstone.Adapters.InitialSurveyAdapter_Student;
 import edu.nu.jam.capstone.Data.InitialSurveyData;
 import edu.nu.jam.capstone.Interfaces.IInitialSurveyAdapterOperations;
+import edu.nu.jam.capstone.Requestsmodule.DatabaseHelper;
 
 public class InitialSurveyActivity extends AppCompatActivity implements IInitialSurveyAdapterOperations
 {
 	private List<InitialSurveyData> initialSurveyDataList = new LinkedList<>();
 	private RecyclerView recyclerView;
 	private int currentIndex;
+	private DatabaseHelper dbHelper = new DatabaseHelper();
 
 	private final String responseDescriptionTag = "Class Response";
 	private enum UserType {PROFESSOR, STUDENT};
@@ -61,7 +63,7 @@ public class InitialSurveyActivity extends AppCompatActivity implements IInitial
 		bindControls();
 		Intent intent = getIntent();
 		// check to see if the Intent's passed extra is professor or student:
-		if (intent.getStringExtra("userType").toLowerCase().startsWith("p"))
+		if (dbHelper.GetUserTypeFromSharedPreferences(this).toLowerCase().startsWith("p"))
 		{
 			// professor-type logic:
 			userType = UserType.PROFESSOR;
