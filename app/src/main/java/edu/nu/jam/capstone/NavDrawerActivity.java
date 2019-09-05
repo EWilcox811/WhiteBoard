@@ -31,12 +31,14 @@ import java.util.List;
 import edu.nu.jam.capstone.Adapters.CommentBoardAdapter;
 import edu.nu.jam.capstone.Data.CommentData;
 import edu.nu.jam.capstone.Interfaces.ICommentBoardOperations;
+import edu.nu.jam.capstone.Requestsmodule.AddCommentHelper;
 import edu.nu.jam.capstone.Requestsmodule.AsyncResponder;
 import edu.nu.jam.capstone.Requestsmodule.CommentListHelper;
 import edu.nu.jam.capstone.Requestsmodule.DatabaseHelper;
 import edu.nu.jam.capstone.Requestsmodule.SessionListHelper;
 
 import static edu.nu.jam.capstone.MainActivity.EXTRA_USER_TYPE;
+import static edu.nu.jam.capstone.NewCommentActivity.EXTRA_IS_ANONYMOUS;
 import static edu.nu.jam.capstone.NewCommentActivity.EXTRA_NEW_COMMENT;
 
 public class NavDrawerActivity extends AppCompatActivity
@@ -234,15 +236,42 @@ public class NavDrawerActivity extends AppCompatActivity
                 if (resultCode == Activity.RESULT_OK)
                 {
                     String comment = data.getStringExtra(EXTRA_NEW_COMMENT);
+                    Boolean isAnonymous = data.getExtras().getBoolean(EXTRA_IS_ANONYMOUS);
                     CommentData commentCard = new CommentData(comment, 0, 0, 0, subComments);
                     topLevelList.add(commentCard);
+
+                    DatabaseHelper dbHelper = new DatabaseHelper();
+                    String userID = dbHelper.GetUserIdFromSharedPreferences(NavDrawerActivity.this);
+                    String sessionID = dbHelper.GetSessionIdFromSharedPreferences(NavDrawerActivity.this);
+                    new AddCommentHelper(new AsyncResponder() {
+                        @Override
+                        public void processFinish(String output) {
+                            getCommentList();
+                        }
+                    }, NavDrawerActivity.this, sessionID, comment, isAnonymous, userID).execute();
                     commentStream.getAdapter().notifyDataSetChanged();
+
+
                 }
+                // public AddCommentHelper(AsyncResponder delegate, Context context, String sessionid, String comment, Boolean isAnonymous, String userId){
                 break;
             case 2:
                 if (resultCode == Activity.RESULT_OK)
                 {
-
+                    /*
+                            new SessionListHelper(new AsyncResponder()
+        {
+            @Override
+            public void processFinish(String output)
+            {
+                dbHelper.onGetSessionListCompleted(output);
+                String freshSessionId = dbHelper.getSessionId();
+                dbHelper.SaveSessionIdToSharedPreferences(NavDrawerActivity.this, freshSessionId);
+                sessionid = freshSessionId;
+                getCommentList();
+            }
+        }, NavDrawerActivity.this, userid).execute();
+                     */
                 }
         }
     }
