@@ -21,14 +21,14 @@ public class CommentData
 		this.parentId = null;
 	}
 
-	public CommentData(String content, int percentage, int upVotes, int numberOfReplies, List<CommentData> subCommentList, String parentId)
+	public CommentData(String content, int percentage, int upVotes, int numberOfReplies, List<CommentData> subCommentList)
 	{
 		this.content = content;
 		this.percentage = percentage;
 		this.upVotes = upVotes;
 		this.numberOfReplies = numberOfReplies;
 		this.repliesList = subCommentList;
-		this.parentId = parentId;
+//		this.parentId = parentId;
 	}
 
 	public String getContent()

@@ -1,22 +1,20 @@
 package edu.nu.jam.capstone;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatCheckBox;
-import androidx.cardview.widget.CardView;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatCheckBox;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NavUtils;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.List;
-
-import edu.nu.jam.capstone.Data.CommentData;
-import edu.nu.jam.capstone.Interfaces.ICommentBoardOperations;
 
 import static edu.nu.jam.capstone.NavDrawerActivity.EXTRA_PARENT_COMMENT;
 
@@ -42,6 +40,8 @@ public class ReplyToCommentActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reply_to_comment);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         System.out.println("Reply to comment activity");
         bindControls();
         returnIntent();
@@ -60,7 +60,7 @@ public class ReplyToCommentActivity extends AppCompatActivity
             public void onClick(View view) {
                 intentReturn.putExtra(EXTRA_COMMENT_REPLY, commentEditText.getText().toString());
                 intentReturn.putExtra(EXTRA_IS_ANONYMOUS, isAnonymousCB.isChecked());
-                intentReturn.putExtra()
+//                intentReturn.putExtra();
                 setResult(Activity.RESULT_OK, intentReturn);
                 finish();
             }
@@ -72,12 +72,26 @@ public class ReplyToCommentActivity extends AppCompatActivity
     {
         intent = getIntent();
         message = intent.getStringExtra(EXTRA_PARENT_COMMENT);
-        parentCommentId = intent.getStringExtra()
+//        parentCommentId = intent.getStringExtra()
         topLevelCommentTextView = findViewById(R.id.topLevelCommentTextView);
         confirmCommentFAB = findViewById(R.id.confirmCommentFAB);
         commentEditText = findViewById(R.id.newCommentET);
         isAnonymousCB = findViewById(R.id.anonymityCheckBox);
     }
 
+    /**
+     * Used for the toolbar
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item)
+    {
+        if(item.getItemId() == android.R.id.home)
+        {
+            NavUtils.navigateUpFromSameTask(this);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }

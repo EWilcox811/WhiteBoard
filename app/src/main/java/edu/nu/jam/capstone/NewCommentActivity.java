@@ -1,11 +1,5 @@
 package edu.nu.jam.capstone;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatCheckBox;
-import androidx.core.app.NavUtils;
-
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,11 +7,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NavUtils;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import edu.nu.jam.capstone.Requestsmodule.DatabaseHelper;
 
 public class NewCommentActivity extends AppCompatActivity
 {
@@ -34,11 +31,8 @@ public class NewCommentActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_comment);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
         bindControls();
         returnIntent();
     }
@@ -66,13 +60,16 @@ public class NewCommentActivity extends AppCompatActivity
         commentEditText = findViewById(R.id.newCommentET);
         isAnonymousCB = findViewById(R.id.anonymityCheckBox);
     }
+    /**
+     * Used for the toolbar
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item)
     {
-        MenuItem menuItem = item;
         if(item.getItemId() == android.R.id.home)
         {
-            Toast.makeText(this, "CLICK", Toast.LENGTH_LONG).show();
             NavUtils.navigateUpFromSameTask(this);
         }
         return super.onOptionsItemSelected(item);

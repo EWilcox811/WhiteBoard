@@ -2,10 +2,15 @@ package edu.nu.jam.capstone;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.LinkedList;
@@ -27,6 +32,8 @@ public class SurveySelectionActivity extends AppCompatActivity implements ISurve
 		surveyLabelList = new LinkedList<>();
 		populateRecyclerViewWeeklyLabels();
 		setContentView(R.layout.activity_survey_selection);
+		Toolbar toolbar = findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
 		bindDataAndControls();
 		configureRecyclerView();
 		registerHandlers();
@@ -166,5 +173,19 @@ public class SurveySelectionActivity extends AppCompatActivity implements ISurve
 			intent.putExtra("surveyWeek", 4);
 		}
 		startActivity(intent);
+	}
+	/**
+	 * Used for the toolbar
+	 * @param item
+	 * @return
+	 */
+	@Override
+	public boolean onOptionsItemSelected(@NonNull MenuItem item)
+	{
+		if(item.getItemId() == android.R.id.home)
+		{
+			NavUtils.navigateUpFromSameTask(this);
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }

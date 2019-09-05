@@ -65,6 +65,7 @@ public class NavDrawerActivity extends AppCompatActivity
     private String userType;
     private int cardPosition;
     private CommentBoardAdapter adapter;
+    private DatabaseHelper dbHelper = new DatabaseHelper();
 
     private ArrayList<HashMap<String, String>> commentListFromBackend;
 
@@ -74,7 +75,6 @@ public class NavDrawerActivity extends AppCompatActivity
         Intent intent = getIntent();
         userType = intent.getStringExtra(EXTRA_USER_TYPE);
         super.onCreate(savedInstanceState);
-        DatabaseHelper dbHelper = new DatabaseHelper();
         if (dbHelper.GetSessionIdFromSharedPreferences(this).isEmpty())
         {
             getSessionId();
@@ -108,8 +108,11 @@ public class NavDrawerActivity extends AppCompatActivity
 
     private void setNavDrawer()
     {
-        if (userType.startsWith("p") || userType.startsWith("P"))
+        if (dbHelper.GetUserTypeFromSharedPreferences(this).startsWith("p") ||
+                dbHelper.GetUserTypeFromSharedPreferences(this).startsWith("P"))
+        {
             professorNavView.findItem(R.id.nav_professorButtonGroup).setVisible(true);
+        }
 
     }
 

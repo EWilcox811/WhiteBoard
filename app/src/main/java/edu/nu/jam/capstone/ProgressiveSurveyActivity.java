@@ -2,9 +2,13 @@ package edu.nu.jam.capstone;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,6 +37,8 @@ public class ProgressiveSurveyActivity extends AppCompatActivity implements IPro
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progressive_survey);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         // TODO:  delete this dummy data after we're connected to the backend:
         progressiveSurveyDataList.add( new ProgressiveSurveyData(
@@ -98,5 +104,20 @@ public class ProgressiveSurveyActivity extends AppCompatActivity implements IPro
     public void onItemSelected(int position, View view)
     {
         // previously card coloring...undefined in this class.
+    }
+
+    /**
+     * Used for the toolbar
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item)
+    {
+        if(item.getItemId() == android.R.id.home)
+        {
+            NavUtils.navigateUpFromSameTask(this);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
