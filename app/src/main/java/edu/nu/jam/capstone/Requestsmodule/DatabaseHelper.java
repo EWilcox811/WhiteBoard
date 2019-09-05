@@ -178,6 +178,7 @@ public class DatabaseHelper {
 
     public void onGetWeeklyELOResultsFinished(String jsonString)
     {
+        // THIS METHOD GATHERS ELOs: in the form of a hash map...
         try {
             // Convert the JSON string into a parsable JSON object.
             JSONObject jsonObj = new JSONObject(jsonString);

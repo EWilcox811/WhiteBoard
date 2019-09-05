@@ -70,6 +70,11 @@
     <string name="elo_number_label">ELO #</string>
     <string name="elo_number">N</string>
     <string name="class_confidence_2">{ Class Confidence }</string>
+    <string name="anonymous_label">Anonymous</string>
+    <string name="user_profile_image_description">USER_AVATAR</string>
+    <string name="reply_icon_info">REPLY_ICON</string>
+    <string name="upvote_icon_info">UPVOTE_ICON</string>
+    <string name="user_name_label">{ User Name }</string>
 
 
 </resources>

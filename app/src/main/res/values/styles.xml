@@ -27,13 +27,13 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">14sp</item>
     </style>
-    <style name="NewCommentStyle">
+    <style name="NewCommentEditTextStyle">
         <item name="android:textSize">16sp</item>
         <item name="android:maxLength">250</item>
         <item name="android:inputType">textMultiLine</item>
         <item name="android:hint">Enter Comment Here</item>
     </style>
-    <style name="ReplyToCommentStyle">
+    <style name="ReplyToCommentEditTextStyle">
         <item name="android:textSize">16sp</item>
         <item name="android:maxLength">250</item>
         <item name="android:inputType">textMultiLine</item>

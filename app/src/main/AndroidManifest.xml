@@ -11,21 +11,21 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".ReplyToCommentActivity"
-            android:label="Reply To Comment Activity"
+            android:label="Reply To Comment"
             android:parentActivityName=".NavDrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".NavDrawerActivity"/>
         </activity>
         <activity android:name=".InitialSurveyActivity"
-            android:label="Initial Survey Activity"
+            android:label="Learning Style Summary"
             android:parentActivityName=".NavDrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".NavDrawerActivity"/>
         </activity>
         <activity android:name=".MajorityConcernActivity"
-            android:label="Majority Concern Activity"
+            android:label="Majority Concern"
             android:parentActivityName=".NavDrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -34,35 +34,35 @@
         <activity android:name=".PasswordRecoveryActivity"/>
         <activity android:name=".PasswordResetActivity"/>
         <activity android:name=".SessionSelectionActivity"
-            android:label="Session Selection Activity"
+            android:label="Session Selection"
             android:parentActivityName=".NavDrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".NavDrawerActivity"/>
         </activity>
         <activity android:name=".SurveySelectionActivity"
-            android:label="Survey Selection Activity"
+            android:label="Survey Selection"
             android:parentActivityName=".NavDrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".NavDrawerActivity"/>
         </activity>
         <activity android:name=".ViewRepliesActivity"
-            android:label="View Replies Activity"
+            android:label="Comment Replies"
             android:parentActivityName=".NavDrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".NavDrawerActivity"/>
         </activity>
         <activity android:name=".ProgressiveSurveyActivity"
-            android:label="Progressive Survey Activity"
+            android:label="Weekly Learning Objectives"
             android:parentActivityName=".NavDrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".NavDrawerActivity"/>
         </activity>
         <activity android:name=".NewCommentActivity"
-            android:label="New Comment Activity"
+            android:label="New Comment"
             android:parentActivityName=".NavDrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

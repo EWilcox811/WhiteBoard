@@ -19,7 +19,7 @@ import edu.nu.jam.capstone.R;
 public class ProgressiveSurveyAdapter_Student extends RecyclerView.Adapter<ProgressiveSurveyAdapter_Student.ViewHolder>
 {
 	private IProgressiveSurveyAdapterOperations progressiveSurveyOperationsContext;
-	static int eloNumber = 1;
+	public static int eloNumber = 1;  // static var used to enumerate the list of ELOs.
 
 	public ProgressiveSurveyAdapter_Student(Context context)
 	{

@@ -111,6 +111,14 @@ public class ProgressiveSurveyActivity extends AppCompatActivity implements IPro
         // previously card coloring...undefined in this class.
     }
 
+    private void resetEloValueInAdapter()
+    {
+        if (userType == UserType.PROFESSOR)
+            ProgressiveSurveyAdapter_Professor.eloNumber = 1;
+        else
+            ProgressiveSurveyAdapter_Student.eloNumber = 1;
+    }
+
     /**
      * Used for the toolbar
      * @param item
@@ -121,6 +129,7 @@ public class ProgressiveSurveyActivity extends AppCompatActivity implements IPro
     {
         if(item.getItemId() == android.R.id.home)
         {
+            resetEloValueInAdapter();
             NavUtils.navigateUpFromSameTask(this);
         }
         return super.onOptionsItemSelected(item);
