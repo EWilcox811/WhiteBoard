@@ -17,14 +17,14 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class AddCommentHelper extends AsyncTask<Void, Void, String> {
+public class ReplyToCommentHelper extends AsyncTask<Void, Void, String> {
     String response = "";
     Context context;
     Long totalBytes;
-    String sessionid;
     String comment;
     Boolean isAnonymous;
     String userId;
+    String parentCommentId;
     ProgressDialog pd;
     public AsyncResponder delegate;
 
@@ -34,18 +34,18 @@ public class AddCommentHelper extends AsyncTask<Void, Void, String> {
      *
      * @param delegate The response delegate (see above example)
      * @param context Context of the activity to be passed
-     * @param sessionid The session ID the comment is being added to
      * @param comment The contents of the comment
      * @param isAnonymous flag for an anonymous comment
      * @param userId User ID, needed for setting the comment in the backend
+     * @param parentCommentId Parent Comment ID, needed for setting comment up as a reply
      */
-    public AddCommentHelper(AsyncResponder delegate, Context context, String sessionid, String comment, Boolean isAnonymous, String userId){
+    public ReplyToCommentHelper(AsyncResponder delegate, Context context, String comment, Boolean isAnonymous, String userId, String parentCommentId){
         this.delegate = delegate;
         this.context = context;
-        this.sessionid = sessionid;
         this.comment = comment;
         this.isAnonymous = isAnonymous;
         this.userId = userId;
+        this.parentCommentId = parentCommentId;
     }
 
     protected void onPreExecute() {
@@ -61,13 +61,13 @@ public class AddCommentHelper extends AsyncTask<Void, Void, String> {
      * Gets the JSON file of comments from the backend database.
      * @throws IOException
      */
-    private void addComment() throws IOException {
+    private void replyToComment() throws IOException {
         HttpURLConnection connection = null;
         BufferedReader reader = null;
 
         try {
             // URL of the backend.
-            URL url = new URL("http://104.248.0.248/sessions/" + sessionid + "/addComment");
+            URL url = new URL("http://104.248.0.248/comments/" + parentCommentId + "/addReply");
             // Establish the connection with the backend.
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
@@ -147,7 +147,7 @@ public class AddCommentHelper extends AsyncTask<Void, Void, String> {
     @Override
     protected String doInBackground(Void...params) {
         try {
-            addComment();
+            replyToComment();
 
         } catch (IOException e) {
             e.printStackTrace();

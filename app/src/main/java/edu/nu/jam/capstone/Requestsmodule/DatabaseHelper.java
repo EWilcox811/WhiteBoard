@@ -35,6 +35,7 @@ public class DatabaseHelper {
 
     ArrayList<HashMap<String,String>> classList  = new ArrayList<HashMap<String,String>>();
     ArrayList<HashMap<String, String>> commentList = new ArrayList<>();
+    ArrayList<HashMap<String, String>> resultList = new ArrayList<>();
     String loginToken;
     String userid;
     String usertype;
@@ -140,6 +141,8 @@ public class DatabaseHelper {
                 String isAnonymous = c.getString("isAnonymous");
                 // Grab the value of the date created key.
                 String datecreated = c.getString("dateCreated");
+                // Grab the value of the upvotes key
+                String upvotes = "1";
 
                 // Make the HashMap for the values.
                 HashMap<String, String> comment = new HashMap<>();
@@ -149,9 +152,11 @@ public class DatabaseHelper {
                 comment.put("username", username);
                 comment.put("isanonymous", isAnonymous);
                 comment.put("datecreated", datecreated);
+                comment.put("upvotes", upvotes);
 
                 // Add the HashMap to the ArrayList.
-                commentList.add(comment);
+                if(parentid == c.getString("id"))
+                    commentList.add(comment);
             }
 
 
@@ -170,6 +175,56 @@ public class DatabaseHelper {
     public ArrayList<HashMap<String, String>> getCommentList() {
         return commentList;
     }
+
+    public void onGetWeeklyELOResultsFinished(String jsonString)
+    {
+        try {
+            // Convert the JSON string into a parsable JSON object.
+            JSONObject jsonObj = new JSONObject(jsonString);
+            // Grab the '_embedded' value.
+            // Grab the array of comments from '_embedded' using the comments key.
+            JSONArray results = jsonObj.getJSONArray(jsonString);
+            // Iterate through the JSON comments array
+            for (int i = 0; i<results.length();i++) {
+                // Set up objects for the HashMap
+                JSONObject c = results.getJSONObject(i);
+                // Grab the value of the id key.
+                String id = c.getString("id");
+                // Grab the value of the question key.
+                String question = c.getString("question");
+                // Grab the value of the number of average key.
+                String average = c.getString("average");
+                // Grab the value of the totalResponses key.
+                String totalresponses = c.getString("totalResponses");
+
+                // Make the HashMap for the values.
+                HashMap<String, String> result = new HashMap<>();
+                result.put("id", id);
+                result.put("question", question);
+                result.put("average", average);
+                result.put("totalresponses", totalresponses);
+
+                // Add the HashMap to the ArrayList.
+                resultList.add(result);
+            }
+
+        } catch (JSONException e) {
+            // This is in case Mike fucked up.
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * HashMap:
+     * id, question, average, totalresponse
+     *
+     * @return returns the ArrayList<HashMap<String, String> for the list of classes.
+     */
+    public ArrayList<HashMap<String, String>> getResultList() {
+        return resultList;
+    }
+
+
 
     public void onLoginFinished(String result)
     {

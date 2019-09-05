@@ -5,11 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,35 +13,22 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class AddCommentHelper extends AsyncTask<Void, Void, String> {
+public class WeeklyELOResultsHelper extends AsyncTask<Void, Void, String> {
+    //http://104.248.0.248/persons/901/currentSession
+
     String response = "";
     Context context;
+    String sessionId = "";
+    String weeklyId;
     Long totalBytes;
-    String sessionid;
-    String comment;
-    Boolean isAnonymous;
-    String userId;
     ProgressDialog pd;
     public AsyncResponder delegate;
 
-    /**
-     * This class extends AsyncTask and will run a 'POST' request adding a comment.
-     * An example can be found in AddCommentHelper.java
-     *
-     * @param delegate The response delegate (see above example)
-     * @param context Context of the activity to be passed
-     * @param sessionid The session ID the comment is being added to
-     * @param comment The contents of the comment
-     * @param isAnonymous flag for an anonymous comment
-     * @param userId User ID, needed for setting the comment in the backend
-     */
-    public AddCommentHelper(AsyncResponder delegate, Context context, String sessionid, String comment, Boolean isAnonymous, String userId){
+    public WeeklyELOResultsHelper(AsyncResponder delegate, Context context, String sessionId, String weeklyId){
         this.delegate = delegate;
         this.context = context;
-        this.sessionid = sessionid;
-        this.comment = comment;
-        this.isAnonymous = isAnonymous;
-        this.userId = userId;
+        this.sessionId = sessionId;
+        this.weeklyId = weeklyId;
     }
 
     protected void onPreExecute() {
@@ -57,47 +40,17 @@ public class AddCommentHelper extends AsyncTask<Void, Void, String> {
         pd.show();
     }
 
-    /**
-     * Gets the JSON file of comments from the backend database.
-     * @throws IOException
-     */
-    private void addComment() throws IOException {
+    void getWeeklyELOResults() throws IOException {
         HttpURLConnection connection = null;
         BufferedReader reader = null;
 
         try {
             // URL of the backend.
-            URL url = new URL("http://104.248.0.248/sessions/" + sessionid + "/addComment");
+            URL url = new URL("http://104.248.0.248/sessions/" + sessionId + "/results/" + weeklyId);
             // Establish the connection with the backend.
             connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-
-            JSONObject jsonObject = new JSONObject();
-            try {
-                jsonObject.put("userId", this.userId);
-                jsonObject.put("message", this.comment);
-                if(this.isAnonymous)
-                    jsonObject.put("isAnonymous", "1");
-                else
-                    jsonObject.put("isAnonymous", "0");
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            System.out.println(jsonObject.toString());
-            connection.setDoOutput(true);
-            connection.setRequestProperty("Content-Type", "application/json");
-
             // Connect to the backend.
             connection.connect();
-
-
-
-
-            DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-            wr.writeBytes(jsonObject.toString());
-            wr.flush();
-            wr.close();
 
             // Get the stream of data from the connection.
             InputStream stream = connection.getInputStream();
@@ -139,15 +92,10 @@ public class AddCommentHelper extends AsyncTask<Void, Void, String> {
         }
     }
 
-    /**
-     * The task that will complete in Asynchronously.
-     * @param params dummy argument (Useful in 'POST')
-     * @return
-     */
     @Override
     protected String doInBackground(Void...params) {
         try {
-            addComment();
+            getWeeklyELOResults();
 
         } catch (IOException e) {
             e.printStackTrace();
