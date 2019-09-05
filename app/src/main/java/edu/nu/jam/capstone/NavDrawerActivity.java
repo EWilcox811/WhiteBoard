@@ -35,11 +35,13 @@ import edu.nu.jam.capstone.Requestsmodule.AddCommentHelper;
 import edu.nu.jam.capstone.Requestsmodule.AsyncResponder;
 import edu.nu.jam.capstone.Requestsmodule.CommentListHelper;
 import edu.nu.jam.capstone.Requestsmodule.DatabaseHelper;
+import edu.nu.jam.capstone.Requestsmodule.ReplyToCommentHelper;
 import edu.nu.jam.capstone.Requestsmodule.SessionListHelper;
 
 import static edu.nu.jam.capstone.MainActivity.EXTRA_USER_TYPE;
 import static edu.nu.jam.capstone.NewCommentActivity.EXTRA_IS_ANONYMOUS;
 import static edu.nu.jam.capstone.NewCommentActivity.EXTRA_NEW_COMMENT;
+import static edu.nu.jam.capstone.ReplyToCommentActivity.EXTRA_PARENT_COMMENT_ID;
 
 public class NavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ICommentBoardOperations
@@ -51,6 +53,7 @@ public class NavDrawerActivity extends AppCompatActivity
 
     //TODO make sure that there is only the necessary objects
     private FloatingActionButton newCommentFAB;
+    private FloatingActionButton newCommentReplyFAB;
     private TextView repliesCount, upVotesCount, commentTextView;
     private CommentData commentCard;
     private List<CommentData> subComments = new ArrayList<>();
@@ -251,29 +254,29 @@ public class NavDrawerActivity extends AppCompatActivity
                         }
                     }, NavDrawerActivity.this, sessionID, comment, isAnonymous, userID).execute();
                     commentStream.getAdapter().notifyDataSetChanged();
-
-
                 }
-                // public AddCommentHelper(AsyncResponder delegate, Context context, String sessionid, String comment, Boolean isAnonymous, String userId){
                 break;
             case 2:
                 if (resultCode == Activity.RESULT_OK)
                 {
-                    /*
-                            new SessionListHelper(new AsyncResponder()
-        {
-            @Override
-            public void processFinish(String output)
-            {
-                dbHelper.onGetSessionListCompleted(output);
-                String freshSessionId = dbHelper.getSessionId();
-                dbHelper.SaveSessionIdToSharedPreferences(NavDrawerActivity.this, freshSessionId);
-                sessionid = freshSessionId;
-                getCommentList();
-            }
-        }, NavDrawerActivity.this, userid).execute();
-                     */
+                    String comment = data.getStringExtra(EXTRA_NEW_COMMENT);
+                    Boolean isAnonymous = data.getExtras().getBoolean(EXTRA_IS_ANONYMOUS);
+                    String parentCommentId = data.getStringExtra(EXTRA_PARENT_COMMENT_ID);
+                    CommentData commentCard = new CommentData(comment, 0, 0, 0, subComments);
+                    topLevelList.add(commentCard);
+
+                    DatabaseHelper dbHelper = new DatabaseHelper();
+                    String userID = dbHelper.GetUserIdFromSharedPreferences(NavDrawerActivity.this);
+                    String sessionID = dbHelper.GetSessionIdFromSharedPreferences(NavDrawerActivity.this);
+                    new ReplyToCommentHelper(new AsyncResponder() {
+                        @Override
+                        public void processFinish(String output) {
+                            getCommentList();
+                        }
+                    }, NavDrawerActivity.this, comment, isAnonymous, userID, parentCommentId).execute();
+                    commentStream.getAdapter().notifyDataSetChanged();
                 }
+                break;
         }
     }
 
@@ -303,7 +306,7 @@ public class NavDrawerActivity extends AppCompatActivity
         Toast.makeText(getApplicationContext(), "Reply image clicked", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(getApplicationContext(), ReplyToCommentActivity.class);
         intent.putExtra(EXTRA_PARENT_COMMENT, topLevelList.get(cardPosition).getContent());
-        startActivity(intent);
+        startActivityForResult(intent, 2);
     }
 
     @Override
