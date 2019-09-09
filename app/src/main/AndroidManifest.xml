@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.nu.jam.capstone">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,64 +10,73 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ReplyToCommentActivity"
+        <activity
+            android:name=".ReplyToCommentActivity"
             android:label="Reply To Comment"
             android:parentActivityName=".NavDrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NavDrawerActivity"/>
+                android:value=".NavDrawerActivity" />
         </activity>
-        <activity android:name=".InitialSurveyActivity"
+        <activity
+            android:name=".InitialSurveyActivity"
             android:label="Learning Style Summary"
             android:parentActivityName=".NavDrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NavDrawerActivity"/>
+                android:value=".NavDrawerActivity" />
         </activity>
-        <activity android:name=".MajorityConcernActivity"
+        <activity
+            android:name=".MajorityConcernActivity"
             android:label="Majority Concern"
             android:parentActivityName=".NavDrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NavDrawerActivity"/>
+                android:value=".NavDrawerActivity" />
         </activity>
-        <activity android:name=".PasswordRecoveryActivity"/>
-        <activity android:name=".PasswordResetActivity"/>
-        <activity android:name=".SessionSelectionActivity"
+        <activity android:name=".PasswordRecoveryActivity" />
+        <activity android:name=".PasswordResetActivity" />
+        <activity
+            android:name=".SessionSelectionActivity"
             android:label="Session Selection"
             android:parentActivityName=".NavDrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NavDrawerActivity"/>
+                android:value=".NavDrawerActivity" />
         </activity>
-        <activity android:name=".SurveySelectionActivity"
+        <activity
+            android:name=".SurveySelectionActivity"
             android:label="Survey Selection"
             android:parentActivityName=".NavDrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NavDrawerActivity"/>
+                android:value=".NavDrawerActivity" />
         </activity>
-        <activity android:name=".ViewRepliesActivity"
+        <activity
+            android:name=".ViewRepliesActivity"
             android:label="Comment Replies"
             android:parentActivityName=".NavDrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NavDrawerActivity"/>
+                android:value=".NavDrawerActivity" />
         </activity>
-        <activity android:name=".ProgressiveSurveyActivity"
+        <activity
+            android:name=".ProgressiveSurveyActivity"
             android:label="Weekly Learning Objectives"
             android:parentActivityName=".NavDrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NavDrawerActivity"/>
+                android:value=".NavDrawerActivity" />
         </activity>
-        <activity android:name=".NewCommentActivity"
+        <activity
+            android:name=".NewCommentActivity"
             android:label="New Comment"
             android:parentActivityName=".NavDrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NavDrawerActivity"/>
+                android:value=".NavDrawerActivity" />
         </activity>
+
         <activity android:name=".NavDrawerActivity" />
         <activity
             android:name=".MainActivity"
@@ -75,9 +84,25 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".SplashScreenActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

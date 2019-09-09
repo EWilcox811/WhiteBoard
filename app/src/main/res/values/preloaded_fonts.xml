@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/amarante</item>
+        <item>@font/amaranth</item>
+        <item>@font/archivo_black</item>
+        <item>@font/candal</item>
+        <item>@font/days_one</item>
+        <item>@font/exo_extrabold_italic</item>
+        <item>@font/krona_one</item>
+        <item>@font/lemon</item>
+        <item>@font/monoton</item>
+        <item>@font/oxygen_bold</item>
+        <item>@font/schoolbell</item>
+        <item>@font/seymour_one</item>
+        <item>@font/sonsie_one</item>
+        <item>@font/suez_one</item>
+        <item>@font/syncopate_bold</item>
+        <item>@font/wendy_one</item>
+    </array>
+</resources>
