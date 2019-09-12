@@ -363,6 +363,10 @@ public class NavDrawerActivity extends AppCompatActivity
                     if(commentListFromBackend.get(i).get("isanonymous").contains("1")) {
                         username = "Anonymous";
                     }
+                    if(commentListFromBackend.get(i).get("username") == dbHelper.GetSUsernameFromSharedPreferences(NavDrawerActivity.this)
+                    && commentListFromBackend.get(i).get("isanonymous").contains("1")){
+                        username = commentListFromBackend.get(i).get("username") + " (Anonymous to Others)";
+                    }
 
 
                     CommentData commentCard = new CommentData(comment, 0, upVotes, numberOfReplies, subComments, username);
