@@ -35,9 +35,14 @@ import edu.nu.jam.capstone.Requestsmodule.AddCommentHelper;
 import edu.nu.jam.capstone.Requestsmodule.AsyncResponder;
 import edu.nu.jam.capstone.Requestsmodule.CommentListHelper;
 import edu.nu.jam.capstone.Requestsmodule.DatabaseHelper;
+import edu.nu.jam.capstone.Requestsmodule.InitialSurveyResultsUpdateHelper;
 import edu.nu.jam.capstone.Requestsmodule.ReplyToCommentHelper;
 import edu.nu.jam.capstone.Requestsmodule.SessionListHelper;
 
+import static edu.nu.jam.capstone.InitialSurveyActivity.EXTRA_CONFIDENCE_1;
+import static edu.nu.jam.capstone.InitialSurveyActivity.EXTRA_CONFIDENCE_2;
+import static edu.nu.jam.capstone.InitialSurveyActivity.EXTRA_CONFIDENCE_3;
+import static edu.nu.jam.capstone.InitialSurveyActivity.EXTRA_CONFIDENCE_4;
 import static edu.nu.jam.capstone.MainActivity.EXTRA_USER_TYPE;
 import static edu.nu.jam.capstone.NewCommentActivity.EXTRA_IS_ANONYMOUS;
 import static edu.nu.jam.capstone.NewCommentActivity.EXTRA_NEW_COMMENT;
@@ -300,6 +305,23 @@ public class NavDrawerActivity extends AppCompatActivity
                 break;
             case 3:
                 //Initial survey results push to backend
+                if (resultCode == Activity.RESULT_OK)
+                {
+                    DatabaseHelper dbHelper = new DatabaseHelper();
+                    String userid = dbHelper.GetUserIdFromSharedPreferences(NavDrawerActivity.this);
+                    Double ConfidenceOne = data.getDoubleExtra(EXTRA_CONFIDENCE_1, 0);
+                    Double ConfidenceTwo = data.getDoubleExtra(EXTRA_CONFIDENCE_2, 0);
+                    Double ConfidenceThree = data.getDoubleExtra(EXTRA_CONFIDENCE_3, 0);
+                    Double ConfidenceFour = data.getDoubleExtra(EXTRA_CONFIDENCE_4, 0);
+
+                    new InitialSurveyResultsUpdateHelper(new AsyncResponder() {
+                        @Override
+                        public void processFinish(String output) {
+
+                        }
+                    }, NavDrawerActivity.this, userid, ConfidenceOne, ConfidenceTwo, ConfidenceThree, ConfidenceFour).execute();
+
+                }
                 break;
             case 4:
                 //progressive survey results push to backend

@@ -37,6 +37,7 @@ public class DatabaseHelper {
     ArrayList<HashMap<String, String>> commentList = new ArrayList<>();
     ArrayList<HashMap<String, String>> replycommentList = new ArrayList<>();
     ArrayList<HashMap<String, String>> resultList = new ArrayList<>();
+    ArrayList<HashMap<String, Double>> intiialResultsList = new ArrayList<>();
     String loginToken;
     String userid;
     String usertype;
@@ -220,12 +221,7 @@ public class DatabaseHelper {
         }
     }
 
-    /**
-     * HashMap:
-     * message, parentid, numofreplies, username, isanonymous, datecreated
-     *
-     * @return returns the ArrayList<HashMap<String, String> for the list of classes.
-     */
+
     public ArrayList<HashMap<String, String>> getCommentList() {
         return commentList;
     }
@@ -234,6 +230,12 @@ public class DatabaseHelper {
         return replycommentList;
     }
 
+    /**
+     * HashMap:
+     * message, parentid, numofreplies, username, isanonymous, datecreated
+     *
+     * @return returns the ArrayList<HashMap<String, String> for the list of classes.
+     */
     public void onGetWeeklyELOResultsFinished(String jsonString)
     {
         // THIS METHOD GATHERS ELOs: in the form of a hash map...
@@ -281,6 +283,41 @@ public class DatabaseHelper {
      */
     public ArrayList<HashMap<String, String>> getResultList() {
         return resultList;
+    }
+
+    public void onGetInitialSurveyesultsFinished(String jsonString)
+    {
+        // THIS METHOD GATHERS ELOs: in the form of a hash map...
+        try {
+            // Convert the JSON string into a parsable JSON object.
+            JSONObject jsonObj = new JSONObject(jsonString);
+            // Grab the '_embedded' value.
+            // Grab the array of comments from '_embedded' using the comments key.
+            JSONArray results = jsonObj.getJSONArray("learningStyleAnswersList");
+            // Iterate through the JSON comments array
+            for (int i = 0; i<results.length();i++) {
+                // Set up objects for the HashMap
+                JSONObject c = results.getJSONObject(i);
+                // Grab the value of the id key.
+                Double answer = c.getDouble("answers");
+
+
+                // Make the HashMap for the values.
+                HashMap<String, Double> result = new HashMap<>();
+                result.put("answer", answer);
+
+                // Add the HashMap to the ArrayList.
+                intiialResultsList.add(result);
+            }
+
+        } catch (JSONException e) {
+            // This is in case Mike fucked up.
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<HashMap<String, Double>> getInitalResultsList() {
+        return intiialResultsList;
     }
 
 
