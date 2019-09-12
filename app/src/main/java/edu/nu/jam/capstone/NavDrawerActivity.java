@@ -278,17 +278,17 @@ public class NavDrawerActivity extends AppCompatActivity
             case 2:
                 if (resultCode == Activity.RESULT_OK)
                 {
-                    /*
                     String comment = data.getStringExtra(EXTRA_NEW_COMMENT);
-                    if(comment.isEmpty()) {
+                    String parentid = data.getStringExtra(EXTRA_PARENT_COMMENT_ID);
+                    String parentcomment = data.getStringExtra(EXTRA_PARENT_COMMENT);
+                    if (comment.isEmpty()) {
                         break;
                     }
                     Boolean isAnonymous = data.getExtras().getBoolean(EXTRA_IS_ANONYMOUS);
-                    String parentCommentId = data.getStringExtra(EXTRA_PARENT_COMMENT_ID);
-                    CommentData commentCard = new CommentData(comment, 0, 0, 0, subComments);
-                    topLevelList.add(commentCard);
-
                     DatabaseHelper dbHelper = new DatabaseHelper();
+                    String username = dbHelper.GetUsernameFromSharedPreferences(NavDrawerActivity.this);
+
+
                     String userID = dbHelper.GetUserIdFromSharedPreferences(NavDrawerActivity.this);
                     String sessionID = dbHelper.GetSessionIdFromSharedPreferences(NavDrawerActivity.this);
                     new ReplyToCommentHelper(new AsyncResponder() {
@@ -296,9 +296,11 @@ public class NavDrawerActivity extends AppCompatActivity
                         public void processFinish(String output) {
                             getCommentList();
                         }
-                    }, NavDrawerActivity.this, comment, isAnonymous, userID, parentCommentId).execute();
-                    commentStream.getAdapter().notifyDataSetChanged();
-                    */
+                    }, NavDrawerActivity.this, comment, isAnonymous, userID, parentid).execute();
+                    Intent intent = new Intent(getApplicationContext(), ViewRepliesActivity.class);
+                    intent.putExtra(EXTRA_PARENT_COMMENT, parentcomment);
+                    intent.putExtra(EXTRA_PARENT_COMMENT_ID, parentid);
+                    startActivity(intent);
                 }
                 break;
             case 3:
@@ -344,6 +346,8 @@ public class NavDrawerActivity extends AppCompatActivity
     @Override
     public void onTextViewClicked(int position)
     {
+        if(topLevelList.get(position).getNumberOfReplies() == 0)
+            return;
         Toast.makeText(getApplicationContext(), "Comment Text View Clicked", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(getApplicationContext(), ViewRepliesActivity.class);
         intent.putExtra(EXTRA_PARENT_COMMENT, topLevelList.get(position).getContent());
@@ -357,6 +361,7 @@ public class NavDrawerActivity extends AppCompatActivity
         Toast.makeText(getApplicationContext(), "Reply image clicked", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(getApplicationContext(), ReplyToCommentActivity.class);
         intent.putExtra(EXTRA_PARENT_COMMENT, topLevelList.get(position).getContent());
+        intent.putExtra(EXTRA_PARENT_COMMENT_ID, topLevelList.get(position).getCommentid());
         startActivityForResult(intent, 2);
     }
 
@@ -411,9 +416,10 @@ public class NavDrawerActivity extends AppCompatActivity
                         username = commentListFromBackend.get(i).get("username") + " (Anonymous to Others)";
                     }
                     String commentid = commentListFromBackend.get(i).get("commentid");
+                    String parentid = commentListFromBackend.get(i).get("parentid");
 
 
-                    CommentData commentCard = new CommentData(comment, 0, upVotes, numberOfReplies, subComments, username, commentid);
+                    CommentData commentCard = new CommentData(comment, 0, upVotes, numberOfReplies, subComments, username, commentid, parentid);
                     topLevelList.add(commentCard);
                 }
 

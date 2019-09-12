@@ -24,7 +24,8 @@ public class ReplyToCommentActivity extends AppCompatActivity
 {
     public static final String EXTRA_COMMENT_REPLY = "comment";
     public static final String EXTRA_IS_ANONYMOUS = "isAnonymous";
-    public static final String EXTRA_PARENT_COMMENT_ID = "parentCommentId";
+    public static final String EXTRA_PARENT_COMMENT_ID = "repliesList";
+    public static final String EXTRA_PARENT_COMMENT = "parentComment";
 
 
     private TextView topLevelCommentTextView;
@@ -61,6 +62,9 @@ public class ReplyToCommentActivity extends AppCompatActivity
             public void onClick(View view) {
                 intentReturn.putExtra(EXTRA_COMMENT_REPLY, commentEditText.getText().toString());
                 intentReturn.putExtra(EXTRA_IS_ANONYMOUS, isAnonymousCB.isChecked());
+                intentReturn.putExtra(EXTRA_PARENT_COMMENT_ID, parentCommentId);
+                intentReturn.putExtra(EXTRA_PARENT_COMMENT, message);
+
 //                intentReturn.putExtra();
                 setResult(Activity.RESULT_OK, intentReturn);
                 finish();
@@ -73,7 +77,7 @@ public class ReplyToCommentActivity extends AppCompatActivity
     {
         intent = getIntent();
         message = intent.getStringExtra(EXTRA_PARENT_COMMENT);
-//        parentCommentId = intent.getStringExtra()
+        parentCommentId = intent.getStringExtra(EXTRA_PARENT_COMMENT_ID);
         topLevelCommentTextView = findViewById(R.id.topLevelCommentTextView);
         confirmCommentFAB = findViewById(R.id.confirmCommentFAB);
         commentEditText = findViewById(R.id.newCommentET);
