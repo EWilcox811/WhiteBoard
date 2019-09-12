@@ -408,7 +408,7 @@ public class DatabaseHelper {
         editor.commit();
     }
 
-    public String GetSUsernameFromSharedPreferences(Context context) {
+    public String GetUsernameFromSharedPreferences(Context context) {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         username = sharedPref.getString("com.whiteboard.username", "");
         System.out.println("Loading User Name From Shared Preferences: " + username);
