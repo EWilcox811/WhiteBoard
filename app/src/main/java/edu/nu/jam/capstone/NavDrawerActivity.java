@@ -242,6 +242,9 @@ public class NavDrawerActivity extends AppCompatActivity
                 if (resultCode == Activity.RESULT_OK)
                 {
                     String comment = data.getStringExtra(EXTRA_NEW_COMMENT);
+                    if(comment.isEmpty()) {
+                        break;
+                    }
                     Boolean isAnonymous = data.getExtras().getBoolean(EXTRA_IS_ANONYMOUS);
                     DatabaseHelper dbHelper = new DatabaseHelper();
                     String username = dbHelper.GetSUsernameFromSharedPreferences(NavDrawerActivity.this);
@@ -265,6 +268,9 @@ public class NavDrawerActivity extends AppCompatActivity
                 {
                     /*
                     String comment = data.getStringExtra(EXTRA_NEW_COMMENT);
+                    if(comment.isEmpty()) {
+                        break;
+                    }
                     Boolean isAnonymous = data.getExtras().getBoolean(EXTRA_IS_ANONYMOUS);
                     String parentCommentId = data.getStringExtra(EXTRA_PARENT_COMMENT_ID);
                     CommentData commentCard = new CommentData(comment, 0, 0, 0, subComments);
