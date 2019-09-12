@@ -35,6 +35,7 @@ public class DatabaseHelper {
 
     ArrayList<HashMap<String,String>> classList  = new ArrayList<HashMap<String,String>>();
     ArrayList<HashMap<String, String>> commentList = new ArrayList<>();
+    ArrayList<HashMap<String, String>> replycommentList = new ArrayList<>();
     ArrayList<HashMap<String, String>> resultList = new ArrayList<>();
     String loginToken;
     String userid;
@@ -120,6 +121,7 @@ public class DatabaseHelper {
 
     public void onGetCommentListCompleted(String result) {
         try {
+            commentList.clear();
             // Convert the JSON string into a parsable JSON object.
             JSONObject jsonObj = new JSONObject(result);
             // Grab the '_embedded' value.
@@ -167,6 +169,57 @@ public class DatabaseHelper {
         }
     }
 
+    public void onGetCommentReplyListCompleted(String result) {
+        try {
+            replycommentList.clear();
+            // Convert the JSON string into a parsable JSON object.
+            JSONObject jsonObj = new JSONObject(result);
+            // Grab the '_embedded' value.
+            JSONObject _embedded = jsonObj.getJSONObject("_embedded");
+            // Grab the array of comments from '_embedded' using the comments key.
+            JSONArray comments = _embedded.getJSONArray("comments");
+            // Iterate through the JSON comments array
+            for (int i = 0; i<comments.length();i++) {
+                // Set up objects for the HashMap
+                JSONObject c = comments.getJSONObject(i);
+                // Grab the value of the subject key.
+                String message = c.getString("message");
+                // Grab the value of the parentid key.
+                String parentid = c.getString("parentId");
+                // Grab the value of the number of replies key.
+                String numofreplies = c.getString("numOfRelies");
+                // Grab the value of the username key.
+                String username = c.getString("userName");
+                // Grab the value of the isAnonymous key.
+                String isAnonymous = c.getString("isAnonymous");
+                // Grab the value of the date created key.
+                String datecreated = c.getString("dateCreated");
+                // Grab the value of the upvotes key
+                String upvotes = "1";
+
+                // Make the HashMap for the values.
+                HashMap<String, String> comment = new HashMap<>();
+                comment.put("message", message);
+                comment.put("parentid", parentid);
+                comment.put("numofreplies", numofreplies);
+                comment.put("username", username);
+                comment.put("isanonymous", isAnonymous);
+                comment.put("datecreated", datecreated);
+                comment.put("upvotes", upvotes);
+
+                // Add the HashMap to the ArrayList.
+                if(parentid == c.getString("id"))
+                    replycommentList.add(comment);
+                ;
+            }
+
+
+        } catch (JSONException e) {
+            // This is in case Mike fucked up.
+            e.printStackTrace();
+        }
+    }
+
     /**
      * HashMap:
      * message, parentid, numofreplies, username, isanonymous, datecreated
@@ -175,6 +228,10 @@ public class DatabaseHelper {
      */
     public ArrayList<HashMap<String, String>> getCommentList() {
         return commentList;
+    }
+
+    public ArrayList<HashMap<String, String>> getCommentReplyList() {
+        return replycommentList;
     }
 
     public void onGetWeeklyELOResultsFinished(String jsonString)
