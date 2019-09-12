@@ -262,8 +262,6 @@ public class NavDrawerActivity extends AppCompatActivity
                     Boolean isAnonymous = data.getExtras().getBoolean(EXTRA_IS_ANONYMOUS);
                     DatabaseHelper dbHelper = new DatabaseHelper();
                     String username = dbHelper.GetUsernameFromSharedPreferences(NavDrawerActivity.this);
-                    CommentData commentCard = new CommentData(comment, 0, 0, 0, subComments, username);
-                    topLevelList.add(commentCard);
 
 
                     String userID = dbHelper.GetUserIdFromSharedPreferences(NavDrawerActivity.this);
@@ -411,9 +409,10 @@ public class NavDrawerActivity extends AppCompatActivity
                     && commentListFromBackend.get(i).get("isanonymous").contains("1")){
                         username = commentListFromBackend.get(i).get("username") + " (Anonymous to Others)";
                     }
+                    String commentid = commentListFromBackend.get(i).get("commentid");
 
 
-                    CommentData commentCard = new CommentData(comment, 0, upVotes, numberOfReplies, subComments, username);
+                    CommentData commentCard = new CommentData(comment, 0, upVotes, numberOfReplies, subComments, username, commentid);
                     topLevelList.add(commentCard);
                 }
 

@@ -147,6 +147,8 @@ public class DatabaseHelper {
                 String datecreated = c.getString("dateCreated");
                 // Grab the value of the upvotes key
                 String upvotes = "1";
+                // Grab the value of the commentid
+                String commentid = c.getString("id");
 
                 // Make the HashMap for the values.
                 HashMap<String, String> comment = new HashMap<>();
@@ -157,6 +159,7 @@ public class DatabaseHelper {
                 comment.put("isanonymous", isAnonymous);
                 comment.put("datecreated", datecreated);
                 comment.put("upvotes", upvotes);
+                comment.put("commentid", commentid);
 
                 // Add the HashMap to the ArrayList.
                 if(parentid == c.getString("id"))
