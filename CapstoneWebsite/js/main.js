@@ -816,7 +816,7 @@ function deleteComment() {
     apiUrl = "http://104.248.0.248/comments"
 
 
-  fetch(apiUrl + "/" + currentRowSelected[1] + "/delete", {
+  fetch(apiUrl + "/" + currentRowSelected[0] + "/delete", {
     method: 'DELETE'
       }).then((response) => {
           getCommentData();

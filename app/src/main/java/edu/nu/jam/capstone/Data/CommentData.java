@@ -10,6 +10,7 @@ public class CommentData
 	private int numberOfReplies;
 	private List<CommentData> repliesList;
 	private String parentId;
+	private String username;
 
 	public CommentData()
 	{
@@ -19,15 +20,17 @@ public class CommentData
 		this.numberOfReplies = 0;
 		this.repliesList = null;
 		this.parentId = null;
+		this.username = null;
 	}
 
-	public CommentData(String content, int percentage, int upVotes, int numberOfReplies, List<CommentData> subCommentList)
+	public CommentData(String content, int percentage, int upVotes, int numberOfReplies, List<CommentData> subCommentList, String username)
 	{
 		this.content = content;
 		this.percentage = percentage;
 		this.upVotes = upVotes;
 		this.numberOfReplies = numberOfReplies;
 		this.repliesList = subCommentList;
+		this.username = username;
 //		this.parentId = parentId;
 	}
 
@@ -86,7 +89,13 @@ public class CommentData
 		this.repliesList = repliesList;
 	}
 
+	public String getUsername() {return username;}
+
+	public void setUsername(String username) {this.username = username;}
+
 	public String getParentId() {return parentId;}
 
 	public void setParentId(String parentId) {this.parentId = parentId;}
+
+
 }

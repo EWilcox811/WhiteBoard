@@ -40,6 +40,7 @@ public class DatabaseHelper {
     String userid;
     String usertype;
     String sessionid;
+    String username;
 
 
 
@@ -340,5 +341,20 @@ public class DatabaseHelper {
         sessionid = sharedPref.getString("com.whiteboard.sessionid", "");
         System.out.println("Loading Session Id From Shared Preferences: " + sessionid);
         return sessionid;
+    }
+
+    public void SaveUsernameToSharedPreferences(Context context, String sessionid) {
+        System.out.println("Saving User Name to Shared Preferences: " + sessionid);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("com.whiteboard.username", username);
+        editor.commit();
+    }
+
+    public String GetSUsernameFromSharedPreferences(Context context) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        username = sharedPref.getString("com.whiteboard.username", "");
+        System.out.println("Loading User Name From Shared Preferences: " + username);
+        return username;
     }
 }

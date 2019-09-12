@@ -243,10 +243,12 @@ public class NavDrawerActivity extends AppCompatActivity
                 {
                     String comment = data.getStringExtra(EXTRA_NEW_COMMENT);
                     Boolean isAnonymous = data.getExtras().getBoolean(EXTRA_IS_ANONYMOUS);
-                    CommentData commentCard = new CommentData(comment, 0, 0, 0, subComments);
+                    DatabaseHelper dbHelper = new DatabaseHelper();
+                    String username = dbHelper.GetSUsernameFromSharedPreferences(NavDrawerActivity.this);
+                    CommentData commentCard = new CommentData(comment, 0, 0, 0, subComments, username);
                     topLevelList.add(commentCard);
 
-                    DatabaseHelper dbHelper = new DatabaseHelper();
+
                     String userID = dbHelper.GetUserIdFromSharedPreferences(NavDrawerActivity.this);
                     String sessionID = dbHelper.GetSessionIdFromSharedPreferences(NavDrawerActivity.this);
                     new AddCommentHelper(new AsyncResponder() {
@@ -261,6 +263,7 @@ public class NavDrawerActivity extends AppCompatActivity
             case 2:
                 if (resultCode == Activity.RESULT_OK)
                 {
+                    /*
                     String comment = data.getStringExtra(EXTRA_NEW_COMMENT);
                     Boolean isAnonymous = data.getExtras().getBoolean(EXTRA_IS_ANONYMOUS);
                     String parentCommentId = data.getStringExtra(EXTRA_PARENT_COMMENT_ID);
@@ -277,6 +280,7 @@ public class NavDrawerActivity extends AppCompatActivity
                         }
                     }, NavDrawerActivity.this, comment, isAnonymous, userID, parentCommentId).execute();
                     commentStream.getAdapter().notifyDataSetChanged();
+                    */
                 }
                 break;
         }
@@ -352,11 +356,16 @@ public class NavDrawerActivity extends AppCompatActivity
                 System.out.println(commentListFromBackend);
                 for (int i = 0; i < commentListFromBackend.size(); i++) {
                     String comment = commentListFromBackend.get(i).get("message");
+                    String username = commentListFromBackend.get(i).get("username");
                     //int upVotes = Integer.parseInt(commentListFromBackend.get(i).get("upvotes"));
                     int upVotes = 0;
                     int numberOfReplies = Integer.parseInt(commentListFromBackend.get(i).get("numofreplies"));
+                    if(commentListFromBackend.get(i).get("isanonymous").contains("1")) {
+                        username = "Anonymous";
+                    }
 
-                    CommentData commentCard = new CommentData(comment, 0, upVotes, numberOfReplies, subComments);
+
+                    CommentData commentCard = new CommentData(comment, 0, upVotes, numberOfReplies, subComments, username);
                     topLevelList.add(commentCard);
                 }
 

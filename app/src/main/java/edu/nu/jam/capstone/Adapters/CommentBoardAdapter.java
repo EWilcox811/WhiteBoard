@@ -37,6 +37,7 @@ public class CommentBoardAdapter extends RecyclerView.Adapter<CommentBoardAdapte
         private TextView upVotesTextView;
         private ImageView replyImageView;
         private ImageView upVoteImageView;
+        private TextView usernameTextView;
 
         ViewHolder(@NonNull View itemView)
         {
@@ -54,6 +55,7 @@ public class CommentBoardAdapter extends RecyclerView.Adapter<CommentBoardAdapte
             upVotesTextView = itemView.findViewById(R.id.numVotes);
             replyImageView = itemView.findViewById(R.id.replyToComment);
             upVoteImageView = itemView.findViewById(R.id.upVoteComment);
+            usernameTextView = itemView.findViewById(R.id.userNameTextView);
         }
 
         private void registerHandlers()
@@ -82,6 +84,7 @@ public class CommentBoardAdapter extends RecyclerView.Adapter<CommentBoardAdapte
             commentTextView.setText(commentData.getContent());
             repliesTextView.setText(Integer.toString(commentData.getNumberOfReplies()));
             upVotesTextView.setText(Integer.toString(commentData.getUpvotes()));
+            usernameTextView.setText(commentData.getUsername());
         }
     }
 
