@@ -346,8 +346,8 @@ public class NavDrawerActivity extends AppCompatActivity
     {
         Toast.makeText(getApplicationContext(), "Comment Text View Clicked", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(getApplicationContext(), ViewRepliesActivity.class);
-        intent.putExtra(EXTRA_PARENT_COMMENT, topLevelList.get(cardPosition).getContent());
-//        intent.putExtra();
+        intent.putExtra(EXTRA_PARENT_COMMENT, topLevelList.get(position).getContent());
+        intent.putExtra(EXTRA_PARENT_COMMENT_ID, topLevelList.get(position).getCommentid());
         startActivity(intent);
     }
 
@@ -356,7 +356,7 @@ public class NavDrawerActivity extends AppCompatActivity
     {
         Toast.makeText(getApplicationContext(), "Reply image clicked", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(getApplicationContext(), ReplyToCommentActivity.class);
-        intent.putExtra(EXTRA_PARENT_COMMENT, topLevelList.get(cardPosition).getContent());
+        intent.putExtra(EXTRA_PARENT_COMMENT, topLevelList.get(position).getContent());
         startActivityForResult(intent, 2);
     }
 
