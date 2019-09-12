@@ -1,5 +1,6 @@
 package edu.nu.jam.capstone;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -27,6 +28,12 @@ import static edu.nu.jam.capstone.MainActivity.EXTRA_USER_TYPE;
 
 public class ProgressiveSurveyActivity extends AppCompatActivity implements IProgressiveSurveyAdapterOperations
 {
+    //Intent extras
+    public static final String EXTRA_PROGRESSIVE_CON_1 = "progressiveConfidence_1";
+    public static final String EXTRA_PROGRESSIVE_CON_2 = "progressiveConfidence_2";
+    public static final String EXTRA_PROGRESSIVE_CON_3 = "progressiveConfidence_3";
+    public static final String EXTRA_PROGRESSIVE_CON_4 = "progressiveConfidence_4";
+
     private List<ProgressiveSurveyData> progressiveSurveyDataList = new LinkedList<>();
     private RecyclerView recyclerView;
     private int currentIndex;
@@ -67,7 +74,6 @@ public class ProgressiveSurveyActivity extends AppCompatActivity implements IPro
                 0));
 
         bindControls();
-        Intent intent = getIntent();
         // check to see if the Intent's passed extra is professor or student:
         if (databaseHelper.GetUserTypeFromSharedPreferences(this).toLowerCase().startsWith("p"))
         {
@@ -88,12 +94,18 @@ public class ProgressiveSurveyActivity extends AppCompatActivity implements IPro
 
     private void submitSurvey()
     {
+        final Intent intentReturn = new Intent();
         submitSurveyFAB.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-
+                intentReturn.putExtra(EXTRA_PROGRESSIVE_CON_1, progressiveSurveyDataList.get(0).getStudentConfidencePercentage());
+                intentReturn.putExtra(EXTRA_PROGRESSIVE_CON_2, progressiveSurveyDataList.get(1).getStudentConfidencePercentage());
+                intentReturn.putExtra(EXTRA_PROGRESSIVE_CON_3, progressiveSurveyDataList.get(2).getStudentConfidencePercentage());
+                intentReturn.putExtra(EXTRA_PROGRESSIVE_CON_4, progressiveSurveyDataList.get(3).getStudentConfidencePercentage());
+                setResult(Activity.RESULT_OK, intentReturn);
+                finish();
             }
         });
     }
