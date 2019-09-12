@@ -12,6 +12,8 @@ import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class InitialSurveyActivity extends AppCompatActivity implements IInitial
 	private RecyclerView recyclerView;
 	private int currentIndex;
 	private DatabaseHelper dbHelper = new DatabaseHelper();
+	private FloatingActionButton submitSurveyFAB;
 
 	private final String responseDescriptionTag = "Class Response";
 	private enum UserType {PROFESSOR, STUDENT};
@@ -80,6 +83,7 @@ public class InitialSurveyActivity extends AppCompatActivity implements IInitial
 	private void bindControls()
 	{
 		recyclerView = findViewById(R.id.initialSurveyRecyclerView);
+		submitSurveyFAB = findViewById(R.id.submitInitialFAB);
 	}
 
 	private void configureRecyclerView()

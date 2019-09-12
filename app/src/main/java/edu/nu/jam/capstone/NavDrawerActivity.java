@@ -92,6 +92,10 @@ public class NavDrawerActivity extends AppCompatActivity
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_drawer);
+        //next three lines set the userName on the navDrawer
+        View headerView = navigationView.getHeaderView(0);
+        TextView userName = headerView.findViewById(R.id.nav_userNameTextView);
+        userName.setText(dbHelper.getUserId());
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -114,6 +118,7 @@ public class NavDrawerActivity extends AppCompatActivity
         {
             professorNavView.findItem(R.id.nav_professorButtonGroup).setVisible(true);
         }
+
 
     }
 
@@ -171,7 +176,11 @@ public class NavDrawerActivity extends AppCompatActivity
                 //TODO takes them to their profile setting
                 break;
             case (R.id.action_logout):
-                //TODO logs them out and sends them back to login screen
+                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
+                editor.clear();
+                editor.commit();
+                Intent logoutIntent = new Intent(this, MainActivity.class);
+                startActivity(logoutIntent);
                 break;
         }
 
@@ -190,13 +199,13 @@ public class NavDrawerActivity extends AppCompatActivity
             case (R.id.nav_howILearn):
                 //TODO send to initial survey activity
                 Intent initialSurveyIntent = new Intent(this, InitialSurveyActivity.class);
-                startActivity(initialSurveyIntent);
+                startActivityForResult(initialSurveyIntent, 3);
                 break;
             case (R.id.nav_progressiveSurvey):
                 //TODO send to progressive survey activity
                 Intent progressiveSurveyIntent = new Intent(this, ProgressiveSurveyActivity.class);
                 progressiveSurveyIntent.putExtra(EXTRA_WEEK_NUMBER, 2);
-                startActivity(progressiveSurveyIntent);
+                startActivityForResult(progressiveSurveyIntent,4);
                 break;
             case (R.id.nav_logout):
                 //TODO logout and send back to login screen
@@ -289,6 +298,12 @@ public class NavDrawerActivity extends AppCompatActivity
                     */
                 }
                 break;
+            case 3:
+                //Initial survey results push to backend
+                break;
+            case 4:
+                //progressive survey results push to backend
+                break;
         }
     }
 
@@ -328,6 +343,7 @@ public class NavDrawerActivity extends AppCompatActivity
     public void onUpVoteClicked(int position)
     {
         topLevelList.get(position).setUpvotes(topLevelList.get(position).getUpvotes() + 1);
+        commentStream.getAdapter().notifyDataSetChanged();//should update the upvote count
     }
 
     public void getSessionId()

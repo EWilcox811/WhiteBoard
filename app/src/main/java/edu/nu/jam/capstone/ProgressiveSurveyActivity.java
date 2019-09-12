@@ -12,6 +12,8 @@ import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,6 +30,7 @@ public class ProgressiveSurveyActivity extends AppCompatActivity implements IPro
     private List<ProgressiveSurveyData> progressiveSurveyDataList = new LinkedList<>();
     private RecyclerView recyclerView;
     private int currentIndex;
+    private FloatingActionButton submitSurveyFAB;
 
     private DatabaseHelper databaseHelper = new DatabaseHelper();
 
@@ -78,11 +81,27 @@ public class ProgressiveSurveyActivity extends AppCompatActivity implements IPro
             userType = UserType.STUDENT;
             configureRecyclerView();
         }
+
+        submitSurvey();
+
+    }
+
+    private void submitSurvey()
+    {
+        submitSurveyFAB.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+
+            }
+        });
     }
 
     private void bindControls()
     {
         recyclerView = findViewById(R.id.progressiveSurveyRecyclerView);
+        submitSurveyFAB = findViewById(R.id.submitSurveyFAB);
     }
 
     private void configureRecyclerView()
