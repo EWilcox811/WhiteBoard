@@ -1,5 +1,6 @@
 package edu.nu.jam.capstone;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -25,6 +26,11 @@ import edu.nu.jam.capstone.Requestsmodule.DatabaseHelper;
 
 public class InitialSurveyActivity extends AppCompatActivity implements IInitialSurveyAdapterOperations
 {
+	//return intent extras
+	public static final String EXTRA_CONFIDENCE_1 = "confidence_1";
+	public static final String EXTRA_CONFIDENCE_2 = "confidence_2";
+	public static final String EXTRA_CONFIDENCE_3 = "confidence_3";
+	public static final String EXTRA_CONFIDENCE_4 = "confidence_4";
 	private List<InitialSurveyData> initialSurveyDataList = new LinkedList<>();
 	private RecyclerView recyclerView;
 	private int currentIndex;
@@ -65,7 +71,6 @@ public class InitialSurveyActivity extends AppCompatActivity implements IInitial
 				0));
 
 		bindControls();
-		Intent intent = getIntent();
 		// check to see if the Intent's passed extra is professor or student:
 		if (dbHelper.GetUserTypeFromSharedPreferences(this).toLowerCase().startsWith("p"))
 		{
@@ -79,6 +84,25 @@ public class InitialSurveyActivity extends AppCompatActivity implements IInitial
 			userType = UserType.STUDENT;
 			configureRecyclerView();
 		}
+		returnIntent();
+	}
+
+	private void returnIntent()
+	{
+		final Intent intentReturn = new Intent();
+		submitSurveyFAB.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				intentReturn.putExtra(EXTRA_CONFIDENCE_1, initialSurveyDataList.get(0).getResponsePercentage());
+				intentReturn.putExtra(EXTRA_CONFIDENCE_2, initialSurveyDataList.get(1).getResponsePercentage());
+				intentReturn.putExtra(EXTRA_CONFIDENCE_3, initialSurveyDataList.get(2).getResponsePercentage());
+				intentReturn.putExtra(EXTRA_CONFIDENCE_4, initialSurveyDataList.get(3).getResponsePercentage());
+				setResult(Activity.RESULT_OK, intentReturn);
+				finish();
+			}
+		});
 	}
 
 	private void bindControls()
