@@ -31,6 +31,7 @@ public class InitialSurveyActivity extends AppCompatActivity implements IInitial
 	private DatabaseHelper dbHelper = new DatabaseHelper();
 	private FloatingActionButton submitSurveyFAB;
 
+
 	private final String responseDescriptionTag = "Class Response";
 	private enum UserType {PROFESSOR, STUDENT};
 	UserType userType;

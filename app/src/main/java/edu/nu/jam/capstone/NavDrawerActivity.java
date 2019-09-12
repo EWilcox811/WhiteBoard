@@ -95,7 +95,7 @@ public class NavDrawerActivity extends AppCompatActivity
         //next three lines set the userName on the navDrawer
         View headerView = navigationView.getHeaderView(0);
         TextView userName = headerView.findViewById(R.id.nav_userNameTextView);
-        userName.setText(dbHelper.getUserId());
+        userName.setText(dbHelper.GetUsernameFromSharedPreferences(this));
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
