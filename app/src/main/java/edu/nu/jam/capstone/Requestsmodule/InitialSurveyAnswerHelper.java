@@ -61,39 +61,15 @@ public class InitialSurveyAnswerHelper extends AsyncTask<Void, Void, String> {
      * Gets the JSON file of comments from the backend database.
      * @throws IOException
      */
-    private void updateQuestionOne() throws IOException {
+    private void getLearningStyleAnswers() throws IOException {
         HttpURLConnection connection = null;
         BufferedReader reader = null;
 
         try {
             // URL of the backend.
-            URL url = new URL("http://104.248.0.248/users/" + userId + "/updateLearningStyle/1");
+            URL url = new URL("http://104.248.0.248/students/" + userId);
             // Establish the connection with the backend.
             connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-
-            JSONObject jsonObject = new JSONObject();
-            try {
-                jsonObject.put("updatedValue", this.ConfidenceOne.toString());
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            System.out.println(jsonObject.toString());
-            connection.setDoOutput(true);
-            connection.setRequestProperty("Content-Type", "application/json");
-
-            // Connect to the backend.
-            connection.connect();
-
-
-
-
-            DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-            wr.writeBytes(jsonObject.toString());
-            wr.flush();
-            wr.close();
-
             // Get the stream of data from the connection.
             InputStream stream = connection.getInputStream();
 
@@ -134,224 +110,6 @@ public class InitialSurveyAnswerHelper extends AsyncTask<Void, Void, String> {
         }
     }
 
-    private void updateQuestionTwo() throws IOException {
-        HttpURLConnection connection = null;
-        BufferedReader reader = null;
-
-        try {
-            // URL of the backend.
-            URL url = new URL("http://104.248.0.248/users/" + userId + "/updateLearningStyle/2");
-            // Establish the connection with the backend.
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-
-            JSONObject jsonObject = new JSONObject();
-            try {
-                jsonObject.put("updatedValue", this.ConfidenceTwo.toString());
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            System.out.println(jsonObject.toString());
-            connection.setDoOutput(true);
-            connection.setRequestProperty("Content-Type", "application/json");
-
-            // Connect to the backend.
-            connection.connect();
-
-
-
-
-            DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-            wr.writeBytes(jsonObject.toString());
-            wr.flush();
-            wr.close();
-
-            // Get the stream of data from the connection.
-            InputStream stream = connection.getInputStream();
-
-            // Read the data from the InputStream.
-            reader = new BufferedReader(new InputStreamReader(stream));
-
-            // Create the string with a StringBuffer to maintain JSON formatting.
-            StringBuffer buffer = new StringBuffer();
-            // Create the empty string that will be overwritten with data from the BufferedReader.
-            String line = "";
-
-            // Loop over the lines in the BufferedReader, exits when it hits EOF
-            while((line = reader.readLine()) != null) {
-                // Add line to the StringBuffer.
-                buffer.append(line+"\n");
-                // Debug logging
-                Log.d("Response: ", "> " + line);
-            }
-
-            // Set the private String 'response' to the StringBuffer value.
-            response = buffer.toString();
-        } catch (MalformedURLException e) {
-            // Debugging catch
-            e.printStackTrace();
-        } finally {
-            // Disconnect from the server
-            if (connection != null) {
-                connection.disconnect();
-                // Close the reader
-                try {
-                    if (reader != null) {
-                        reader.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    private void updateQuestionThree() throws IOException {
-        HttpURLConnection connection = null;
-        BufferedReader reader = null;
-
-        try {
-            // URL of the backend.
-            URL url = new URL("http://104.248.0.248/users/" + userId + "/updateLearningStyle/3");
-            // Establish the connection with the backend.
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-
-            JSONObject jsonObject = new JSONObject();
-            try {
-                jsonObject.put("updatedValue", this.ConfidenceThree.toString());
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            System.out.println(jsonObject.toString());
-            connection.setDoOutput(true);
-            connection.setRequestProperty("Content-Type", "application/json");
-
-            // Connect to the backend.
-            connection.connect();
-
-
-
-
-            DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-            wr.writeBytes(jsonObject.toString());
-            wr.flush();
-            wr.close();
-
-            // Get the stream of data from the connection.
-            InputStream stream = connection.getInputStream();
-
-            // Read the data from the InputStream.
-            reader = new BufferedReader(new InputStreamReader(stream));
-
-            // Create the string with a StringBuffer to maintain JSON formatting.
-            StringBuffer buffer = new StringBuffer();
-            // Create the empty string that will be overwritten with data from the BufferedReader.
-            String line = "";
-
-            // Loop over the lines in the BufferedReader, exits when it hits EOF
-            while((line = reader.readLine()) != null) {
-                // Add line to the StringBuffer.
-                buffer.append(line+"\n");
-                // Debug logging
-                Log.d("Response: ", "> " + line);
-            }
-
-            // Set the private String 'response' to the StringBuffer value.
-            response = buffer.toString();
-        } catch (MalformedURLException e) {
-            // Debugging catch
-            e.printStackTrace();
-        } finally {
-            // Disconnect from the server
-            if (connection != null) {
-                connection.disconnect();
-                // Close the reader
-                try {
-                    if (reader != null) {
-                        reader.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    private void updateQuestionFour() throws IOException {
-        HttpURLConnection connection = null;
-        BufferedReader reader = null;
-
-        try {
-            // URL of the backend.
-            URL url = new URL("http://104.248.0.248/users/" + userId + "/updateLearningStyle/4");
-            // Establish the connection with the backend.
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-
-            JSONObject jsonObject = new JSONObject();
-            try {
-                jsonObject.put("updatedValue", this.ConfidenceFour.toString());
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            System.out.println(jsonObject.toString());
-            connection.setDoOutput(true);
-            connection.setRequestProperty("Content-Type", "application/json");
-
-            // Connect to the backend.
-            connection.connect();
-
-
-
-
-            DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-            wr.writeBytes(jsonObject.toString());
-            wr.flush();
-            wr.close();
-
-            // Get the stream of data from the connection.
-            InputStream stream = connection.getInputStream();
-
-            // Read the data from the InputStream.
-            reader = new BufferedReader(new InputStreamReader(stream));
-
-            // Create the string with a StringBuffer to maintain JSON formatting.
-            StringBuffer buffer = new StringBuffer();
-            // Create the empty string that will be overwritten with data from the BufferedReader.
-            String line = "";
-
-            // Loop over the lines in the BufferedReader, exits when it hits EOF
-            while((line = reader.readLine()) != null) {
-                // Add line to the StringBuffer.
-                buffer.append(line+"\n");
-                // Debug logging
-                Log.d("Response: ", "> " + line);
-            }
-
-            // Set the private String 'response' to the StringBuffer value.
-            response = buffer.toString();
-        } catch (MalformedURLException e) {
-            // Debugging catch
-            e.printStackTrace();
-        } finally {
-            // Disconnect from the server
-            if (connection != null) {
-                connection.disconnect();
-                // Close the reader
-                try {
-                    if (reader != null) {
-                        reader.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
 
     /**
      * The task that will complete in Asynchronously.
@@ -361,10 +119,7 @@ public class InitialSurveyAnswerHelper extends AsyncTask<Void, Void, String> {
     @Override
     protected String doInBackground(Void...params) {
         try {
-            updateQuestionOne();
-            updateQuestionTwo();
-            updateQuestionThree();
-            updateQuestionFour();
+            getLearningStyleAnswers();
 
         } catch (IOException e) {
             e.printStackTrace();
