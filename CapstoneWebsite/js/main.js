@@ -12,6 +12,8 @@ var professordivNew;
 var studentdivNew;
 var classesdivNew;
 var newBtn;
+var div1;
+var chartsdiv;
 
 function getProfessorData() {
     newBtn = document.getElementById("NewBtn");
@@ -236,7 +238,11 @@ function drawTable(headers, tabledata) {
     
 
     // get the reference for the body
-    var div1 = document.getElementById('tablediv');
+    chartsdiv = document.getElementById("chartsdiv");
+    div1 = document.getElementById('tablediv');
+
+    chartsdiv.style.display = "none";
+    div1.style.display = "block";
 
 
 
@@ -281,7 +287,7 @@ function removeTable() {
 }
 
 
-window.onload=getProfessorData; 
+window.onload=initialize; 
 
 
 /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
@@ -306,9 +312,14 @@ function highlight(e) {
     
 }
 
+function initialize() {    
+    getProfessorData()
+}
+
 var table = document.getElementById('tablebody'),
     selected = table.getElementsByClassName('selected');
-table.onclick = highlight;
+    table.onclick = highlight;
+
 
 function NewBtnOnClick() {
     switch(currentDataSelected) {
@@ -825,4 +836,72 @@ function deleteComment() {
         console.error(err)
   })
     
+}
+
+// --------------------------------------------------------
+// Chart Generation
+
+function generateCharts() {
+    chartsdiv.style.display = "block";
+    div1.style.display = "none";
+    getLearningStyleData();
+
+
+    
+}
+
+function drawLearningStyleChart(inputdata) {
+    Highcharts.chart('LearningStyle', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Learning Style'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    exporting: { enabled: false },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+            }
+        }
+    },
+    series: [{
+        name: 'Questions',
+        colorByPoint: true,
+        data: inputdata
+    }]
+});
+}
+
+function getLearningStyleData() {
+    jQuery.getJSON("http://104.248.0.248/learningstyle/globalResults", function(data) {
+    }.bind(this)).fail(function(xhr, status) {
+    console.log("The JSON chart failed to load.");
+    console.log(status);
+    }).done(function(data) {
+        var surveyinfo = new Array();
+        for(d in data) {
+            var question = data[d]["question"]
+            var average = data[d]["average"]
+            surveyresponse = [question, average];
+            for(i in surveyresponse) {
+                if(surveyresponse[i] == "" || surveyresponse[i] == undefined){
+                    surveyresponse[i] = "No Data Available";
+                } 
+            }
+            surveyinfo.push(surveyresponse);
+            
+        }
+        drawLearningStyleChart(surveyinfo);
+    })
 }
