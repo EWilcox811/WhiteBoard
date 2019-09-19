@@ -77,6 +77,7 @@
     <string name="user_name_label">{ User Name }</string>
     <string name="whiteboard_splash_screen_label">WhiteBoard</string>
     <string name="wb_logo_desc">WB_LOGO</string>
+    <string name="comment_filler">{ Here is the actual comment that gets posted to this view by the user }</string>
 
 
 </resources>
