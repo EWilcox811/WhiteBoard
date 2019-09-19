@@ -36,6 +36,7 @@ import edu.nu.jam.capstone.Requestsmodule.AsyncResponder;
 import edu.nu.jam.capstone.Requestsmodule.CommentListHelper;
 import edu.nu.jam.capstone.Requestsmodule.DatabaseHelper;
 import edu.nu.jam.capstone.Requestsmodule.InitialSurveyResultsUpdateHelper;
+import edu.nu.jam.capstone.Requestsmodule.ProgressiveSurveyAnswerHelper;
 import edu.nu.jam.capstone.Requestsmodule.ReplyToCommentHelper;
 import edu.nu.jam.capstone.Requestsmodule.SessionListHelper;
 
@@ -324,7 +325,31 @@ public class NavDrawerActivity extends AppCompatActivity
                 }
                 break;
             case 4:
-                //progressive survey results push to backend
+                /*
+                if (resultCode == Activity.RESULT_OK)
+                {
+                    DatabaseHelper dbHelper = new DatabaseHelper();
+                    String userid = dbHelper.GetUserIdFromSharedPreferences(NavDrawerActivity.this);
+                    Bundle bundle = data.getBundleExtra("WeeklyELOBundle");
+                    ArrayList<HashMap<String,String>> WeeklyELOList = (ArrayList<HashMap<String, String>>)bundle.getSerializable("WeeklyELO");
+
+                    Double ConfidenceOne = data.getDoubleExtra(EXTRA_CONFIDENCE_1, 0);
+                    Double ConfidenceTwo = data.getDoubleExtra(EXTRA_CONFIDENCE_2, 0);
+                    Double ConfidenceThree = data.getDoubleExtra(EXTRA_CONFIDENCE_3, 0);
+                    Double ConfidenceFour = data.getDoubleExtra(EXTRA_CONFIDENCE_4, 0);
+
+                    new ProgressiveSurveyAnswerHelper(new AsyncResponder() {
+                        @Override
+                        public void processFinish(String output) {
+
+                        }
+                    }, NavDrawerActivity.this, userid, ConfidenceOne, ConfidenceTwo, ConfidenceThree, ConfidenceFour).execute();
+
+                }
+
+
+                 */
+
                 break;
         }
     }
@@ -401,7 +426,6 @@ public class NavDrawerActivity extends AppCompatActivity
                 topLevelList.clear();
                 dbHelper.onGetCommentListCompleted(output);
                 commentListFromBackend = dbHelper.getCommentList();
-                System.out.println(commentListFromBackend);
                 for (int i = 0; i < commentListFromBackend.size(); i++) {
                     String comment = commentListFromBackend.get(i).get("message");
                     String username = commentListFromBackend.get(i).get("username");

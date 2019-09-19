@@ -246,10 +246,10 @@ public class DatabaseHelper {
         // THIS METHOD GATHERS ELOs: in the form of a hash map...
         try {
             // Convert the JSON string into a parsable JSON object.
-            JSONObject jsonObj = new JSONObject(jsonString);
+            //JSONObject jsonObj = new JSONObject(jsonString);
             // Grab the '_embedded' value.
             // Grab the array of comments from '_embedded' using the comments key.
-            JSONArray results = jsonObj.getJSONArray(jsonString);
+            JSONArray results = new JSONArray(jsonString);
             // Iterate through the JSON comments array
             for (int i = 0; i<results.length();i++) {
                 // Set up objects for the HashMap

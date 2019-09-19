@@ -46,7 +46,8 @@ public class WeeklyELOResultsHelper extends AsyncTask<Void, Void, String> {
 
         try {
             // URL of the backend.
-            URL url = new URL("http://104.248.0.248/sessions/" + sessionId + "/results/" + weeklyId);
+            System.out.println("http://104.248.0.248/sessions/" + sessionId + "/results/" + weeklyId);
+            URL url = new URL("http://104.248.0.248/sessions/" + "1" + "/results/" + weeklyId);
             // Establish the connection with the backend.
             connection = (HttpURLConnection) url.openConnection();
             // Connect to the backend.
