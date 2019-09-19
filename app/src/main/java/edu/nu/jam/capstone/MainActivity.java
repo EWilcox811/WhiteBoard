@@ -2,7 +2,6 @@ package edu.nu.jam.capstone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -64,7 +63,7 @@ public class MainActivity extends AppCompatActivity
 
 	private void bindControlsAndData() {
 	    username = findViewById(R.id.userNameEditView);
-	    password = findViewById(R.id.emailEditView);
+	    password = findViewById(R.id.passwordEditView);
 		loginButton = findViewById(R.id.loginBtn);
 		RememberMe = findViewById(R.id.rememberMeCheckBox);
 		loginButton.setOnClickListener(new View.OnClickListener() {

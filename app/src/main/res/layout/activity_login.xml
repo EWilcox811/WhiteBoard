@@ -25,7 +25,7 @@
         android:layout_marginBottom="40dp"/>
 
     <TextView
-        android:id="@+id/emailTextView"
+        android:id="@+id/passwordTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/password"
@@ -33,7 +33,7 @@
         android:layout_margin="10dp"/>
 
     <EditText
-        android:id="@+id/emailEditView"
+        android:id="@+id/passwordEditView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autofillHints=""
