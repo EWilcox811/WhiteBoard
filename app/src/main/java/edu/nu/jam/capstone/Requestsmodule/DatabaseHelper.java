@@ -43,6 +43,7 @@ public class DatabaseHelper {
     String usertype;
     String sessionid;
     String username;
+    String resetflag;
 
 
 
@@ -454,5 +455,20 @@ public class DatabaseHelper {
         username = sharedPref.getString("com.whiteboard.username", "");
         System.out.println("Loading User Name From Shared Preferences: " + username);
         return username;
+    }
+
+    public void SavePasswordResetFlagToSharedPreferences(Context context, String flag) {
+        System.out.println("Saving User Name to Shared Preferences: " + sessionid);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("com.whiteboard.resetflag", flag);
+        editor.commit();
+    }
+
+    public String GetPasswordResetFlagFromSharedPreferences(Context context) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        resetflag = sharedPref.getString("com.whiteboard.resetflag", "");
+        System.out.println("Loading User Name From Shared Preferences: " + resetflag);
+        return resetflag;
     }
 }
