@@ -337,8 +337,6 @@ public class NavDrawerActivity extends AppCompatActivity
     public void onItemSelected(int position)
     {
         cardPosition = position;
-        Toast.makeText(this, "You clicked card " + position, Toast.LENGTH_LONG).show();
-
     }
 
     @Override
