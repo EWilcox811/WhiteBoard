@@ -342,7 +342,6 @@ public class NavDrawerActivity extends AppCompatActivity
     @Override
     public void onTextViewClicked(int position)
     {
-        Toast.makeText(getApplicationContext(), "Comment Text View Clicked", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(getApplicationContext(), ViewRepliesActivity.class);
         intent.putExtra(EXTRA_PARENT_COMMENT, topLevelList.get(position).getContent());
         intent.putExtra(EXTRA_PARENT_COMMENT_ID, topLevelList.get(position).getCommentid());
@@ -352,7 +351,6 @@ public class NavDrawerActivity extends AppCompatActivity
     @Override
     public void onReplyClicked(int position)
     {
-        Toast.makeText(getApplicationContext(), "Reply image clicked", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(getApplicationContext(), ReplyToCommentActivity.class);
         intent.putExtra(EXTRA_PARENT_COMMENT, topLevelList.get(position).getContent());
         startActivityForResult(intent, 2);
