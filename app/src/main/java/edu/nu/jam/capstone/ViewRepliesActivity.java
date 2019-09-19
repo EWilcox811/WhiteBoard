@@ -125,12 +125,10 @@ implements ICommentBoardOperations
     @Override
     public void onTextViewClicked(int position)
     {
-        Toast.makeText(getApplicationContext(), "Comment Text View Clicked", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(getApplicationContext(), ViewRepliesActivity.class);
         intent.putExtra(EXTRA_PARENT_COMMENT, repliesList.get(position).getContent());
         System.out.println(repliesList.get(position).getCommentid());
         intent.putExtra(EXTRA_PARENT_COMMENT_ID, repliesList.get(position).getCommentid());
-//        intent.putExtra();
         startActivity(intent);
     }
 
