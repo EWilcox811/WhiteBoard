@@ -341,19 +341,14 @@ public class NavDrawerActivity extends AppCompatActivity
                         question.put("confidence", confidence);
                         WeeklyELOList.add(question);
                     }
-
-
-                    Double ConfidenceOne = data.getDoubleExtra(EXTRA_CONFIDENCE_1, 0);
-                    Double ConfidenceTwo = data.getDoubleExtra(EXTRA_CONFIDENCE_2, 0);
-                    Double ConfidenceThree = data.getDoubleExtra(EXTRA_CONFIDENCE_3, 0);
-                    Double ConfidenceFour = data.getDoubleExtra(EXTRA_CONFIDENCE_4, 0);
+                    String sessionid = dbHelper.GetSessionIdFromSharedPreferences(NavDrawerActivity.this);
 
                     new ProgressiveSurveyAnswerHelper(new AsyncResponder() {
                         @Override
                         public void processFinish(String output) {
 
                         }
-                    }, NavDrawerActivity.this, userid, ConfidenceOne, ConfidenceTwo, ConfidenceThree, ConfidenceFour).execute();
+                    }, NavDrawerActivity.this, sessionid, WeeklyELOList).execute();
 
                 }
 

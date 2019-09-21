@@ -21,6 +21,7 @@ import java.util.HashMap;
 
 public class ProgressiveSurveyAnswerHelper extends AsyncTask<Void, Void, String> {
     String response = "";
+    String sessionid = "";
     ArrayList<HashMap<String, String>> useranswers;
     Context context;
     Long totalBytes;
@@ -35,9 +36,10 @@ public class ProgressiveSurveyAnswerHelper extends AsyncTask<Void, Void, String>
      * @param context Context of the activity to be passed.
      * @param useranswers pass the array of answers of the user.
      */
-    public ProgressiveSurveyAnswerHelper(AsyncResponder delegate, Context context, ArrayList<HashMap<String, String>> useranswers){
+    public ProgressiveSurveyAnswerHelper(AsyncResponder delegate, Context context, String sessionid, ArrayList<HashMap<String, String>> useranswers){
         this.delegate = delegate;
         this.context = context;
+        this.sessionid = sessionid;
         this.useranswers = useranswers;
     }
 
@@ -54,13 +56,13 @@ public class ProgressiveSurveyAnswerHelper extends AsyncTask<Void, Void, String>
      * Gets the JSON info for the user token from the backend database.
      * @throws IOException
      */
-    private void sendProgressiveAnswers() throws IOException {
+    private void sendProgressiveAnswers(String questionid, String confidence) throws IOException {
         HttpURLConnection connection = null;
         BufferedReader reader = null;
 
         try {
             // URL of the backend.
-            URL url = new URL("http://104.248.0.248/");
+            URL url = new URL("http://104.248.0.248/sessions/" + "1" + "/updateQuestion/" + questionid);
             // Establish the connection with the backend.
             connection = (HttpURLConnection) url.openConnection();
             // Set headers for login
@@ -77,6 +79,7 @@ public class ProgressiveSurveyAnswerHelper extends AsyncTask<Void, Void, String>
 
             // Create the JSON object to POST
             JSONObject jsonParam = new JSONObject();
+            jsonParam.put("response", confidence);
 
             // POST to the backend.
             wr.writeBytes(jsonParam.toString());
@@ -112,21 +115,24 @@ public class ProgressiveSurveyAnswerHelper extends AsyncTask<Void, Void, String>
         } catch (MalformedURLException e) {
             // Debugging catch
             e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         } finally {
-            // Disconnect from the server
-            if (connection != null) {
-                connection.disconnect();
-                // Close the reader
-                try {
-                    if (reader != null) {
-                        reader.close();
+                // Disconnect from the server
+                if (connection != null) {
+                    connection.disconnect();
+                    // Close the reader
+                    try {
+                        if (reader != null) {
+                            reader.close();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
         }
-    }
+
 
     /**
      * The task that will complete in Asynchronously.
@@ -136,7 +142,11 @@ public class ProgressiveSurveyAnswerHelper extends AsyncTask<Void, Void, String>
     @Override
     protected String doInBackground(Void...params) {
         try {
-            sendProgressiveAnswers();
+            for(int i = 0; i < useranswers.size();i++) {
+                String questionid = useranswers.get(i).get("id");
+                String confidence = useranswers.get(i).get("confidence");
+                sendProgressiveAnswers(questionid, confidence);
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
