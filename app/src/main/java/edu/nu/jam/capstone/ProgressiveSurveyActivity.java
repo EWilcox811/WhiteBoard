@@ -142,6 +142,18 @@ public class ProgressiveSurveyActivity extends AppCompatActivity implements IPro
         // previously card coloring...undefined in this class.
     }
 
+    @Override
+    public void setStudentConfidence(int position, double confidence)
+    {
+        progressiveSurveyDataList.get(position).setStudentConfidencePercentage(confidence);
+    }
+
+    @Override
+    public void setClassConfidence(int position)
+    {
+
+    }
+
     private void resetEloValueInAdapter()
     {
         if (userType == UserType.PROFESSOR)

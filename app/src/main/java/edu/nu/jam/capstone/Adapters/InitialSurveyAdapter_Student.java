@@ -64,26 +64,7 @@ public class InitialSurveyAdapter_Student extends RecyclerView.Adapter<InitialSu
 				}
 			});
 
-			initialSurveyResponseSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
-			{
-				@Override
-				public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
-				{
-					initialSurveyResponsePercentageTextView.setText(Integer.toString(progress) + ".0 %");
-				}
 
-				@Override
-				public void onStartTrackingTouch(SeekBar seekBar)
-				{
-					// Stub...
-				}
-
-				@Override
-				public void onStopTrackingTouch(SeekBar seekBar)
-				{
-					// Stub...
-				}
-			});
 
 		}
 
@@ -103,12 +84,33 @@ public class InitialSurveyAdapter_Student extends RecyclerView.Adapter<InitialSu
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull InitialSurveyAdapter_Student.ViewHolder holder, int position)
+	public void onBindViewHolder(final @NonNull InitialSurveyAdapter_Student.ViewHolder holder, final int position)
 	{
 		List<InitialSurveyData> initialSurveyDataList = initialSurveyOperationsContext.onGetInitialSurveyQuestions();
 		InitialSurveyData initialSurveyData = initialSurveyDataList.get(position);
 		holder.displayInitialSurveyData(initialSurveyData);
 		holder.itemView.setTag(position);
+		holder.initialSurveyResponseSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
+		{
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
+			{
+				holder.initialSurveyResponsePercentageTextView.setText(Integer.toString(progress) + ".0 %");
+				initialSurveyOperationsContext.setStudentResponsePercentage(position, progress);
+			}
+
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar)
+			{
+				// Stub...
+			}
+
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar)
+			{
+				// Stub...
+			}
+		});
 	}
 
 	@Override
