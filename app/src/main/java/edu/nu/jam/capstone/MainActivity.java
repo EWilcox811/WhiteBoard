@@ -36,9 +36,16 @@ public class MainActivity extends AppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login);
-		//clearSharedPreferences();
-		getSharedPreferencesData();
+		if(!dbHelper.GetPasswordResetFlagFromSharedPreferences(this).equals("1"))
+        {
+            setContentView(R.layout.activity_login);
+            getSharedPreferencesData();
+        }
+		else
+        {
+            Intent intent = new Intent(this, PasswordResetActivity.class);
+            startActivity(intent);
+        }
 
 	}
 

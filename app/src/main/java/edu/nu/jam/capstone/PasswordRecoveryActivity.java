@@ -9,11 +9,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import edu.nu.jam.capstone.Requestsmodule.DatabaseHelper;
+
 import static edu.nu.jam.capstone.MainActivity.EXTRA_USERNAME;
 
 public class PasswordRecoveryActivity extends AppCompatActivity
 {
     public static final String EXTRA_EMAIL = "email";
+
+    private DatabaseHelper dbHelper;
 
     private Button submitButton;
     private EditText userNameEditText, emailEditText;
@@ -32,6 +36,7 @@ public class PasswordRecoveryActivity extends AppCompatActivity
 
     private void bindControls()
     {
+        dbHelper = new DatabaseHelper();
         userNameEditText = findViewById(R.id.userNameEditView);
         emailEditText = findViewById(R.id.emailEditView);
         submitButton = findViewById(R.id.submitBtn);
@@ -56,6 +61,7 @@ public class PasswordRecoveryActivity extends AppCompatActivity
              *
              * the following should be done if validated.
              */
+            dbHelper.SavePasswordResetFlagToSharedPreferences(this, "1");
             Intent intent = new Intent(this, PasswordResetActivity.class);
             if (!userNameEditText.getText().toString().isEmpty())
                 intent.putExtra(EXTRA_USERNAME, userNameEditText.getText().toString());
