@@ -7,6 +7,7 @@ public class ProgressiveSurveyData
 	private String learningObjective;
 	private double classConfidencePercentage;
 	private double studentConfidencePercentage;
+	private String questionid;
 
 	//TODO: change learning outcome to learning objective in the wireframe.
 	//TODO: add submit btn for the student view (to confirm changes to the backend).
@@ -16,11 +17,13 @@ public class ProgressiveSurveyData
 		learningObjective = null;
 		classConfidencePercentage = 0.0;
 		studentConfidencePercentage = 0.0;
+		questionid = null;
 	}
 
-	public ProgressiveSurveyData(String learningObjective, double classConfidencePercentage, double studentConfidencePercentage)
+	public ProgressiveSurveyData(String learningObjective, double classConfidencePercentage, double studentConfidencePercentage, String questionid)
 	{
 		this.learningObjective = learningObjective;
+		this.questionid = questionid;
 
 		if (classConfidencePercentage != -1)
 			this.classConfidencePercentage = classConfidencePercentage;
@@ -61,5 +64,13 @@ public class ProgressiveSurveyData
 	public void setStudentConfidencePercentage(double studentConfidencePercentage)
 	{
 		this.studentConfidencePercentage = studentConfidencePercentage;
+	}
+
+	public String getQuestionid() {
+		return questionid;
+	}
+
+	public void setQuestionid(String questionid) {
+		this.questionid = questionid;
 	}
 }

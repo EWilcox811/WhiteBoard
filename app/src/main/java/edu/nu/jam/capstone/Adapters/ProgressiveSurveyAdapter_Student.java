@@ -20,6 +20,7 @@ public class ProgressiveSurveyAdapter_Student extends RecyclerView.Adapter<Progr
 {
 	private IProgressiveSurveyAdapterOperations progressiveSurveyOperationsContext;
 	public static int eloNumber = 1;  // static var used to enumerate the list of ELOs.
+	private SeekBar progressiveSurveyResponseSeekBar;
 
 	public ProgressiveSurveyAdapter_Student(Context context)
 	{
@@ -33,7 +34,7 @@ public class ProgressiveSurveyAdapter_Student extends RecyclerView.Adapter<Progr
 	{
 		private TextView learningObjectiveNumber;
 		private TextView progressiveSurveyQuestionTextView;
-		private SeekBar progressiveSurveyResponseSeekBar;
+
 		private TextView progressiveSurveyResponsePercentageTextView;
 
 		ViewHolder(@NonNull View itemView)
@@ -142,6 +143,12 @@ public class ProgressiveSurveyAdapter_Student extends RecyclerView.Adapter<Progr
 		if (progressiveSurveyOperationsContext.onGetLearningObjectives() != null)
 			return progressiveSurveyOperationsContext.onGetLearningObjectives().size();
 		return -1;
+	}
+
+	public String getSeekBarAmount() {
+		String percentage = String.valueOf(progressiveSurveyResponseSeekBar.getProgress());
+
+		return percentage;
 	}
 }
 

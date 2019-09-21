@@ -1,5 +1,6 @@
 package edu.nu.jam.capstone;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NavUtils;
@@ -23,14 +25,18 @@ import java.util.List;
 import edu.nu.jam.capstone.Adapters.CommentBoardAdapter;
 import edu.nu.jam.capstone.Data.CommentData;
 import edu.nu.jam.capstone.Interfaces.ICommentBoardOperations;
+import edu.nu.jam.capstone.Requestsmodule.AddCommentHelper;
 import edu.nu.jam.capstone.Requestsmodule.AsyncResponder;
 import edu.nu.jam.capstone.Requestsmodule.CommentListHelper;
 import edu.nu.jam.capstone.Requestsmodule.CommentRepliesListHelper;
 import edu.nu.jam.capstone.Requestsmodule.DatabaseHelper;
+import edu.nu.jam.capstone.Requestsmodule.ReplyToCommentHelper;
 import edu.nu.jam.capstone.Requestsmodule.SessionListHelper;
 
 import static edu.nu.jam.capstone.NavDrawerActivity.EXTRA_PARENT_COMMENT;
 import static edu.nu.jam.capstone.NavDrawerActivity.EXTRA_PARENT_COMMENT_ID;
+import static edu.nu.jam.capstone.NewCommentActivity.EXTRA_IS_ANONYMOUS;
+import static edu.nu.jam.capstone.NewCommentActivity.EXTRA_NEW_COMMENT;
 
 public class ViewRepliesActivity extends AppCompatActivity
 implements ICommentBoardOperations
@@ -95,6 +101,39 @@ implements ICommentBoardOperations
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        switch (requestCode) {
+            case 1:
+                if (resultCode == Activity.RESULT_OK) {
+                    String comment = data.getStringExtra(EXTRA_NEW_COMMENT);
+                    String parentid = data.getStringExtra(EXTRA_PARENT_COMMENT_ID);
+                    String parentcomment = data.getStringExtra(EXTRA_PARENT_COMMENT);
+                    if (comment.isEmpty()) {
+                        break;
+                    }
+                    Boolean isAnonymous = data.getExtras().getBoolean(EXTRA_IS_ANONYMOUS);
+                    DatabaseHelper dbHelper = new DatabaseHelper();
+                    String username = dbHelper.GetUsernameFromSharedPreferences(ViewRepliesActivity.this);
+
+
+                    String userID = dbHelper.GetUserIdFromSharedPreferences(ViewRepliesActivity.this);
+                    String sessionID = dbHelper.GetSessionIdFromSharedPreferences(ViewRepliesActivity.this);
+                    new ReplyToCommentHelper(new AsyncResponder() {
+                        @Override
+                        public void processFinish(String output) {
+                            getCommentList();
+                        }
+                    }, ViewRepliesActivity.this, comment, isAnonymous, userID, parentid).execute();
+                    Intent intent = new Intent(getApplicationContext(), ViewRepliesActivity.class);
+                    intent.putExtra(EXTRA_PARENT_COMMENT, parentcomment);
+                    intent.putExtra(EXTRA_PARENT_COMMENT_ID, parentid);
+                    startActivity(intent);
+                }
+                break;
+        }
+    }
+
     /**
      * Used for the toolbar
      * @param item
@@ -125,10 +164,14 @@ implements ICommentBoardOperations
     @Override
     public void onTextViewClicked(int position)
     {
+        if(repliesList.get(position).getNumberOfReplies() == 0)
+            return;
+        Toast.makeText(getApplicationContext(), "Comment Text View Clicked", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(getApplicationContext(), ViewRepliesActivity.class);
         intent.putExtra(EXTRA_PARENT_COMMENT, repliesList.get(position).getContent());
         System.out.println(repliesList.get(position).getCommentid());
         intent.putExtra(EXTRA_PARENT_COMMENT_ID, repliesList.get(position).getCommentid());
+//        intent.putExtra();
         startActivity(intent);
     }
 
@@ -137,8 +180,9 @@ implements ICommentBoardOperations
     {
         Intent intent = new Intent(getApplicationContext(), ReplyToCommentActivity.class);
         intent.putExtra(EXTRA_PARENT_COMMENT, repliesList.get(position).getContent());
+        System.out.println("From Replies Activity: " + repliesList.get(position).getCommentid());
         intent.putExtra(EXTRA_PARENT_COMMENT_ID, repliesList.get(position).getCommentid());
-        startActivityForResult(intent, 2);
+        startActivityForResult(intent, 1);
     }
 
     @Override
@@ -192,9 +236,10 @@ implements ICommentBoardOperations
                         username = commentReplyListFromBackend.get(i).get("username") + " (Anonymous to Others)";
                     }
                     String commentid = commentReplyListFromBackend.get(i).get("commentid");
+                    String parentid = commentReplyListFromBackend.get(i).get("parentid");
 
 
-                    CommentData commentCard = new CommentData(comment, 0, upVotes, numberOfReplies, null, username, commentid);
+                    CommentData commentCard = new CommentData(comment, 0, upVotes, numberOfReplies, null, username, commentid, parentid);
                     repliesList.add(commentCard);
                 }
 

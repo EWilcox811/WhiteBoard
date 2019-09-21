@@ -287,7 +287,7 @@ function removeTable() {
 }
 
 
-window.onload=getProfessorData; 
+window.onload=initialize; 
 
 
 /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
@@ -312,9 +312,14 @@ function highlight(e) {
     
 }
 
+function initialize() {    
+    getProfessorData()
+}
+
 var table = document.getElementById('tablebody'),
     selected = table.getElementsByClassName('selected');
-table.onclick = highlight;
+    table.onclick = highlight;
+
 
 function NewBtnOnClick() {
     switch(currentDataSelected) {
