@@ -65,7 +65,10 @@ public class NavDrawerActivity extends AppCompatActivity
     private CommentData commentCard;
     private List<CommentData> subComments = new ArrayList<>();
     List<CommentData> topLevelList = new ArrayList<>();
-    NavigationView navigationView;
+
+    private NavigationView navigationView;
+
+
     private Menu professorNavView;
     private RecyclerView commentStream;
     private String sessionid;
@@ -97,7 +100,7 @@ public class NavDrawerActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_drawer);
+        navigationView = findViewById(R.id.nav_drawer);
         //next three lines set the userName on the navDrawer
         View headerView = navigationView.getHeaderView(0);
         TextView userName = headerView.findViewById(R.id.nav_userNameTextView);

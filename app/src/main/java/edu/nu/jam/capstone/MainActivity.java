@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,8 @@ public class MainActivity extends AppCompatActivity
 {
 
 	public static final String EXTRA_USER_TYPE = "userType";
+	public static final String EXTRA_USERNAME = "userName";
+
 	private DatabaseHelper dbHelper;
     private EditText username;
     private EditText password;
@@ -27,13 +30,14 @@ public class MainActivity extends AppCompatActivity
 	private CheckBox RememberMe;
 	private String loginToken;
 
+	private TextView forgotPasswordTextView;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		//clearSharedPreferences();
-
 		getSharedPreferencesData();
 
 	}
@@ -92,6 +96,18 @@ public class MainActivity extends AppCompatActivity
                 }, MainActivity.this, usernameText, passwordText).execute();
             }
         });
+		forgotPasswordTextView = findViewById(R.id.forgotPasswordTextView);
+		forgotPasswordTextView.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				Intent intent = new Intent(MainActivity.this, PasswordRecoveryActivity.class);
+				if(null != username.getText().toString())
+					intent.putExtra(EXTRA_USERNAME, username.getText().toString());
+				startActivity(intent);
+			}
+		});
 	}
 
 	private void startNewActivity()
