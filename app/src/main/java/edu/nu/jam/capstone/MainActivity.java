@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity
 	private CheckBox RememberMe;
 	private String loginToken;
 
-	private TextView forgotPasswordTextView;
+	private TextView forgotPasswordTextView, incorrectCredentialsTextView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity
 	    password = findViewById(R.id.passwordEditView);
 		loginButton = findViewById(R.id.loginBtn);
 		RememberMe = findViewById(R.id.rememberMeCheckBox);
+		incorrectCredentialsTextView = findViewById(R.id.incorrectCredentialsTextView);
 		loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +86,11 @@ public class MainActivity extends AppCompatActivity
                 new LoginHelper(new AsyncResponder(){
                     @Override
                     public void processFinish(String output){
+                        /**
+                         * TODO check for correct credentials
+                         * if credentials are incorrect, set incorrectCredentialsTextView to
+                         * incorrectCredentialsTextView.setText(R.string.credentials_incorrect);
+                         */
                         dbHelper = new DatabaseHelper();
                         if(RememberMe.isChecked()) {
 							dbHelper.SaveUserInfoToSharedPreferences(MainActivity.this, usernameText, passwordText, true);
