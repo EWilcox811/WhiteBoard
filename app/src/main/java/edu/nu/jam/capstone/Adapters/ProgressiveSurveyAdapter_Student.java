@@ -34,7 +34,7 @@ public class ProgressiveSurveyAdapter_Student extends RecyclerView.Adapter<Progr
 	{
 		private TextView learningObjectiveNumber;
 		private TextView progressiveSurveyQuestionTextView;
-
+		private SeekBar progressiveSurveyResponseSeekBar;
 		private TextView progressiveSurveyResponsePercentageTextView;
 
 		ViewHolder(@NonNull View itemView)
