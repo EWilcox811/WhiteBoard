@@ -241,6 +241,7 @@ function drawTable(headers, tabledata) {
     chartsdiv = document.getElementById("chartsdiv");
     div1 = document.getElementById('tablediv');
 
+
     chartsdiv.style.display = "none";
     div1.style.display = "block";
 

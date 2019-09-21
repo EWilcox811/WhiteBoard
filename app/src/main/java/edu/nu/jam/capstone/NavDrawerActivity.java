@@ -325,13 +325,23 @@ public class NavDrawerActivity extends AppCompatActivity
                 }
                 break;
             case 4:
-                /*
+
                 if (resultCode == Activity.RESULT_OK)
                 {
                     DatabaseHelper dbHelper = new DatabaseHelper();
                     String userid = dbHelper.GetUserIdFromSharedPreferences(NavDrawerActivity.this);
-                    Bundle bundle = data.getBundleExtra("WeeklyELOBundle");
-                    ArrayList<HashMap<String,String>> WeeklyELOList = (ArrayList<HashMap<String, String>>)bundle.getSerializable("WeeklyELO");
+                    ArrayList<HashMap<String,String>> WeeklyELOList = new ArrayList<>();
+                    int numberOfQuestions = data.getIntExtra("NumberOfQuestions", 0);
+                    for(int i = 0; i < numberOfQuestions; i++) {
+                        String questionid = data.getStringExtra("QuestionID_" + i);
+                        String confidence = data.getStringExtra("Confidence_" + i);
+
+                        HashMap<String, String> question = new HashMap<>();
+                        question.put("id", questionid);
+                        question.put("confidence", confidence);
+                        WeeklyELOList.add(question);
+                    }
+
 
                     Double ConfidenceOne = data.getDoubleExtra(EXTRA_CONFIDENCE_1, 0);
                     Double ConfidenceTwo = data.getDoubleExtra(EXTRA_CONFIDENCE_2, 0);
@@ -348,7 +358,7 @@ public class NavDrawerActivity extends AppCompatActivity
                 }
 
 
-                 */
+
 
                 break;
         }
