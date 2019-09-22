@@ -31,8 +31,6 @@ public class PasswordResetActivity extends AppCompatActivity
         setContentView(R.layout.activity_password_reset);
 
         bindControls();
-        if (!username.isEmpty())
-            userNameEditText.setText(username);
         resetPassword();
     }
 
