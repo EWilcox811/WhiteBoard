@@ -348,6 +348,20 @@ public class DatabaseHelper {
         return loginToken;
     }
 
+    public void onPasswordResetFirstStepFinished(String result)
+    {
+        try {
+            // Convert the JSON string into a parsable JSON object.
+            JSONObject jsonObj = new JSONObject(result);
+            // Grab the 'jwtToken' value.
+            userid = jsonObj.getString("userId");
+
+        } catch (JSONException e) {
+            // This is in case Mike fucked up.
+            e.printStackTrace();
+        }
+    }
+
     public String getUserId() { return userid; }
 
     public String getUserType() {return usertype;}

@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		dbHelper = new DatabaseHelper();
 		if(!dbHelper.GetPasswordResetFlagFromSharedPreferences(this).equals("1"))
         {
             setContentView(R.layout.activity_login);
@@ -58,7 +59,6 @@ public class MainActivity extends AppCompatActivity
 	}
 
 	private void getSharedPreferencesData() {
-		dbHelper = new DatabaseHelper();
 		loginToken = dbHelper.GetLoginTokenFromSharedPreferences(this);
 		List<String> userInfo = new ArrayList<>();
 		userInfo = dbHelper.GetUserInfoFromSharedPreferences(this);

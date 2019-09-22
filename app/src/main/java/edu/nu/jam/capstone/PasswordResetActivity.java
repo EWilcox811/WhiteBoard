@@ -8,7 +8,12 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import edu.nu.jam.capstone.Requestsmodule.AsyncResponder;
+import edu.nu.jam.capstone.Requestsmodule.DatabaseHelper;
+import edu.nu.jam.capstone.Requestsmodule.PasswordResetSecondStepHelper;
+
 import static edu.nu.jam.capstone.MainActivity.EXTRA_USERNAME;
+import static edu.nu.jam.capstone.MainActivity.EXTRA_USER_TYPE;
 
 public class PasswordResetActivity extends AppCompatActivity
 {
@@ -16,6 +21,7 @@ public class PasswordResetActivity extends AppCompatActivity
     private EditText userNameEditText, tempPassEditText, newPassEditText_1, newPassEditText_2;
     private Intent intent;
     private String username;
+    private String userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,6 +47,14 @@ public class PasswordResetActivity extends AppCompatActivity
                 {
                     if (newPassEditText_1.getText().toString().equals(newPassEditText_2.getText().toString()))
                     {
+                        DatabaseHelper dbhelper = new DatabaseHelper();
+                        new PasswordResetSecondStepHelper(new AsyncResponder() {
+                            @Override
+                            public void processFinish(String output) {
+                                Intent intent = new Intent(PasswordResetActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        }, PasswordResetActivity.this, userid, tempPassEditText.getText().toString(), newPassEditText_1.getText().toString()).execute();
                         /**
                          * TODO send username, temp password and newPassEditText_1 to the backend for validation
                          * if valid send to login screen
@@ -63,5 +77,6 @@ public class PasswordResetActivity extends AppCompatActivity
         newPassEditText_2 = findViewById(R.id.confirmNewPasswordEditView);
         submitButton = findViewById(R.id.submitBtn);
         username = intent.getStringExtra(EXTRA_USERNAME);
+        userid = intent.getStringExtra("userid");
     }
 }

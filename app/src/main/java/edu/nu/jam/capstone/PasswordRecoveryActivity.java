@@ -9,7 +9,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import edu.nu.jam.capstone.Requestsmodule.AsyncResponder;
 import edu.nu.jam.capstone.Requestsmodule.DatabaseHelper;
+import edu.nu.jam.capstone.Requestsmodule.PasswordResetFirstStepHelper;
 
 import static edu.nu.jam.capstone.MainActivity.EXTRA_USERNAME;
 
@@ -52,7 +54,7 @@ public class PasswordRecoveryActivity extends AppCompatActivity
 
     private void requestTempPassword()
     {
-        if (!userNameEditText.getText().toString().isEmpty() || !emailEditText.getText().toString().isEmpty())
+        if (userNameEditText != null && !userNameEditText.getText().toString().isEmpty() || emailEditText != null && !emailEditText.getText().toString().isEmpty())
         {
             /**
              * TODO Validate userNameEditText or emailEditText with backend
@@ -62,10 +64,19 @@ public class PasswordRecoveryActivity extends AppCompatActivity
              * the following should be done if validated.
              */
             dbHelper.SavePasswordResetFlagToSharedPreferences(this, "1");
-            Intent intent = new Intent(this, PasswordResetActivity.class);
-            if (!userNameEditText.getText().toString().isEmpty())
-                intent.putExtra(EXTRA_USERNAME, userNameEditText.getText().toString());
-            startActivity(intent);
+            new PasswordResetFirstStepHelper(new AsyncResponder() {
+                @Override
+                public void processFinish(String output) {
+                    dbHelper.onPasswordResetFirstStepFinished(output);
+                    String userid = dbHelper.getUserId();
+                    Intent intent = new Intent(PasswordRecoveryActivity.this, PasswordResetActivity.class);
+                    if (!userNameEditText.getText().toString().isEmpty())
+                        intent.putExtra(EXTRA_USERNAME, userNameEditText.getText().toString());
+                    intent.putExtra("userid", userid);
+                    startActivity(intent);
+                }
+            }, PasswordRecoveryActivity.this, userNameEditText.getText().toString(), emailEditText.getText().toString()).execute();
+
 
         } else
             Toast.makeText(this, "FIELDS ARE EMPTY", Toast.LENGTH_LONG).show();
