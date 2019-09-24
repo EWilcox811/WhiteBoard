@@ -65,7 +65,10 @@ public class NavDrawerActivity extends AppCompatActivity
     private CommentData commentCard;
     private List<CommentData> subComments = new ArrayList<>();
     List<CommentData> topLevelList = new ArrayList<>();
-    NavigationView navigationView;
+
+    private NavigationView navigationView;
+
+
     private Menu professorNavView;
     private RecyclerView commentStream;
     private String sessionid;
@@ -97,7 +100,7 @@ public class NavDrawerActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_drawer);
+        navigationView = findViewById(R.id.nav_drawer);
         //next three lines set the userName on the navDrawer
         View headerView = navigationView.getHeaderView(0);
         TextView userName = headerView.findViewById(R.id.nav_userNameTextView);
@@ -325,30 +328,35 @@ public class NavDrawerActivity extends AppCompatActivity
                 }
                 break;
             case 4:
-                /*
+
                 if (resultCode == Activity.RESULT_OK)
                 {
                     DatabaseHelper dbHelper = new DatabaseHelper();
                     String userid = dbHelper.GetUserIdFromSharedPreferences(NavDrawerActivity.this);
-                    Bundle bundle = data.getBundleExtra("WeeklyELOBundle");
-                    ArrayList<HashMap<String,String>> WeeklyELOList = (ArrayList<HashMap<String, String>>)bundle.getSerializable("WeeklyELO");
+                    ArrayList<HashMap<String,String>> WeeklyELOList = new ArrayList<>();
+                    int numberOfQuestions = data.getIntExtra("NumberOfQuestions", 0);
+                    for(int i = 0; i < numberOfQuestions; i++) {
+                        String questionid = data.getStringExtra("QuestionID_" + i);
+                        String confidence = data.getStringExtra("Confidence_" + i);
 
-                    Double ConfidenceOne = data.getDoubleExtra(EXTRA_CONFIDENCE_1, 0);
-                    Double ConfidenceTwo = data.getDoubleExtra(EXTRA_CONFIDENCE_2, 0);
-                    Double ConfidenceThree = data.getDoubleExtra(EXTRA_CONFIDENCE_3, 0);
-                    Double ConfidenceFour = data.getDoubleExtra(EXTRA_CONFIDENCE_4, 0);
+                        HashMap<String, String> question = new HashMap<>();
+                        question.put("id", questionid);
+                        question.put("confidence", confidence);
+                        WeeklyELOList.add(question);
+                    }
+                    String sessionid = dbHelper.GetSessionIdFromSharedPreferences(NavDrawerActivity.this);
 
                     new ProgressiveSurveyAnswerHelper(new AsyncResponder() {
                         @Override
                         public void processFinish(String output) {
 
                         }
-                    }, NavDrawerActivity.this, userid, ConfidenceOne, ConfidenceTwo, ConfidenceThree, ConfidenceFour).execute();
+                    }, NavDrawerActivity.this, sessionid, WeeklyELOList).execute();
 
                 }
 
 
-                 */
+
 
                 break;
         }

@@ -13,4 +13,5 @@ public interface IInitialSurveyAdapterOperations
 {
 	List<InitialSurveyData> onGetInitialSurveyQuestions();
 	void onItemSelected(int position, View view);
+	void setStudentResponsePercentage(int position, double response);
 }

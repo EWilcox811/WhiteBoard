@@ -93,13 +93,12 @@ public class ProgressiveSurveyActivity extends AppCompatActivity implements IPro
                 ArrayList<HashMap<String,String>> ELOAnswers = new ArrayList<>();
                 for(int i = 0; i < progressiveSurveyDataList.size();i++) {
                     String questionid = progressiveSurveyDataList.get(i).getQuestionid();
+                    String confidence = String.valueOf(progressiveSurveyDataList.get(i).getStudentConfidencePercentage());
+                    intentReturn.putExtra("QuestionID_" + i, questionid);
+                    intentReturn.putExtra("Confidence_"+i,confidence);
 
                 }
-
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("WeeklyELO", (Serializable) progressiveSurveyDataList);
-                intentReturn.putExtra("WeeklyELOBundle", bundle);
-                System.out.println("Result: " + progressiveSurveyDataList.get(0).getStudentConfidencePercentage());
+                intentReturn.putExtra("NumberOfQuestions", progressiveSurveyDataList.size());
 
                 /*
                 intentReturn.putExtra(EXTRA_PROGRESSIVE_CON_1, progressiveSurveyDataList.get(0).getStudentConfidencePercentage());
@@ -143,6 +142,18 @@ public class ProgressiveSurveyActivity extends AppCompatActivity implements IPro
     public void onItemSelected(int position, View view)
     {
         // previously card coloring...undefined in this class.
+    }
+
+    @Override
+    public void setStudentConfidence(int position, double confidence)
+    {
+        progressiveSurveyDataList.get(position).setStudentConfidencePercentage(confidence);
+    }
+
+    @Override
+    public void setClassConfidence(int position)
+    {
+
     }
 
     private void resetEloValueInAdapter()

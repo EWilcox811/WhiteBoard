@@ -34,7 +34,7 @@ public class ProgressiveSurveyAdapter_Student extends RecyclerView.Adapter<Progr
 	{
 		private TextView learningObjectiveNumber;
 		private TextView progressiveSurveyQuestionTextView;
-
+		private SeekBar progressiveSurveyResponseSeekBar;
 		private TextView progressiveSurveyResponsePercentageTextView;
 
 		ViewHolder(@NonNull View itemView)
@@ -51,7 +51,6 @@ public class ProgressiveSurveyAdapter_Student extends RecyclerView.Adapter<Progr
 			progressiveSurveyQuestionTextView = itemView.findViewById(R.id.progressiveSurveyQuestionTextView);
 			progressiveSurveyResponseSeekBar = itemView.findViewById(R.id.progressiveSurveyResponseSeekBar);
 			progressiveSurveyResponsePercentageTextView = itemView.findViewById(R.id.progressiveSurveyResponsePercentageTextView);
-
 		}
 
 		private void registerHandlers()
@@ -69,26 +68,26 @@ public class ProgressiveSurveyAdapter_Student extends RecyclerView.Adapter<Progr
 				}
 			});
 
-			progressiveSurveyResponseSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
-			{
-				@Override
-				public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
-				{
-					progressiveSurveyResponsePercentageTextView.setText(Integer.toString(progress) + ".0 %");
-				}
-
-				@Override
-				public void onStartTrackingTouch(SeekBar seekBar)
-				{
-					// Stub...
-				}
-
-				@Override
-				public void onStopTrackingTouch(SeekBar seekBar)
-				{
-					// Stub...
-				}
-			});
+//			progressiveSurveyResponseSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
+//			{
+//				@Override
+//				public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
+//				{
+//
+//				}
+//
+//				@Override
+//				public void onStartTrackingTouch(SeekBar seekBar)
+//				{
+//					// Stub...
+//				}
+//
+//				@Override
+//				public void onStopTrackingTouch(SeekBar seekBar)
+//				{
+//					// Stub...
+//				}
+//			});
 		}
 
 		private void displayProgressiveSurveyData(ProgressiveSurveyData progressiveSurveyData)
@@ -109,12 +108,33 @@ public class ProgressiveSurveyAdapter_Student extends RecyclerView.Adapter<Progr
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull ProgressiveSurveyAdapter_Student.ViewHolder holder, int position)
+	public void onBindViewHolder(final @NonNull ProgressiveSurveyAdapter_Student.ViewHolder holder, final int position)
 	{
 		List<ProgressiveSurveyData> progressiveSurveyDataList = progressiveSurveyOperationsContext.onGetLearningObjectives();
 		ProgressiveSurveyData progressiveSurveyData = progressiveSurveyDataList.get(position);
 		holder.displayProgressiveSurveyData(progressiveSurveyData);
 		holder.itemView.setTag(position);
+		holder.progressiveSurveyResponseSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
+		{
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean b)
+			{
+				holder.progressiveSurveyResponsePercentageTextView.setText(Integer.toString(progress) + ".0 %");
+				progressiveSurveyOperationsContext.setStudentConfidence(position, (double) progress);
+			}
+
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar)
+			{
+
+			}
+
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar)
+			{
+
+			}
+		});
 	}
 
 	@Override

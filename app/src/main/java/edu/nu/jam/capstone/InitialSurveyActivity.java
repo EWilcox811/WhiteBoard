@@ -137,6 +137,12 @@ public class InitialSurveyActivity extends AppCompatActivity implements IInitial
 		// previously card coloring...undefined in this class.
 	}
 
+	@Override
+	public void setStudentResponsePercentage(int position, double response)
+	{
+		initialSurveyDataList.get(position).setResponsePercentage(response);
+	}
+
 	/**
 	 * Used for the toolbar
 	 * @param item

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,8 @@ public class MainActivity extends AppCompatActivity
 {
 
 	public static final String EXTRA_USER_TYPE = "userType";
+	public static final String EXTRA_USERNAME = "userName";
+
 	private DatabaseHelper dbHelper;
     private EditText username;
     private EditText password;
@@ -27,14 +30,23 @@ public class MainActivity extends AppCompatActivity
 	private CheckBox RememberMe;
 	private String loginToken;
 
+	private TextView forgotPasswordTextView, incorrectCredentialsTextView;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login);
-		//clearSharedPreferences();
-
-		getSharedPreferencesData();
+		dbHelper = new DatabaseHelper();
+		if(!dbHelper.GetPasswordResetFlagFromSharedPreferences(this).equals("1"))
+        {
+            setContentView(R.layout.activity_login);
+            getSharedPreferencesData();
+        }
+		else
+        {
+            Intent intent = new Intent(this, PasswordResetActivity.class);
+            startActivity(intent);
+        }
 
 	}
 
@@ -47,7 +59,6 @@ public class MainActivity extends AppCompatActivity
 	}
 
 	private void getSharedPreferencesData() {
-		dbHelper = new DatabaseHelper();
 		loginToken = dbHelper.GetLoginTokenFromSharedPreferences(this);
 		List<String> userInfo = new ArrayList<>();
 		userInfo = dbHelper.GetUserInfoFromSharedPreferences(this);
@@ -66,6 +77,7 @@ public class MainActivity extends AppCompatActivity
 	    password = findViewById(R.id.passwordEditView);
 		loginButton = findViewById(R.id.loginBtn);
 		RememberMe = findViewById(R.id.rememberMeCheckBox);
+		incorrectCredentialsTextView = findViewById(R.id.incorrectCredentialsTextView);
 		loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +86,11 @@ public class MainActivity extends AppCompatActivity
                 new LoginHelper(new AsyncResponder(){
                     @Override
                     public void processFinish(String output){
+                        /**
+                         * TODO check for correct credentials
+                         * if credentials are incorrect, set incorrectCredentialsTextView to
+                         * incorrectCredentialsTextView.setText(R.string.credentials_incorrect);
+                         */
                         dbHelper = new DatabaseHelper();
                         if(RememberMe.isChecked()) {
 							dbHelper.SaveUserInfoToSharedPreferences(MainActivity.this, usernameText, passwordText, true);
@@ -92,6 +109,18 @@ public class MainActivity extends AppCompatActivity
                 }, MainActivity.this, usernameText, passwordText).execute();
             }
         });
+		forgotPasswordTextView = findViewById(R.id.forgotPasswordTextView);
+		forgotPasswordTextView.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				Intent intent = new Intent(MainActivity.this, PasswordRecoveryActivity.class);
+				if(null != username.getText().toString())
+					intent.putExtra(EXTRA_USERNAME, username.getText().toString());
+				startActivity(intent);
+			}
+		});
 	}
 
 	private void startNewActivity()
