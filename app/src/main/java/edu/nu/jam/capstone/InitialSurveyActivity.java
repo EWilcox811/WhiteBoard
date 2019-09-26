@@ -42,7 +42,6 @@ public class InitialSurveyActivity extends AppCompatActivity implements IInitial
 	private enum UserType {PROFESSOR, STUDENT};
 	UserType userType;
 
-	// TODO:  identify whether professor or student type and assign to Enum value.
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
