@@ -45,11 +45,12 @@ public class PasswordResetActivity extends AppCompatActivity
                 {
                     if (newPassEditText_1.getText().toString().equals(newPassEditText_2.getText().toString()))
                     {
-                        DatabaseHelper dbhelper = new DatabaseHelper();
+                        final DatabaseHelper dbhelper = new DatabaseHelper();
                         new PasswordResetSecondStepHelper(new AsyncResponder() {
                             @Override
                             public void processFinish(String output) {
                                 Intent intent = new Intent(PasswordResetActivity.this, MainActivity.class);
+                                dbhelper.SavePasswordResetFlagToSharedPreferences(PasswordResetActivity.this, "0");
                                 startActivity(intent);
                             }
                         }, PasswordResetActivity.this, userid, tempPassEditText.getText().toString(), newPassEditText_1.getText().toString()).execute();
