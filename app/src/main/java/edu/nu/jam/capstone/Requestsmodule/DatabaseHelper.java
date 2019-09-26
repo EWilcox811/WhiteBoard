@@ -366,6 +366,8 @@ public class DatabaseHelper {
 
     public String getUserType() {return usertype;}
 
+    public String getUserName() {return username;}
+
     public void SaveLoginTokenToSharedPreferences(Context context) {
         System.out.println("Saving Login Token to Shared Preferences");
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
@@ -427,14 +429,14 @@ public class DatabaseHelper {
     }
 
     public void SaveUserTypeToSharedPreferences(Context context, String usertype) {
-        System.out.println("Saving User Type to Shared Preferences: " + userid);
+        System.out.println("Saving User Type to Shared Preferences: " + usertype);
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("com.whiteboard.usertype", usertype);
         editor.commit();
     }
 
-        public String GetUserTypeFromSharedPreferences(Context context) {
+    public String GetUserTypeFromSharedPreferences(Context context) {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         usertype = sharedPref.getString("com.whiteboard.usertype", "");
         System.out.println("Loading User Type From Shared Preferences: " + usertype);
@@ -456,8 +458,8 @@ public class DatabaseHelper {
         return sessionid;
     }
 
-    public void SaveUsernameToSharedPreferences(Context context, String sessionid) {
-        System.out.println("Saving User Name to Shared Preferences: " + sessionid);
+    public void SaveUsernameToSharedPreferences(Context context, String username) {
+        System.out.println("Saving User Name to Shared Preferences: " + username);
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("com.whiteboard.username", username);

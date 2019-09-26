@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity
 						dbHelper.SaveUserIdToSharedPreferences(MainActivity.this, userid);
 						String userType = dbHelper.getUserType();
 						dbHelper.SaveUserTypeToSharedPreferences(MainActivity.this, userType);
-						dbHelper.SaveUsernameToSharedPreferences(MainActivity.this, username.getText().toString());
+						dbHelper.SaveUsernameToSharedPreferences(MainActivity.this, usernameText);
 						startNewActivity();
 					}
 

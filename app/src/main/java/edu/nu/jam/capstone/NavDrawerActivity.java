@@ -103,14 +103,16 @@ public class NavDrawerActivity extends AppCompatActivity
         navigationView = findViewById(R.id.nav_drawer);
         //next three lines set the userName on the navDrawer
         View headerView = navigationView.getHeaderView(0);
-        TextView userName = headerView.findViewById(R.id.nav_userNameTextView);
-        userName.setText(dbHelper.GetUsernameFromSharedPreferences(this));
+        //TextView userName = headerView.findViewById(R.id.nav_userNameTextView);
+        //userName.setText(dbHelper.GetUsernameFromSharedPreferences(this));
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         bindControls();
+        setUsernameInNavDrawer(headerView);
         setNavDrawer();
 
         commentStream.setHasFixedSize(false);
@@ -118,6 +120,13 @@ public class NavDrawerActivity extends AppCompatActivity
         commentStream.setAdapter(adapter);
         commentStream.getAdapter().notifyDataSetChanged();
 
+    }
+    private void setUsernameInNavDrawer(View navDrawer)
+    {
+        TextView userName = navDrawer.findViewById(R.id.nav_userNameTextView);
+        userName.setText(dbHelper.GetUsernameFromSharedPreferences(this));
+        System.out.println("Username loaded from shared pref: " + dbHelper.GetUsernameFromSharedPreferences(this));
+        System.out.println("Username loaded from dbhelper: " + dbHelper.getUserName());
     }
 
     private void setNavDrawer()
