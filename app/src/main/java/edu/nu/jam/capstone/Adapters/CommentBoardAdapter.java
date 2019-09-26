@@ -9,15 +9,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.List;
 
 import edu.nu.jam.capstone.Data.CommentData;
 import edu.nu.jam.capstone.Interfaces.ICommentBoardOperations;
 import edu.nu.jam.capstone.R;
-
-// TODO: Update all fields
 
 public class CommentBoardAdapter extends RecyclerView.Adapter<CommentBoardAdapter.ViewHolder>
 {

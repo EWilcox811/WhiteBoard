@@ -56,11 +56,7 @@ public class ProgressiveSurveyAdapter_Professor extends RecyclerView.Adapter<Pro
 				@Override
 				public void onClick(View view)
 				{
-//					int index = (int) view.getTag();
-//					View fetchedViewOrigin = (View) phoneNumberTextView.getParent();
-//					View fetchedViewIntermediate = (View) fetchedViewOrigin.getParent();
-//					View fetchedViewTarget = (View) fetchedViewIntermediate.getParent();
-//					rolodexOperationsContext.onItemSelected(index, fetchedViewTarget);
+
 				}
 			});
 		}

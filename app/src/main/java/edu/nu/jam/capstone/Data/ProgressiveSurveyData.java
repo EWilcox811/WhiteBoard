@@ -9,9 +9,6 @@ public class ProgressiveSurveyData
 	private double studentConfidencePercentage;
 	private String questionid;
 
-	//TODO: change learning outcome to learning objective in the wireframe.
-	//TODO: add submit btn for the student view (to confirm changes to the backend).
-
 	public ProgressiveSurveyData()
 	{
 		learningObjective = null;

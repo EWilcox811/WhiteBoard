@@ -13,9 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import edu.nu.jam.capstone.Data.ProgressiveSurveyData;
 import edu.nu.jam.capstone.Data.SessionData;
-import edu.nu.jam.capstone.Interfaces.IProgressiveSurveyAdapterOperations;
 import edu.nu.jam.capstone.Interfaces.ISessionSelectionOperations;
 import edu.nu.jam.capstone.R;
 
@@ -61,11 +59,7 @@ public class SessionSelectionAdapter extends RecyclerView.Adapter<SessionSelecti
 				@Override
 				public void onClick(View view)
 				{
-//					int index = (int) view.getTag();
-//					View fetchedViewOrigin = (View) phoneNumberTextView.getParent();
-//					View fetchedViewIntermediate = (View) fetchedViewOrigin.getParent();
-//					View fetchedViewTarget = (View) fetchedViewIntermediate.getParent();
-//					rolodexOperationsContext.onItemSelected(index, fetchedViewTarget);
+
 				}
 			});
 		}

@@ -18,8 +18,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import static edu.nu.jam.capstone.NavDrawerActivity.EXTRA_PARENT_COMMENT;
 
-//TODO create functionality for the replies activity
-
 public class ReplyToCommentActivity extends AppCompatActivity
 {
     public static final String EXTRA_COMMENT_REPLY = "comment";
@@ -64,7 +62,6 @@ public class ReplyToCommentActivity extends AppCompatActivity
                 intentReturn.putExtra(EXTRA_PARENT_COMMENT_ID, parentCommentId);
                 intentReturn.putExtra(EXTRA_PARENT_COMMENT, message);
 
-//                intentReturn.putExtra();
                 setResult(Activity.RESULT_OK, intentReturn);
                 finish();
             }

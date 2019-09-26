@@ -91,9 +91,6 @@ public class ReplyToCommentHelper extends AsyncTask<Void, Void, String> {
             // Connect to the backend.
             connection.connect();
 
-
-
-
             DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
             wr.writeBytes(jsonObject.toString());
             wr.flush();

@@ -58,7 +58,6 @@ public class PasswordRecoveryActivity extends AppCompatActivity
         if (userNameEditText != null && !userNameEditText.getText().toString().isEmpty())
         {
             /**
-             * TODO Validate userNameEditText or emailEditText with backend
              * if either is valid, backend will send an email to user with a temporary password
              * and application should take the user to the PasswordResetActivity
              *

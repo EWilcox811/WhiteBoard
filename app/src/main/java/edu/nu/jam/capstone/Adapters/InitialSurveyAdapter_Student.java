@@ -1,5 +1,6 @@
 package edu.nu.jam.capstone.Adapters;
 
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,11 +57,7 @@ public class InitialSurveyAdapter_Student extends RecyclerView.Adapter<InitialSu
 				@Override
 				public void onClick(View view)
 				{
-//					int index = (int) view.getTag();
-//					View fetchedViewOrigin = (View) phoneNumberTextView.getParent();
-//					View fetchedViewIntermediate = (View) fetchedViewOrigin.getParent();
-//					View fetchedViewTarget = (View) fetchedViewIntermediate.getParent();
-//					rolodexOperationsContext.onItemSelected(index, fetchedViewTarget);
+
 				}
 			});
 

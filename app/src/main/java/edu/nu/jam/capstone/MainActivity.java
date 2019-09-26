@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity
 	}
 
 	private void clearSharedPreferences() {
-		// FOR TESTING/DEBUGGING PURPOSES ONLY
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
 		SharedPreferences.Editor editor = sharedPref.edit();
 		editor.clear();
@@ -91,7 +90,6 @@ public class MainActivity extends AppCompatActivity
 							return;
 						}
 						/**
-						 * TODO check for correct credentials
 						 * if credentials are incorrect, set incorrectCredentialsTextView to
 						 * incorrectCredentialsTextView.setText(R.string.credentials_incorrect);
 						 */

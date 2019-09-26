@@ -1,7 +1,5 @@
 package edu.nu.jam.capstone.Interfaces;
 
-import androidx.cardview.widget.CardView;
-
 import java.util.List;
 
 import edu.nu.jam.capstone.Data.CommentData;

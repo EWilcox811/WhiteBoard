@@ -55,8 +55,6 @@ public class NavDrawerActivity extends AppCompatActivity
     public static final String EXTRA_PARENT_COMMENT = "parentComment";
     public static final String EXTRA_WEEK_NUMBER = "weekNumber";
 
-
-    //TODO make sure that there is only the necessary objects
     private FloatingActionButton newCommentFAB;
     private FloatingActionButton newCommentReplyFAB;
     private TextView repliesCount, upVotesCount, commentTextView;
@@ -66,7 +64,6 @@ public class NavDrawerActivity extends AppCompatActivity
     List<CommentData> topLevelList = new ArrayList<>();
 
     private NavigationView navigationView;
-
 
     private Menu professorNavView;
     private RecyclerView commentStream;
@@ -118,6 +115,7 @@ public class NavDrawerActivity extends AppCompatActivity
         commentStream.setLayoutManager(new LinearLayoutManager(this));
         commentStream.setAdapter(adapter);
         commentStream.getAdapter().notifyDataSetChanged();
+        // TODO:
         refresh = findViewById(R.id.swipeRefreshComments);
         refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
         {
@@ -197,7 +195,6 @@ public class NavDrawerActivity extends AppCompatActivity
         switch (id)
         {
             case (R.id.action_settings):
-                //TODO takes them to their profile setting
                 break;
             case (R.id.action_logout):
                 SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
@@ -221,18 +218,15 @@ public class NavDrawerActivity extends AppCompatActivity
         switch (id)
         {
             case (R.id.nav_howILearn):
-                //TODO send to initial survey activity
                 Intent initialSurveyIntent = new Intent(this, InitialSurveyActivity.class);
                 startActivityForResult(initialSurveyIntent, 3);
                 break;
             case (R.id.nav_progressiveSurvey):
-                //TODO send to progressive survey activity
                 Intent progressiveSurveyIntent = new Intent(this, ProgressiveSurveyActivity.class);
                 progressiveSurveyIntent.putExtra(EXTRA_WEEK_NUMBER, 2);
                 startActivityForResult(progressiveSurveyIntent,4);
                 break;
             case (R.id.nav_logout):
-                //TODO logout and send back to login screen
                 SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
                 editor.clear();
                 editor.commit();
@@ -244,18 +238,15 @@ public class NavDrawerActivity extends AppCompatActivity
                 startActivityForResult(newCommentIntent, 1);
                 break;
             case (R.id.nav_surveyResults):
-                //TODO send to survey selection activity
                 Intent surveySelectionIntent = new Intent(this, SurveySelectionActivity.class);
                 startActivity(surveySelectionIntent);
                 break;
             case (R.id.nav_sessionSelection):
-                //TODO send to session selection activity
                 Intent sessionSelectionIntent = new Intent(this, SessionSelectionActivity.class);
                 startActivity(sessionSelectionIntent);
                 break;
             case (R.id.nav_majorityConcern):
                 //Bonus Item
-                //TODO send to majority concern activity
                 Intent majorityConcernIntent = new Intent(this, MajorityConcernActivity.class);
                 startActivity(majorityConcernIntent);
                 break;

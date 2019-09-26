@@ -60,34 +60,9 @@ public class ProgressiveSurveyAdapter_Student extends RecyclerView.Adapter<Progr
 				@Override
 				public void onClick(View view)
 				{
-//					int index = (int) view.getTag();
-//					View fetchedViewOrigin = (View) phoneNumberTextView.getParent();
-//					View fetchedViewIntermediate = (View) fetchedViewOrigin.getParent();
-//					View fetchedViewTarget = (View) fetchedViewIntermediate.getParent();
-//					rolodexOperationsContext.onItemSelected(index, fetchedViewTarget);
+
 				}
 			});
-
-//			progressiveSurveyResponseSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
-//			{
-//				@Override
-//				public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
-//				{
-//
-//				}
-//
-//				@Override
-//				public void onStartTrackingTouch(SeekBar seekBar)
-//				{
-//					// Stub...
-//				}
-//
-//				@Override
-//				public void onStopTrackingTouch(SeekBar seekBar)
-//				{
-//					// Stub...
-//				}
-//			});
 		}
 
 		private void displayProgressiveSurveyData(ProgressiveSurveyData progressiveSurveyData)

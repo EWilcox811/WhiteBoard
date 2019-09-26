@@ -17,8 +17,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-//TEST
-
 public class InitialSurveyResultsUpdateHelper extends AsyncTask<Void, Void, String> {
     String response = "";
     Context context;
@@ -86,9 +84,6 @@ public class InitialSurveyResultsUpdateHelper extends AsyncTask<Void, Void, Stri
 
             // Connect to the backend.
             connection.connect();
-
-
-
 
             DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
             wr.writeBytes(jsonObject.toString());
@@ -230,8 +225,6 @@ public class InitialSurveyResultsUpdateHelper extends AsyncTask<Void, Void, Stri
 
             // Connect to the backend.
             connection.connect();
-
-
 
 
             DataOutputStream wr = new DataOutputStream(connection.getOutputStream());

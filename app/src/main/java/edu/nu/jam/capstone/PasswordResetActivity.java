@@ -13,7 +13,6 @@ import edu.nu.jam.capstone.Requestsmodule.DatabaseHelper;
 import edu.nu.jam.capstone.Requestsmodule.PasswordResetSecondStepHelper;
 
 import static edu.nu.jam.capstone.MainActivity.EXTRA_USERNAME;
-import static edu.nu.jam.capstone.MainActivity.EXTRA_USER_TYPE;
 
 public class PasswordResetActivity extends AppCompatActivity
 {
@@ -55,7 +54,6 @@ public class PasswordResetActivity extends AppCompatActivity
                             }
                         }, PasswordResetActivity.this, userid, tempPassEditText.getText().toString(), newPassEditText_1.getText().toString()).execute();
                         /**
-                         * TODO send username, temp password and newPassEditText_1 to the backend for validation
                          * if valid send to login screen
                          * if invalid display Toast what was wrong and allow for another attempt.
                          * ERROR POSSIBILITIES FROM BACKEND.

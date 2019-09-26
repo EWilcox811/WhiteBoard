@@ -3,7 +3,6 @@ package edu.nu.jam.capstone;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -16,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -30,7 +28,6 @@ import edu.nu.jam.capstone.Requestsmodule.AsyncResponder;
 import edu.nu.jam.capstone.Requestsmodule.DatabaseHelper;
 import edu.nu.jam.capstone.Requestsmodule.WeeklyELOResultsHelper;
 
-import static edu.nu.jam.capstone.MainActivity.EXTRA_USER_TYPE;
 
 public class ProgressiveSurveyActivity extends AppCompatActivity implements IProgressiveSurveyAdapterOperations
 {
@@ -51,8 +48,6 @@ public class ProgressiveSurveyActivity extends AppCompatActivity implements IPro
     private enum UserType {PROFESSOR, STUDENT};
     UserType userType;
 
-    // TODO:  identify whether professor or student type and assign to Enum value.
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -60,8 +55,6 @@ public class ProgressiveSurveyActivity extends AppCompatActivity implements IPro
         setContentView(R.layout.activity_progressive_survey);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
 
         bindControls();
         // check to see if the Intent's passed extra is professor or student:
@@ -100,12 +93,6 @@ public class ProgressiveSurveyActivity extends AppCompatActivity implements IPro
                 }
                 intentReturn.putExtra("NumberOfQuestions", progressiveSurveyDataList.size());
 
-                /*
-                intentReturn.putExtra(EXTRA_PROGRESSIVE_CON_1, progressiveSurveyDataList.get(0).getStudentConfidencePercentage());
-                intentReturn.putExtra(EXTRA_PROGRESSIVE_CON_2, progressiveSurveyDataList.get(1).getStudentConfidencePercentage());
-                intentReturn.putExtra(EXTRA_PROGRESSIVE_CON_3, progressiveSurveyDataList.get(2).getStudentConfidencePercentage());
-                intentReturn.putExtra(EXTRA_PROGRESSIVE_CON_4, progressiveSurveyDataList.get(3).getStudentConfidencePercentage());
-                 */
                 setResult(Activity.RESULT_OK, intentReturn);
                 finish();
             }
@@ -142,7 +129,7 @@ public class ProgressiveSurveyActivity extends AppCompatActivity implements IPro
     @Override
     public void onItemSelected(int position, View view)
     {
-        // previously card coloring...undefined in this class.
+
     }
 
     @Override

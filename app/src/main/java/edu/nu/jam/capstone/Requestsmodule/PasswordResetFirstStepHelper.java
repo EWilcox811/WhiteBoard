@@ -87,8 +87,6 @@ public class PasswordResetFirstStepHelper extends AsyncTask<Void, Void, String> 
             wr.flush();
             wr.close();
 
-
-
             // Get the stream of data from the connection.
             InputStream stream = connection.getInputStream();
 

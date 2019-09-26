@@ -56,25 +56,6 @@ public class InitialSurveyActivity extends AppCompatActivity implements IInitial
 		Toolbar toolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
-		// TODO:  delete this dummy data after we're connected to the backend:
-		/*
-		initialSurveyDataList.add( new InitialSurveyData(
-				"\"When I learn I read books, articles, and handouts\":",
-				responseDescriptionTag,
-				0));
-		initialSurveyDataList.add( new InitialSurveyData(
-				"\"When I learn I use examples and applications\":",
-				responseDescriptionTag,
-				0));
-		initialSurveyDataList.add( new InitialSurveyData(
-				"\"When I learn I see patterns in things\":",
-				responseDescriptionTag,
-				0));
-		initialSurveyDataList.add( new InitialSurveyData(
-				"\"When I learn I like to talk things through\":",
-				responseDescriptionTag,
-				0));
-	*/
 		bindControls();
 		// check to see if the Intent's passed extra is professor or student:
 		if (dbHelper.GetUserTypeFromSharedPreferences(this).toLowerCase().startsWith("p"))
@@ -140,7 +121,7 @@ public class InitialSurveyActivity extends AppCompatActivity implements IInitial
 	@Override
 	public void onItemSelected(int position, View view)
 	{
-		// previously card coloring...undefined in this class.
+
 	}
 
 	@Override
@@ -184,6 +165,5 @@ public class InitialSurveyActivity extends AppCompatActivity implements IInitial
 				recyclerView.getAdapter().notifyDataSetChanged();
 			}
 		}, InitialSurveyActivity.this).execute();
-		//onGetInitialSurveyesultsFinished
 	}
 }

@@ -23,6 +23,7 @@ public class SessionSelectionActivity extends AppCompatActivity
 	 * @param item
 	 * @return
 	 */
+
 	@Override
 	public boolean onOptionsItemSelected(@NonNull MenuItem item)
 	{

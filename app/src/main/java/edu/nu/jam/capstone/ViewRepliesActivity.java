@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,9 +25,7 @@ import java.util.List;
 import edu.nu.jam.capstone.Adapters.CommentBoardAdapter;
 import edu.nu.jam.capstone.Data.CommentData;
 import edu.nu.jam.capstone.Interfaces.ICommentBoardOperations;
-import edu.nu.jam.capstone.Requestsmodule.AddCommentHelper;
 import edu.nu.jam.capstone.Requestsmodule.AsyncResponder;
-import edu.nu.jam.capstone.Requestsmodule.CommentListHelper;
 import edu.nu.jam.capstone.Requestsmodule.CommentRepliesListHelper;
 import edu.nu.jam.capstone.Requestsmodule.DatabaseHelper;
 import edu.nu.jam.capstone.Requestsmodule.ReplyToCommentHelper;
@@ -60,8 +57,6 @@ implements ICommentBoardOperations
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reply_board);
 
-
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -83,6 +78,7 @@ implements ICommentBoardOperations
         replyStream.setLayoutManager(new LinearLayoutManager(this));
         replyStream.setAdapter(new CommentBoardAdapter(this));
         replyStream.getAdapter().notifyDataSetChanged();
+        // TODO:
         swipeRefreshLayout = findViewById(R.id.repliesSwipeRefreshComments);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
         {

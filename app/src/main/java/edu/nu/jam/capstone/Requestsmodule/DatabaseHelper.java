@@ -1,35 +1,16 @@
 package edu.nu.jam.capstone.Requestsmodule;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.zip.InflaterOutputStream;
-
-import javax.net.ssl.HttpsURLConnection;
 
 public class DatabaseHelper {
 
@@ -86,7 +67,6 @@ public class DatabaseHelper {
 
 
         } catch (JSONException e) {
-            // This is in case Mike fucked up.
             e.printStackTrace();
         }
 
@@ -169,7 +149,6 @@ public class DatabaseHelper {
 
 
         } catch (JSONException e) {
-            // This is in case Mike fucked up.
             e.printStackTrace();
         }
     }
@@ -221,7 +200,6 @@ public class DatabaseHelper {
 
 
         } catch (JSONException e) {
-            // This is in case Mike fucked up.
             e.printStackTrace();
         }
     }
@@ -275,7 +253,6 @@ public class DatabaseHelper {
             }
 
         } catch (JSONException e) {
-            // This is in case Mike fucked up.
             e.printStackTrace();
         }
     }
@@ -321,7 +298,6 @@ public class DatabaseHelper {
             }
 
         } catch (JSONException e) {
-            // This is in case Mike fucked up.
             e.printStackTrace();
         }
     }
@@ -343,7 +319,6 @@ public class DatabaseHelper {
             usertype = jsonObj.getString("userType");
 
         } catch (JSONException e) {
-            // This is in case Mike fucked up.
             e.printStackTrace();
         }
     }
@@ -362,7 +337,6 @@ public class DatabaseHelper {
             userid = jsonObj.getString("userId");
 
         } catch (JSONException e) {
-            // This is in case Mike fucked up.
             e.printStackTrace();
         }
     }
