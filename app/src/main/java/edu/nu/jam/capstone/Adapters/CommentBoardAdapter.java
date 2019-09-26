@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.List;
 
@@ -129,7 +130,6 @@ public class CommentBoardAdapter extends RecyclerView.Adapter<CommentBoardAdapte
                 commentOperationsContext.onTextViewClicked(position);
             }
         });
-
     }
 
     @Override

@@ -18,6 +18,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -60,6 +61,7 @@ public class NavDrawerActivity extends AppCompatActivity
     private FloatingActionButton newCommentReplyFAB;
     private TextView repliesCount, upVotesCount, commentTextView;
     private CommentData commentCard;
+    private SwipeRefreshLayout refresh;
     private List<CommentData> subComments = new ArrayList<>();
     List<CommentData> topLevelList = new ArrayList<>();
 
@@ -116,6 +118,15 @@ public class NavDrawerActivity extends AppCompatActivity
         commentStream.setLayoutManager(new LinearLayoutManager(this));
         commentStream.setAdapter(adapter);
         commentStream.getAdapter().notifyDataSetChanged();
+        refresh = findViewById(R.id.swipeRefreshComments);
+        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
+        {
+            @Override
+            public void onRefresh()
+            {
+                getCommentList();
+            }
+        });
 
     }
     private void setUsernameInNavDrawer(View navDrawer)
@@ -405,6 +416,7 @@ public class NavDrawerActivity extends AppCompatActivity
         commentStream.getAdapter().notifyDataSetChanged();//should update the upvote count
     }
 
+
     public void getSessionId()
     {
         final DatabaseHelper dbHelper = new DatabaseHelper();
@@ -456,9 +468,9 @@ public class NavDrawerActivity extends AppCompatActivity
                 }
 
                 commentStream.getAdapter().notifyDataSetChanged();
+                refresh.setRefreshing(false);
             }
         }, NavDrawerActivity.this, sessionid).execute();
-
 
 
     }

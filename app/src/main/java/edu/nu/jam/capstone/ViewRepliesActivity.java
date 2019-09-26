@@ -15,6 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -50,6 +51,7 @@ implements ICommentBoardOperations
     private ArrayList<HashMap<String, String>> commentReplyListFromBackend;
     private DatabaseHelper dbHelper = new DatabaseHelper();
     private String parentCommentId = "";
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Override
@@ -81,6 +83,15 @@ implements ICommentBoardOperations
         replyStream.setLayoutManager(new LinearLayoutManager(this));
         replyStream.setAdapter(new CommentBoardAdapter(this));
         replyStream.getAdapter().notifyDataSetChanged();
+        swipeRefreshLayout = findViewById(R.id.repliesSwipeRefreshComments);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
+        {
+            @Override
+            public void onRefresh()
+            {
+                getCommentList();
+            }
+        });
 
     }
 
@@ -240,6 +251,7 @@ implements ICommentBoardOperations
                 }
 
                 replyStream.getAdapter().notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
             }
         }, ViewRepliesActivity.this, parentCommentId).execute();
 
