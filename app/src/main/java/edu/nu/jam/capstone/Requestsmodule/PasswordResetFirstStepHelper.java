@@ -87,7 +87,6 @@ public class PasswordResetFirstStepHelper extends AsyncTask<Void, Void, String> 
             wr.flush();
             wr.close();
 
-            System.out.println(jsonParam.toString());
 
 
             // Get the stream of data from the connection.

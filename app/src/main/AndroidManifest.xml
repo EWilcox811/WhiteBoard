@@ -40,6 +40,7 @@
         <activity
             android:name=".PasswordRecoveryActivity"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden"
             android:label="Password Recovery"
             android:parentActivityName=".MainActivity">
             <meta-data
@@ -49,6 +50,7 @@
         <activity
             android:name=".PasswordResetActivity"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden"
             android:label="Password Reset"
             android:parentActivityName=".MainActivity">
             <meta-data

@@ -8,9 +8,7 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -47,7 +45,6 @@ import static edu.nu.jam.capstone.InitialSurveyActivity.EXTRA_CONFIDENCE_4;
 import static edu.nu.jam.capstone.MainActivity.EXTRA_USER_TYPE;
 import static edu.nu.jam.capstone.NewCommentActivity.EXTRA_IS_ANONYMOUS;
 import static edu.nu.jam.capstone.NewCommentActivity.EXTRA_NEW_COMMENT;
-import static edu.nu.jam.capstone.ReplyToCommentActivity.EXTRA_PARENT_COMMENT_ID;
 
 public class NavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ICommentBoardOperations
@@ -125,8 +122,6 @@ public class NavDrawerActivity extends AppCompatActivity
     {
         TextView userName = navDrawer.findViewById(R.id.nav_userNameTextView);
         userName.setText(dbHelper.GetUsernameFromSharedPreferences(this));
-        System.out.println("Username loaded from shared pref: " + dbHelper.GetUsernameFromSharedPreferences(this));
-        System.out.println("Username loaded from dbhelper: " + dbHelper.getUserName());
     }
 
     private void setNavDrawer()
@@ -381,8 +376,6 @@ public class NavDrawerActivity extends AppCompatActivity
     public void onItemSelected(int position)
     {
         cardPosition = position;
-        Toast.makeText(this, "You clicked card " + position, Toast.LENGTH_LONG).show();
-
     }
 
     @Override
@@ -390,7 +383,6 @@ public class NavDrawerActivity extends AppCompatActivity
     {
         if(topLevelList.get(position).getNumberOfReplies() == 0)
             return;
-        Toast.makeText(getApplicationContext(), "Comment Text View Clicked", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(getApplicationContext(), ViewRepliesActivity.class);
         intent.putExtra(EXTRA_PARENT_COMMENT, topLevelList.get(position).getContent());
         intent.putExtra(EXTRA_PARENT_COMMENT_ID, topLevelList.get(position).getCommentid());
@@ -400,7 +392,6 @@ public class NavDrawerActivity extends AppCompatActivity
     @Override
     public void onReplyClicked(int position)
     {
-        Toast.makeText(getApplicationContext(), "Reply image clicked", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(getApplicationContext(), ReplyToCommentActivity.class);
         intent.putExtra(EXTRA_PARENT_COMMENT, topLevelList.get(position).getContent());
         intent.putExtra(EXTRA_PARENT_COMMENT_ID, topLevelList.get(position).getCommentid());

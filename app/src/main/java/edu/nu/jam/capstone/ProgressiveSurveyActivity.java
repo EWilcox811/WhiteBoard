@@ -189,7 +189,6 @@ public class ProgressiveSurveyActivity extends AppCompatActivity implements IPro
             public void processFinish(String output) {
                 databaseHelper.onGetWeeklyELOResultsFinished(output);
                 ArrayList<HashMap<String,String>> weeklyELOResults = databaseHelper.getResultList();
-                System.out.println("Weekly Results: " + weeklyELOResults);
                 for(int i = 0; i < weeklyELOResults.size();i++) {
                     String id = weeklyELOResults.get(i).get("id");
                     String question = weeklyELOResults.get(i).get("question");

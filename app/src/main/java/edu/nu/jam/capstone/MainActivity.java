@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity
 		userInfo = dbHelper.GetUserInfoFromSharedPreferences(this);
 		boolean rememberMe = dbHelper.GetRememberMeFromSharedPreferences(this);
 		if(loginToken.isEmpty() || userInfo.get(0).isEmpty() || !rememberMe) {
-			System.out.println("Login Token or User Data Not Found");
 			bindControlsAndData();
 		}
 		else {
@@ -103,7 +102,6 @@ public class MainActivity extends AppCompatActivity
 						dbHelper.onLoginFinished(output);
 						String token = dbHelper.getLoginToken();
 						dbHelper.SaveLoginTokenToSharedPreferences(MainActivity.this);
-						System.out.println(token);
 						String userid = dbHelper.getUserId();
 						dbHelper.SaveUserIdToSharedPreferences(MainActivity.this, userid);
 						String userType = dbHelper.getUserType();

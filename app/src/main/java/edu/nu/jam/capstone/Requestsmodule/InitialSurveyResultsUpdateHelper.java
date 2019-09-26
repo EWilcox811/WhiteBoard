@@ -81,7 +81,6 @@ public class InitialSurveyResultsUpdateHelper extends AsyncTask<Void, Void, Stri
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            System.out.println(jsonObject.toString());
             connection.setDoOutput(true);
             connection.setRequestProperty("Content-Type", "application/json");
 
@@ -154,7 +153,6 @@ public class InitialSurveyResultsUpdateHelper extends AsyncTask<Void, Void, Stri
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            System.out.println(jsonObject.toString());
             connection.setDoOutput(true);
             connection.setRequestProperty("Content-Type", "application/json");
 
@@ -227,7 +225,6 @@ public class InitialSurveyResultsUpdateHelper extends AsyncTask<Void, Void, Stri
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            System.out.println(jsonObject.toString());
             connection.setDoOutput(true);
             connection.setRequestProperty("Content-Type", "application/json");
 
@@ -300,7 +297,6 @@ public class InitialSurveyResultsUpdateHelper extends AsyncTask<Void, Void, Stri
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            System.out.println(jsonObject.toString());
             connection.setDoOutput(true);
             connection.setRequestProperty("Content-Type", "application/json");
 
