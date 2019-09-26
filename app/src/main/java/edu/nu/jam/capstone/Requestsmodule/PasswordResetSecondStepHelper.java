@@ -64,7 +64,7 @@ public class PasswordResetSecondStepHelper extends AsyncTask<Void, Void, String>
 
         try {
             // URL of the backend.
-            URL url = new URL("http://104.248.0.248/user/recover/passwordChange");
+            URL url = new URL("http://104.248.0.248/users/recover/passwordChange");
             // Establish the connection with the backend.
             connection = (HttpURLConnection) url.openConnection();
             // Set headers for login
