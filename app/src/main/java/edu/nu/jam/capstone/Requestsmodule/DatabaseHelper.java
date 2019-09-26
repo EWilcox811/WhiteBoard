@@ -37,7 +37,7 @@ public class DatabaseHelper {
     ArrayList<HashMap<String, String>> commentList = new ArrayList<>();
     ArrayList<HashMap<String, String>> replycommentList = new ArrayList<>();
     ArrayList<HashMap<String, String>> resultList = new ArrayList<>();
-    ArrayList<HashMap<String, Double>> intiialResultsList = new ArrayList<>();
+    ArrayList<HashMap<String, String>> intiialResultsList = new ArrayList<>();
     String loginToken;
     String userid;
     String usertype;
@@ -295,21 +295,26 @@ public class DatabaseHelper {
         // THIS METHOD GATHERS ELOs: in the form of a hash map...
         try {
             // Convert the JSON string into a parsable JSON object.
-            JSONObject jsonObj = new JSONObject(jsonString);
+            //JSONObject jsonObj = new JSONObject(jsonString);
             // Grab the '_embedded' value.
             // Grab the array of comments from '_embedded' using the comments key.
-            JSONArray results = jsonObj.getJSONArray("learningStyleAnswersList");
+            JSONArray results = new JSONArray(jsonString);
             // Iterate through the JSON comments array
             for (int i = 0; i<results.length();i++) {
                 // Set up objects for the HashMap
                 JSONObject c = results.getJSONObject(i);
                 // Grab the value of the id key.
-                Double answer = c.getDouble("answers");
-
+                String id = c.getString("questionId");
+                // Grab the value of the question key.
+                String question = c.getString("question");
+                // Grab the value of the number of average key.
+                String average = c.getString("average");
 
                 // Make the HashMap for the values.
-                HashMap<String, Double> result = new HashMap<>();
-                result.put("answer", answer);
+                HashMap<String, String> result = new HashMap<>();
+                result.put("id", id);
+                result.put("question", question);
+                result.put("average", average);
 
                 // Add the HashMap to the ArrayList.
                 intiialResultsList.add(result);
@@ -321,7 +326,7 @@ public class DatabaseHelper {
         }
     }
 
-    public ArrayList<HashMap<String, Double>> getInitalResultsList() {
+    public ArrayList<HashMap<String, String>> getInitialResultsList() {
         return intiialResultsList;
     }
 
@@ -365,6 +370,8 @@ public class DatabaseHelper {
     public String getUserId() { return userid; }
 
     public String getUserType() {return usertype;}
+
+    public String getUserName() {return username;}
 
     public void SaveLoginTokenToSharedPreferences(Context context) {
         System.out.println("Saving Login Token to Shared Preferences");
@@ -427,14 +434,14 @@ public class DatabaseHelper {
     }
 
     public void SaveUserTypeToSharedPreferences(Context context, String usertype) {
-        System.out.println("Saving User Type to Shared Preferences: " + userid);
+        System.out.println("Saving User Type to Shared Preferences: " + usertype);
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("com.whiteboard.usertype", usertype);
         editor.commit();
     }
 
-        public String GetUserTypeFromSharedPreferences(Context context) {
+    public String GetUserTypeFromSharedPreferences(Context context) {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         usertype = sharedPref.getString("com.whiteboard.usertype", "");
         System.out.println("Loading User Type From Shared Preferences: " + usertype);
@@ -456,8 +463,8 @@ public class DatabaseHelper {
         return sessionid;
     }
 
-    public void SaveUsernameToSharedPreferences(Context context, String sessionid) {
-        System.out.println("Saving User Name to Shared Preferences: " + sessionid);
+    public void SaveUsernameToSharedPreferences(Context context, String username) {
+        System.out.println("Saving User Name to Shared Preferences: " + username);
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("com.whiteboard.username", username);

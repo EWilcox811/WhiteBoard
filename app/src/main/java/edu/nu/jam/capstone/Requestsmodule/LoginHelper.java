@@ -83,11 +83,17 @@ public class LoginHelper extends AsyncTask<Void, Void, String> {
             // POST to the backend.
             wr.writeBytes(jsonParam.toString());
 
+            int code = connection.getResponseCode();
+            if(code != 200)
+            {
+                response = null;
+                return;
+            }
+
             // Flush and Close the DataOutputStream.
             wr.flush();
             wr.close();
 
-            System.out.println(jsonParam.toString());
 
 
             // Get the stream of data from the connection.
@@ -149,10 +155,7 @@ public class LoginHelper extends AsyncTask<Void, Void, String> {
 
         // This counts how many bytes were downloaded
         // Used for getting the total size of the bytes transferred.
-        final byte[] result = response.getBytes();
-        // Can run a debug log on this to see sizes later.
-        totalBytes = Long.valueOf(result.length);
-        return response;
+        return "";
     }
 
     /**
@@ -163,11 +166,15 @@ public class LoginHelper extends AsyncTask<Void, Void, String> {
         super.onPostExecute(result);
         // Calls the processFinish method from the ClassListResponse interface
         // This is overridden when executing the task.
-        delegate.processFinish(response);
+        if(response == null) {
+            delegate.processFinish(null);
+        }
+        else {
+            delegate.processFinish(response);
+        }
         // Remove the progress bar.
         if(pd.isShowing()){
             pd.dismiss();
         }
-
     }
 }

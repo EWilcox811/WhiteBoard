@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,7 +24,9 @@ import edu.nu.jam.capstone.Adapters.InitialSurveyAdapter_Professor;
 import edu.nu.jam.capstone.Adapters.InitialSurveyAdapter_Student;
 import edu.nu.jam.capstone.Data.InitialSurveyData;
 import edu.nu.jam.capstone.Interfaces.IInitialSurveyAdapterOperations;
+import edu.nu.jam.capstone.Requestsmodule.AsyncResponder;
 import edu.nu.jam.capstone.Requestsmodule.DatabaseHelper;
+import edu.nu.jam.capstone.Requestsmodule.InitialSurveyResultsHelper;
 
 public class InitialSurveyActivity extends AppCompatActivity implements IInitialSurveyAdapterOperations
 {
@@ -36,13 +40,13 @@ public class InitialSurveyActivity extends AppCompatActivity implements IInitial
 	private int currentIndex;
 	private DatabaseHelper dbHelper = new DatabaseHelper();
 	private FloatingActionButton submitSurveyFAB;
+	private ArrayList<HashMap<String,String>> initialsurveylist;
 
 
 	private final String responseDescriptionTag = "Class Response";
 	private enum UserType {PROFESSOR, STUDENT};
 	UserType userType;
 
-	// TODO:  identify whether professor or student type and assign to Enum value.
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -53,6 +57,7 @@ public class InitialSurveyActivity extends AppCompatActivity implements IInitial
 		setSupportActionBar(toolbar);
 
 		// TODO:  delete this dummy data after we're connected to the backend:
+		/*
 		initialSurveyDataList.add( new InitialSurveyData(
 				"\"When I learn I read books, articles, and handouts\":",
 				responseDescriptionTag,
@@ -69,7 +74,7 @@ public class InitialSurveyActivity extends AppCompatActivity implements IInitial
 				"\"When I learn I like to talk things through\":",
 				responseDescriptionTag,
 				0));
-
+	*/
 		bindControls();
 		// check to see if the Intent's passed extra is professor or student:
 		if (dbHelper.GetUserTypeFromSharedPreferences(this).toLowerCase().startsWith("p"))
@@ -109,6 +114,7 @@ public class InitialSurveyActivity extends AppCompatActivity implements IInitial
 	{
 		recyclerView = findViewById(R.id.initialSurveyRecyclerView);
 		submitSurveyFAB = findViewById(R.id.submitInitialFAB);
+		getInitialSurveyResults();
 	}
 
 	private void configureRecyclerView()
@@ -156,5 +162,28 @@ public class InitialSurveyActivity extends AppCompatActivity implements IInitial
 			NavUtils.navigateUpFromSameTask(this);
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void getInitialSurveyResults()
+	{
+		new InitialSurveyResultsHelper(new AsyncResponder() {
+			@Override
+			public void processFinish(String output) {
+				dbHelper.onGetInitialSurveyesultsFinished(output);
+				initialsurveylist = dbHelper.getInitialResultsList();
+				for(int i = 0;i < initialsurveylist.size();i++)
+				{
+					String question = initialsurveylist.get(i).get("question");
+					String id = initialsurveylist.get(i).get("questionid");
+					double percentage = Double.parseDouble(initialsurveylist.get(i).get("average"));
+
+					InitialSurveyData data = new InitialSurveyData(question, responseDescriptionTag, percentage);
+
+					initialSurveyDataList.add(data);
+				}
+				recyclerView.getAdapter().notifyDataSetChanged();
+			}
+		}, InitialSurveyActivity.this).execute();
+		//onGetInitialSurveyesultsFinished
 	}
 }

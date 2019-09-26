@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity
 		userInfo = dbHelper.GetUserInfoFromSharedPreferences(this);
 		boolean rememberMe = dbHelper.GetRememberMeFromSharedPreferences(this);
 		if(loginToken.isEmpty() || userInfo.get(0).isEmpty() || !rememberMe) {
-			System.out.println("Login Token or User Data Not Found");
 			bindControlsAndData();
 		}
 		else {
@@ -81,33 +80,38 @@ public class MainActivity extends AppCompatActivity
 		loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String usernameText = username.getText().toString();
-                final String passwordText = password.getText().toString();
-                new LoginHelper(new AsyncResponder(){
-                    @Override
-                    public void processFinish(String output){
-                        /**
-                         * TODO check for correct credentials
-                         * if credentials are incorrect, set incorrectCredentialsTextView to
-                         * incorrectCredentialsTextView.setText(R.string.credentials_incorrect);
-                         */
-                        dbHelper = new DatabaseHelper();
-                        if(RememberMe.isChecked()) {
+				final String usernameText = username.getText().toString();
+				final String passwordText = password.getText().toString();
+				new LoginHelper(new AsyncResponder() {
+					@Override
+					public void processFinish(String output) {
+						incorrectCredentialsTextView.setText("");
+						if(output == null) {
+							incorrectCredentialsTextView.setText("Incorrect username or password");
+							return;
+						}
+						/**
+						 * TODO check for correct credentials
+						 * if credentials are incorrect, set incorrectCredentialsTextView to
+						 * incorrectCredentialsTextView.setText(R.string.credentials_incorrect);
+						 */
+						dbHelper = new DatabaseHelper();
+						if (RememberMe.isChecked()) {
 							dbHelper.SaveUserInfoToSharedPreferences(MainActivity.this, usernameText, passwordText, true);
 						}
-                        dbHelper.onLoginFinished(output);
-                        String token = dbHelper.getLoginToken();
-                        dbHelper.SaveLoginTokenToSharedPreferences(MainActivity.this);
-                        System.out.println(token);
+						dbHelper.onLoginFinished(output);
+						String token = dbHelper.getLoginToken();
+						dbHelper.SaveLoginTokenToSharedPreferences(MainActivity.this);
 						String userid = dbHelper.getUserId();
 						dbHelper.SaveUserIdToSharedPreferences(MainActivity.this, userid);
 						String userType = dbHelper.getUserType();
 						dbHelper.SaveUserTypeToSharedPreferences(MainActivity.this, userType);
-						dbHelper.SaveUsernameToSharedPreferences(MainActivity.this, username.getText().toString());
-                        startNewActivity();
-                    }
-                }, MainActivity.this, usernameText, passwordText).execute();
-            }
+						dbHelper.SaveUsernameToSharedPreferences(MainActivity.this, usernameText);
+						startNewActivity();
+					}
+
+				}, MainActivity.this, usernameText, passwordText).execute();
+			}
         });
 		forgotPasswordTextView = findViewById(R.id.forgotPasswordTextView);
 		forgotPasswordTextView.setOnClickListener(new View.OnClickListener()

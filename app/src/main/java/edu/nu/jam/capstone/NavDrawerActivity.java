@@ -8,9 +8,7 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -20,6 +18,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -47,7 +46,6 @@ import static edu.nu.jam.capstone.InitialSurveyActivity.EXTRA_CONFIDENCE_4;
 import static edu.nu.jam.capstone.MainActivity.EXTRA_USER_TYPE;
 import static edu.nu.jam.capstone.NewCommentActivity.EXTRA_IS_ANONYMOUS;
 import static edu.nu.jam.capstone.NewCommentActivity.EXTRA_NEW_COMMENT;
-import static edu.nu.jam.capstone.ReplyToCommentActivity.EXTRA_PARENT_COMMENT_ID;
 
 public class NavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ICommentBoardOperations
@@ -63,6 +61,7 @@ public class NavDrawerActivity extends AppCompatActivity
     private FloatingActionButton newCommentReplyFAB;
     private TextView repliesCount, upVotesCount, commentTextView;
     private CommentData commentCard;
+    private SwipeRefreshLayout refresh;
     private List<CommentData> subComments = new ArrayList<>();
     List<CommentData> topLevelList = new ArrayList<>();
 
@@ -103,21 +102,37 @@ public class NavDrawerActivity extends AppCompatActivity
         navigationView = findViewById(R.id.nav_drawer);
         //next three lines set the userName on the navDrawer
         View headerView = navigationView.getHeaderView(0);
-        TextView userName = headerView.findViewById(R.id.nav_userNameTextView);
-        userName.setText(dbHelper.GetUsernameFromSharedPreferences(this));
+        //TextView userName = headerView.findViewById(R.id.nav_userNameTextView);
+        //userName.setText(dbHelper.GetUsernameFromSharedPreferences(this));
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         bindControls();
+        setUsernameInNavDrawer(headerView);
         setNavDrawer();
 
         commentStream.setHasFixedSize(false);
         commentStream.setLayoutManager(new LinearLayoutManager(this));
         commentStream.setAdapter(adapter);
         commentStream.getAdapter().notifyDataSetChanged();
+        refresh = findViewById(R.id.swipeRefreshComments);
+        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
+        {
+            @Override
+            public void onRefresh()
+            {
+                getCommentList();
+            }
+        });
 
+    }
+    private void setUsernameInNavDrawer(View navDrawer)
+    {
+        TextView userName = navDrawer.findViewById(R.id.nav_userNameTextView);
+        userName.setText(dbHelper.GetUsernameFromSharedPreferences(this));
     }
 
     private void setNavDrawer()
@@ -372,8 +387,6 @@ public class NavDrawerActivity extends AppCompatActivity
     public void onItemSelected(int position)
     {
         cardPosition = position;
-        Toast.makeText(this, "You clicked card " + position, Toast.LENGTH_LONG).show();
-
     }
 
     @Override
@@ -381,7 +394,6 @@ public class NavDrawerActivity extends AppCompatActivity
     {
         if(topLevelList.get(position).getNumberOfReplies() == 0)
             return;
-        Toast.makeText(getApplicationContext(), "Comment Text View Clicked", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(getApplicationContext(), ViewRepliesActivity.class);
         intent.putExtra(EXTRA_PARENT_COMMENT, topLevelList.get(position).getContent());
         intent.putExtra(EXTRA_PARENT_COMMENT_ID, topLevelList.get(position).getCommentid());
@@ -391,7 +403,6 @@ public class NavDrawerActivity extends AppCompatActivity
     @Override
     public void onReplyClicked(int position)
     {
-        Toast.makeText(getApplicationContext(), "Reply image clicked", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(getApplicationContext(), ReplyToCommentActivity.class);
         intent.putExtra(EXTRA_PARENT_COMMENT, topLevelList.get(position).getContent());
         intent.putExtra(EXTRA_PARENT_COMMENT_ID, topLevelList.get(position).getCommentid());
@@ -404,6 +415,7 @@ public class NavDrawerActivity extends AppCompatActivity
         topLevelList.get(position).setUpvotes(topLevelList.get(position).getUpvotes() + 1);
         commentStream.getAdapter().notifyDataSetChanged();//should update the upvote count
     }
+
 
     public void getSessionId()
     {
@@ -456,9 +468,9 @@ public class NavDrawerActivity extends AppCompatActivity
                 }
 
                 commentStream.getAdapter().notifyDataSetChanged();
+                refresh.setRefreshing(false);
             }
         }, NavDrawerActivity.this, sessionid).execute();
-
 
 
     }

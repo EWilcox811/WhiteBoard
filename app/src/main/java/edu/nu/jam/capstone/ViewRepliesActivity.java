@@ -15,6 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -50,6 +51,7 @@ implements ICommentBoardOperations
     private ArrayList<HashMap<String, String>> commentReplyListFromBackend;
     private DatabaseHelper dbHelper = new DatabaseHelper();
     private String parentCommentId = "";
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Override
@@ -81,6 +83,15 @@ implements ICommentBoardOperations
         replyStream.setLayoutManager(new LinearLayoutManager(this));
         replyStream.setAdapter(new CommentBoardAdapter(this));
         replyStream.getAdapter().notifyDataSetChanged();
+        swipeRefreshLayout = findViewById(R.id.repliesSwipeRefreshComments);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
+        {
+            @Override
+            public void onRefresh()
+            {
+                getCommentList();
+            }
+        });
 
     }
 
@@ -166,10 +177,8 @@ implements ICommentBoardOperations
     {
         if(repliesList.get(position).getNumberOfReplies() == 0)
             return;
-        Toast.makeText(getApplicationContext(), "Comment Text View Clicked", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(getApplicationContext(), ViewRepliesActivity.class);
         intent.putExtra(EXTRA_PARENT_COMMENT, repliesList.get(position).getContent());
-        System.out.println(repliesList.get(position).getCommentid());
         intent.putExtra(EXTRA_PARENT_COMMENT_ID, repliesList.get(position).getCommentid());
 //        intent.putExtra();
         startActivity(intent);
@@ -180,7 +189,6 @@ implements ICommentBoardOperations
     {
         Intent intent = new Intent(getApplicationContext(), ReplyToCommentActivity.class);
         intent.putExtra(EXTRA_PARENT_COMMENT, repliesList.get(position).getContent());
-        System.out.println("From Replies Activity: " + repliesList.get(position).getCommentid());
         intent.putExtra(EXTRA_PARENT_COMMENT_ID, repliesList.get(position).getCommentid());
         startActivityForResult(intent, 1);
     }
@@ -221,7 +229,6 @@ implements ICommentBoardOperations
                 repliesList.clear();
                 dbHelper.onGetCommentReplyListCompleted(output);
                 commentReplyListFromBackend = dbHelper.getCommentReplyList();
-                System.out.println(commentReplyListFromBackend);
                 for (int i = 0; i < commentReplyListFromBackend.size(); i++) {
                     String comment = commentReplyListFromBackend.get(i).get("message");
                     String username = commentReplyListFromBackend.get(i).get("username");
@@ -244,6 +251,7 @@ implements ICommentBoardOperations
                 }
 
                 replyStream.getAdapter().notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
             }
         }, ViewRepliesActivity.this, parentCommentId).execute();
 
