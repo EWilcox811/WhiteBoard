@@ -12,6 +12,7 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".ReplyToCommentActivity"
+            android:screenOrientation="portrait"
             android:label="Reply To Comment"
             android:parentActivityName=".NavDrawerActivity">
             <meta-data
@@ -20,6 +21,7 @@
         </activity>
         <activity
             android:name=".InitialSurveyActivity"
+            android:screenOrientation="portrait"
             android:label="Learning Style Summary"
             android:parentActivityName=".NavDrawerActivity">
             <meta-data
@@ -28,6 +30,7 @@
         </activity>
         <activity
             android:name=".MajorityConcernActivity"
+            android:screenOrientation="portrait"
             android:label="Majority Concern"
             android:parentActivityName=".NavDrawerActivity">
             <meta-data
@@ -36,6 +39,7 @@
         </activity>
         <activity
             android:name=".PasswordRecoveryActivity"
+            android:screenOrientation="portrait"
             android:label="Password Recovery"
             android:parentActivityName=".MainActivity">
             <meta-data
@@ -44,6 +48,7 @@
         </activity>
         <activity
             android:name=".PasswordResetActivity"
+            android:screenOrientation="portrait"
             android:label="Password Reset"
             android:parentActivityName=".MainActivity">
             <meta-data
@@ -52,6 +57,7 @@
         </activity>
         <activity
             android:name=".SessionSelectionActivity"
+            android:screenOrientation="portrait"
             android:label="Session Selection"
             android:parentActivityName=".NavDrawerActivity">
             <meta-data
@@ -60,6 +66,7 @@
         </activity>
         <activity
             android:name=".SurveySelectionActivity"
+            android:screenOrientation="portrait"
             android:label="Survey Selection"
             android:parentActivityName=".NavDrawerActivity">
             <meta-data
@@ -68,6 +75,7 @@
         </activity>
         <activity
             android:name=".ViewRepliesActivity"
+            android:screenOrientation="portrait"
             android:label="Comment Replies"
             android:parentActivityName=".NavDrawerActivity">
             <meta-data
@@ -76,6 +84,7 @@
         </activity>
         <activity
             android:name=".ProgressiveSurveyActivity"
+            android:screenOrientation="portrait"
             android:label="Weekly Learning Objectives"
             android:parentActivityName=".NavDrawerActivity">
             <meta-data
@@ -84,6 +93,7 @@
         </activity>
         <activity
             android:name=".NewCommentActivity"
+            android:screenOrientation="portrait"
             android:label="New Comment"
             android:parentActivityName=".NavDrawerActivity">
             <meta-data
@@ -94,7 +104,9 @@
         <activity android:name=".NavDrawerActivity" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -103,7 +115,8 @@
         </activity>
 
         <activity
-            android:name=".SplashScreenActivity">
+            android:name=".SplashScreenActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
