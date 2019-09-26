@@ -19,10 +19,12 @@ public class PasswordRecoveryActivity extends AppCompatActivity
 {
     public static final String EXTRA_EMAIL = "email";
 
+    private String emailAddress, userName;
+
     private DatabaseHelper dbHelper;
 
     private Button submitButton;
-    private EditText userNameEditText, emailEditText;
+    private EditText userNameEditText;
     private Intent intent;
 
     @Override
@@ -40,7 +42,6 @@ public class PasswordRecoveryActivity extends AppCompatActivity
     {
         dbHelper = new DatabaseHelper();
         userNameEditText = findViewById(R.id.userNameEditView);
-        emailEditText = findViewById(R.id.emailEditView);
         submitButton = findViewById(R.id.submitBtn);
         submitButton.setOnClickListener(new View.OnClickListener()
         {
@@ -54,7 +55,7 @@ public class PasswordRecoveryActivity extends AppCompatActivity
 
     private void requestTempPassword()
     {
-        if (userNameEditText != null && !userNameEditText.getText().toString().isEmpty() || emailEditText != null && !emailEditText.getText().toString().isEmpty())
+        if (userNameEditText != null && !userNameEditText.getText().toString().isEmpty())
         {
             /**
              * TODO Validate userNameEditText or emailEditText with backend
@@ -63,6 +64,16 @@ public class PasswordRecoveryActivity extends AppCompatActivity
              *
              * the following should be done if validated.
              */
+            if(userNameEditText.getText().toString().contains("@"))
+            {
+                userName = "";
+                emailAddress = userNameEditText.getText().toString();
+            }
+            else
+            {
+                userName = userNameEditText.getText().toString();
+                emailAddress = "";
+            }
             dbHelper.SavePasswordResetFlagToSharedPreferences(this, "1");
             new PasswordResetFirstStepHelper(new AsyncResponder() {
                 @Override
@@ -70,12 +81,10 @@ public class PasswordRecoveryActivity extends AppCompatActivity
                     dbHelper.onPasswordResetFirstStepFinished(output);
                     String userid = dbHelper.getUserId();
                     Intent intent = new Intent(PasswordRecoveryActivity.this, PasswordResetActivity.class);
-                    if (!userNameEditText.getText().toString().isEmpty())
-                        intent.putExtra(EXTRA_USERNAME, userNameEditText.getText().toString());
                     intent.putExtra("userid", userid);
                     startActivity(intent);
                 }
-            }, PasswordRecoveryActivity.this, userNameEditText.getText().toString(), emailEditText.getText().toString()).execute();
+            }, PasswordRecoveryActivity.this, userName, emailAddress).execute();
 
 
         } else
