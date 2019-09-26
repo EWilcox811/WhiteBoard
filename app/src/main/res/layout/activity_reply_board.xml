@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ViewRepliesActivity">
+    <include layout="@layout/toolbar" />
 
     <TextView
         android:id="@+id/replies_parentComment"
@@ -25,10 +26,16 @@
         android:layout_height="3dp"
         android:background="?android:attr/listDivider" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:orientation="vertical">
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/repliesSwipeRefreshComments"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/viewRepliesRecyclerView"
@@ -38,7 +45,12 @@
 
         </androidx.recyclerview.widget.RecyclerView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addNewReplyFAB"
         android:layout_width="wrap_content"
@@ -48,7 +60,6 @@
         android:backgroundTint="@color/themeMedium"
         app:borderWidth="0sp"
         app:srcCompat="@drawable/ic_dialog_new_comment" />
-
-    <include layout="@layout/toolbar" />
+    </LinearLayout>
 
 </LinearLayout>
