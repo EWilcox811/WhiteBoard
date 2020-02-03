@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="edu.nu.jam.capstone">
+    package="edu.nu.jam.whiteboard">
 
     <application
         android:allowBackup="true"
@@ -11,101 +11,101 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ReplyToCommentActivity"
+            android:name="edu.nu.jam.whiteboard.ReplyToCommentActivity"
             android:screenOrientation="portrait"
             android:label="Reply To Comment"
-            android:parentActivityName=".NavDrawerActivity">
+            android:parentActivityName="edu.nu.jam.whiteboard.NavDrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NavDrawerActivity" />
+                android:value="edu.nu.jam.whiteboard.NavDrawerActivity" />
         </activity>
         <activity
-            android:name=".InitialSurveyActivity"
+            android:name="edu.nu.jam.whiteboard.InitialSurveyActivity"
             android:screenOrientation="portrait"
             android:label="Learning Style Summary"
-            android:parentActivityName=".NavDrawerActivity">
+            android:parentActivityName="edu.nu.jam.whiteboard.NavDrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NavDrawerActivity" />
+                android:value="edu.nu.jam.whiteboard.NavDrawerActivity" />
         </activity>
         <activity
-            android:name=".MajorityConcernActivity"
+            android:name="edu.nu.jam.whiteboard.MajorityConcernActivity"
             android:screenOrientation="portrait"
             android:label="Majority Concern"
-            android:parentActivityName=".NavDrawerActivity">
+            android:parentActivityName="edu.nu.jam.whiteboard.NavDrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NavDrawerActivity" />
+                android:value="edu.nu.jam.whiteboard.NavDrawerActivity" />
         </activity>
         <activity
-            android:name=".PasswordRecoveryActivity"
+            android:name="edu.nu.jam.whiteboard.PasswordRecoveryActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:label="Password Recovery"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="edu.nu.jam.whiteboard.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value="edu.nu.jam.whiteboard.MainActivity"/>
         </activity>
         <activity
-            android:name=".PasswordResetActivity"
+            android:name="edu.nu.jam.whiteboard.PasswordResetActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:label="Password Reset"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="edu.nu.jam.whiteboard.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value="edu.nu.jam.whiteboard.MainActivity"/>
         </activity>
         <activity
-            android:name=".SessionSelectionActivity"
+            android:name="edu.nu.jam.whiteboard.SessionSelectionActivity"
             android:screenOrientation="portrait"
             android:label="Session Selection"
-            android:parentActivityName=".NavDrawerActivity">
+            android:parentActivityName="edu.nu.jam.whiteboard.NavDrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NavDrawerActivity" />
+                android:value="edu.nu.jam.whiteboard.NavDrawerActivity" />
         </activity>
         <activity
-            android:name=".SurveySelectionActivity"
+            android:name="edu.nu.jam.whiteboard.SurveySelectionActivity"
             android:screenOrientation="portrait"
             android:label="Survey Selection"
-            android:parentActivityName=".NavDrawerActivity">
+            android:parentActivityName="edu.nu.jam.whiteboard.NavDrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NavDrawerActivity" />
+                android:value="edu.nu.jam.whiteboard.NavDrawerActivity" />
         </activity>
         <activity
-            android:name=".ViewRepliesActivity"
+            android:name="edu.nu.jam.whiteboard.ViewRepliesActivity"
             android:screenOrientation="portrait"
             android:label="Comment Replies"
-            android:parentActivityName=".NavDrawerActivity">
+            android:parentActivityName="edu.nu.jam.whiteboard.NavDrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NavDrawerActivity" />
+                android:value="edu.nu.jam.whiteboard.NavDrawerActivity" />
         </activity>
         <activity
-            android:name=".ProgressiveSurveyActivity"
+            android:name="edu.nu.jam.whiteboard.ProgressiveSurveyActivity"
             android:screenOrientation="portrait"
             android:label="Weekly Learning Objectives"
-            android:parentActivityName=".NavDrawerActivity">
+            android:parentActivityName="edu.nu.jam.whiteboard.NavDrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NavDrawerActivity" />
+                android:value="edu.nu.jam.whiteboard.NavDrawerActivity" />
         </activity>
         <activity
-            android:name=".NewCommentActivity"
+            android:name="edu.nu.jam.whiteboard.NewCommentActivity"
             android:screenOrientation="portrait"
             android:label="New Comment"
-            android:parentActivityName=".NavDrawerActivity">
+            android:parentActivityName="edu.nu.jam.whiteboard.NavDrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NavDrawerActivity" />
+                android:value="edu.nu.jam.whiteboard.NavDrawerActivity" />
         </activity>
 
-        <activity android:name=".NavDrawerActivity" />
+        <activity android:name="edu.nu.jam.whiteboard.NavDrawerActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name="edu.nu.jam.whiteboard.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:screenOrientation="portrait">
@@ -117,7 +117,7 @@
         </activity>
 
         <activity
-            android:name=".SplashScreenActivity"
+            android:name="edu.nu.jam.whiteboard.SplashScreenActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
